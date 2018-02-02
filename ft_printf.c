@@ -161,7 +161,7 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-
+/*
 int		main()
 {
 	int ret;
@@ -296,4 +296,4 @@ int		main()
 
 
  return (0);	
-}
+}*/
