@@ -7,7 +7,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-HEADER = includes/ft_printf.h
+HEADER = includes/*.h
 
 OBJ = $(SRC:.c=.o)
 
