@@ -9,7 +9,6 @@
 /*   Updated: 2018/01/10 14:00:34 by vsyveniu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 # ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -54,7 +53,7 @@ int		ft_isflag(char c);
 int			ft_checkisnorepeat(char cinlist, char c);
 void	ft_errorrepeatflag();
 char	get_conversion(const char *format, int *index);
-void		ft_printchar(f_list *params, char c, int size);
+void		ft_printchar(f_list *params, unsigned char c, int size);
 int		ft_printstr(f_list *params, char *str, int size);
 int		ft_handlestr(f_list *params, void *arg, int size);
 void		ft_handledigits(f_list *params, int arg, int val);
@@ -77,19 +76,18 @@ void	ft_puttriplecratch(char c2, char c3, int size, int size2);
 void	ft_putdoublecratch(f_list *p, char c2, int size, int size2);
 void	ft_printhash(char c);
 int		ft_checkmodifiers(f_list *p);
-int		ft_checkflag(f_list *p, int *arg, int size, int val);
+int		ft_checkflag(f_list *p, void *arg, int size, int val);
 int	ft_handleleft(f_list *p,  int size);
 int	ft_handleright(f_list *p,  int size);
 void	ft_handleneg(f_list *p, int size);
 void	ft_handlepos(f_list *p, int size);
 int		ft_getargsize(f_list *p, void *arg);
-int 	ft_getsizehexoctbi(f_list *p, void *arg);
 int		ft_checkmodifiers(f_list *p);
 int		ft_getargsize(f_list *p, void *arg);
-int 	ft_getsizehexoctbi(f_list *p, void *arg);
+int 	ft_getsizehexoctbi(f_list *p, int arg);
 int 	ft_printf(const char *format, ... );
-int	ft_printsize(f_list *p, unsigned long size);
-int		ft_printstrsize(f_list *p, unsigned long size);
+int	ft_printsize(f_list *p, int size);
+int		ft_printstrsize(f_list *p, int size);
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i);
 
 

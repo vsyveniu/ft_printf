@@ -6,6 +6,8 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
+HEADER = includes
+
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME) 
@@ -14,7 +16,7 @@ $(NAME): $(NAME) $(OBJ)
 		 ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -I $(HEADER) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
