@@ -65,12 +65,12 @@ int	ft_handleleft(f_list *p, int size)
 
 
 
-int		ft_checkflag(f_list *p, void *arg, int size, int val)
+int		ft_checkflag(f_list *p, int arg, int size, int val)
 {
 	int	temp;
-	temp = (*(int*)arg);	
+	temp = arg;	
 	p->ispos = 1;
-	if (*(int*)arg < 0)
+	if (arg < 0)
 	{
 		temp *= -1;
 		p->ispos = 2;

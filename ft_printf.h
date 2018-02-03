@@ -77,7 +77,7 @@ void	ft_puttriplecratch(char c2, char c3, int size, int size2);
 void	ft_putdoublecratch(f_list *p, char c2, int size, int size2);
 void	ft_printhash(char c);
 int		ft_checkmodifiers(f_list *p);
-int		ft_checkflag(f_list *p, void *arg, int size, int val);
+int		ft_checkflag(f_list *p, int arg, int size, int val);
 int	ft_handleleft(f_list *p,  int size);
 int	ft_handleright(f_list *p,  int size);
 void	ft_handleneg(f_list *p, int size);

@@ -89,7 +89,7 @@ int		printallshit(f_list *p, va_list args)
 		//printf("fuck3\n");
 	val = ft_checkmodifiers(p);
 	//	printf("fuck4\n");
-	ft_checkflag(p, &arg, size, val);
+	ft_checkflag(p, (*(int*)&arg), size, val);
 	//	printf("fuck5\n");
 	printsize = ft_printsize(p, (unsigned long)size);
 	//printf("prntsize ->   %d\n", printsize);
