@@ -6,32 +6,32 @@
 
 # 0006 
   ft_printf("%%");
-  1. (   29) -->-^@TERM_PROGRAM=Apple_Terminal<--
+  1. (   30) -->-%^@TERM_PROGRAM=Apple_Terminal<--
   2. (    1) -->%<--
 
 # 0007 
   ft_printf("%5%");
-  1. (   33) -->     -^@TERM_PROGRAM=Apple_Terminal<--
+  1. (   32) -->     -%TERM_PROGRAM=Apple_Terminal<--
   2. (    5) -->    %<--
 
 # 0008 
   ft_printf("%-5%");
-  1. (   33) -->-    ^@TERM_PROGRAM=Apple_Terminal<--
+  1. (   32) -->-%   TERM_PROGRAM=Apple_Terminal<--
   2. (    5) -->%    <--
 
 # 0009 
   ft_printf("%.0%");
-  1. (   29) -->-^@TERM_PROGRAM=Apple_Terminal<--
+  1. (   29) -->-%TERM_PROGRAM=Apple_Terminal<--
   2. (    1) -->%<--
 
 # 0010 (char *)
   ft_printf("%%", "test");
-  1. (    6) -->-^@test<--
+  1. (    7) -->-%^@test<--
   2. (    1) -->%<--
 
 # 0011 (char *)
   ft_printf("%   %", "test");
-  1. (    6) -->-^@test<--
+  1. (    6) -->-%test<--
   2. (    1) -->%<--
 
 # 0012 (int)
@@ -221,137 +221,102 @@
 
 # 0049 (char *)
   ft_printf("%s", "abc");
-  1. (    4) -->^@abc<--
+  1. (    7) -->abc^@abc<--
   2. (    3) -->abc<--
 
 # 0050 (char *)
   ft_printf("%s", "this is a string");
-  1. (   17) -->^@this is a string<--
+  1. (   33) -->this is a string^@this is a string<--
   2. (   16) -->this is a string<--
-
-# 0051 (char *)
-  ft_printf("%s ", "this is a string");
-  1. (    1) --> <--
-  2. (   17) -->this is a string <--
-
-# 0052 (char *)
-  ft_printf("%s  ", "this is a string");
-  1. (    2) -->  <--
-  2. (   18) -->this is a string  <--
 
 # 0053 (char *)
   ft_printf("this is a %s", "string");
-  1. (   17) -->this is a ^@string<--
-  2. (   16) -->this is a string<--
-
-# 0054 (char *)
-  ft_printf("%s is a string", "this");
-  1. (   12) --> is a string<--
+  1. (   23) -->this is a string^@string<--
   2. (   16) -->this is a string<--
 
 # 0055 (char *)
   ft_printf("Line Feed %s", "\\n");
-  1. (   13) -->Line Feed ^@\\n<--
+  1. (   15) -->Line Feed \\n^@\\n<--
   2. (   12) -->Line Feed \\n<--
-
-# 0058 (char *)
-  ft_printf("%5.2s is a string", "this");
-  1. (   17) --> is a string<--
-  2. (   17) -->   th is a string<--
 
 # 0060 (char *)
   ft_printf("%.2s is a string", "");
   1. (   14) --> is a string<--
   2. (   12) --> is a string<--
 
-# 0061 (char *)
-  ft_printf("%5.2s is a string", "");
-  1. (   17) --> is a string<--
+# 0063 (char *)
+  ft_printf("%-.2s is a string", "this");
+  1. (   12) -->th is a string<--
+  2. (   14) -->th is a string<--
+
+# 0067 (char *)
+  ft_printf("%-5.2s is a string", "");
+  1. (   17) -->     ^@T    is a string<--
   2. (   17) -->      is a string<--
-
-# 0064 (char *)
-  ft_printf("%-5.2s is a string", "this");
-  1. (   17) -->this  is a string<--
-  2. (   17) -->th    is a string<--
-
-# 0066 (char *)
-  ft_printf("%-.2s is a string", "");
-  1. (   14) --> is a string<--
-  2. (   12) --> is a string<--
 
 # 0068 (char *)
   ft_printf("%s %s", "this", "is");
-  1. (    6) --> ^@this<--
+  1. (   12) -->this is^@this<--
   2. (    7) -->this is<--
 
 # 0069 (char *)
   ft_printf("%s %s %s", "this", "is", "a");
-  1. (    7) -->  ^@this<--
+  1. (   14) -->this is a^@this<--
   2. (    9) -->this is a<--
 
 # 0070 (char *)
   ft_printf("%s %s %s %s", "this", "is", "a", "multi");
-  1. (    8) -->   ^@this<--
+  1. (   20) -->this is a multi^@this<--
   2. (   15) -->this is a multi<--
-
-# 0071 (char *)
-  ft_printf("%s %s %s %s string. gg!", "this", "is", "a", "multi", "string");
-  1. (   15) -->    string. gg!<--
-  2. (   27) -->this is a multi string. gg!<--
 
 # 0072 (char *)
   ft_printf("%s%s%s%s%s", "this", "is", "a", "multi", "string");
-  1. (    9) -->%s%s^@this<--
+  1. (   23) -->thisisamultistring^@this<--
   2. (   18) -->thisisamultistring<--
 
 # 0073 (NULL)
   ft_printf("@moulitest: %s", NULL);
-  1. (   17) -->@moulitest: (null)^@NULL<--
+  1. (   23) -->@moulitest: (null)^@NULL<--
   2. (   18) -->@moulitest: (null)<--
 
 # 0074 (NULL)
   ft_printf("%.2c", NULL);
-  1. (    7) -->^@^@NULL<--
+  1. (    6) -->^@^@NULL<--
   2. (    1) -->^@<--
 
 # 0075 (NULL)
   ft_printf("%s %s", NULL, string);
-  1. (    6) -->(null) ^@NULL<--
+  1. (   18) -->(null) string^@NULL<--
   2. (   13) -->(null) string<--
 
 # 0076 (char)
   ft_printf("%c", 42);
-  1. (    3) -->*^@42<--
+  1. (    4) -->*^@42<--
   2. (    1) -->*<--
 
 # 0077 (char)
   ft_printf("%5c", 42);
-  1. (    8) -->    *^@42<--
+  1. (    4) -->    *^@42<--
   2. (    5) -->    *<--
 
 # 0078 (char)
   ft_printf("%-5c", 42);
-  1. (    8) -->*    ^@42<--
+  1. (    4) -->*    ^@42<--
   2. (    5) -->*    <--
 
 # 0079 (char)
   ft_printf("@moulitest: %c", 0);
-  1. (   14) -->@moulitest: ^@^@0<--
+  1. (   15) -->@moulitest: ^@^@0<--
   2. (   13) -->@moulitest: ^@<--
 
 # 0080 (char)
   ft_printf("%2c", 0);
-  1. (    4) --> ^@^@0<--
+  1. (    3) --> ^@^@0<--
   2. (    2) --> ^@<--
-
-# 0081 (char)
-  ft_printf("null %c and text", 0);
-  1. (   14) -->null ^@ and text<--
-  2. (   15) -->null ^@ and text<--
 
 # 0082 (char)
   ft_printf("% c", 0);
-  1. (    2) -->^@^@0<--
+  1. (    3) -->^@^@0<--
   2. (    1) -->^@<--
 
 # 0083 (int)
@@ -891,12 +856,12 @@
 
 # 0192 (intmax_t)
   ft_printf("%ju", 4999999999);
-  1. (32656) -->^@4999999999<--
+  1. (32654) -->^@4999999999<--
   2. (   10) -->4999999999<--
 
 # 0193 (size_t)
   ft_printf("%ju", 4294967296);
-  1. (32671) -->^@4294967296<--
+  1. (32752) -->^@4294967296<--
   2. (   10) -->4294967296<--
 
 # 0194 (unsigned long)
@@ -970,27 +935,27 @@ SUCCESS TESTS:\n
   48. FAIL ft_printf("@moulitest: %5.x %5.0x", 0, 0);    -> "@moulitest:            "
   49. FAIL ft_printf("%s", "abc");                       -> "abc"
   50. FAIL ft_printf("%s", "this is a string");          -> "this is a string"
-  51. FAIL ft_printf("%s ", "this is a string");         -> "this is a string "
-  52. FAIL ft_printf("%s  ", "this is a string");        -> "this is a string  "
+  51.      ft_printf("%s ", "this is a string");         -> "this is a string "
+  52.      ft_printf("%s  ", "this is a string");        -> "this is a string  "
   53. FAIL ft_printf("this is a %s", "string");          -> "this is a string"
-  54. FAIL ft_printf("%s is a string", "this");          -> "this is a string"
+  54.      ft_printf("%s is a string", "this");          -> "this is a string"
   55. FAIL ft_printf("Line Feed %s", "\\n");             -> "Line Feed \\n"
   56.      ft_printf("%10s is a string", "this");        -> "      this is a string"
   57.      ft_printf("%.2s is a string", "this");        -> "th is a string"
-  58. FAIL ft_printf("%5.2s is a string", "this");       -> "   th is a string"
+  58.      ft_printf("%5.2s is a string", "this");       -> "   th is a string"
   59.      ft_printf("%10s is a string", "");            -> "           is a string"
   60. FAIL ft_printf("%.2s is a string", "");            -> " is a string"
-  61. FAIL ft_printf("%5.2s is a string", "");           -> "      is a string"
+  61.      ft_printf("%5.2s is a string", "");           -> "      is a string"
   62.      ft_printf("%-10s is a string", "this");       -> "this       is a string"
-  63.      ft_printf("%-.2s is a string", "this");       -> "th is a string"
-  64. FAIL ft_printf("%-5.2s is a string", "this");      -> "th    is a string"
+  63. FAIL ft_printf("%-.2s is a string", "this");       -> "th is a string"
+  64.      ft_printf("%-5.2s is a string", "this");      -> "th    is a string"
   65.      ft_printf("%-10s is a string", "");           -> "           is a string"
-  66. FAIL ft_printf("%-.2s is a string", "");           -> " is a string"
-  67.      ft_printf("%-5.2s is a string", "");          -> "      is a string"
+  66.      ft_printf("%-.2s is a string", "");           -> " is a string"
+  67. FAIL ft_printf("%-5.2s is a string", "");          -> "      is a string"
   68. FAIL ft_printf("%s %s", "this", "is");             -> "this is"
   69. FAIL ft_printf("%s %s %s", "this", "is", "a");     -> "this is a"
   70. FAIL ft_printf("%s %s %s %s", "this", "is", "a", "multi"); -> "this is a multi"
-  71. FAIL ft_printf("%s %s %s %s string. gg!", "this", "is", "a", "multi", "string"); -> "this is a multi string. gg!"
+  71.      ft_printf("%s %s %s %s string. gg!", "this", "is", "a", "multi", "string"); -> "this is a multi string. gg!"
   72. FAIL ft_printf("%s%s%s%s%s", "this", "is", "a", "multi", "string"); -> "thisisamultistring"
   73. FAIL ft_printf("@moulitest: %s", NULL);            -> "@moulitest: (null)"
   74. FAIL ft_printf("%.2c", NULL);                      -> "^@"
@@ -1000,7 +965,7 @@ SUCCESS TESTS:\n
   78. FAIL ft_printf("%-5c", 42);                        -> "*    "
   79. FAIL ft_printf("@moulitest: %c", 0);               -> "@moulitest: ^@"
   80. FAIL ft_printf("%2c", 0);                          -> " ^@"
-  81. FAIL ft_printf("null %c and text", 0);             -> "null ^@ and text"
+  81.      ft_printf("null %c and text", 0);             -> "null ^@ and text"
   82. FAIL ft_printf("% c", 0);                          -> "^@"
   83. FAIL ft_printf("%o", 40);                          -> "50"
   84. FAIL ft_printf("%5o", 41);                         -> "   51"

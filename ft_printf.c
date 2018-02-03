@@ -23,18 +23,15 @@ void	ft_parse(const char *format, f_list *p, int *index)
 	while (ft_isflag(format[*index]) == 1)
 	{
 		p = ft_getflag(format, p, index);
-	//	printf("format -> %c\n", format[*index]);
 		(*index)++;
 	}
 	//printf("\nafter flags -> %c\n", format[*index]);
+	//printf("\nbefore width -> %c\n", format[*index]);
 	p->w = ft_getwidth(format, index);
-	while (ft_isdigit(format[*index]) == 1)
-		(*index)++;
 	//printf("w -> %lu\n", p->w);
 	//printf("\nafter w -> %c\n", format[*index]);
+	//printf("\nbefore precision -> %c\n", format[*index]);
 	p->pr = get_precision(format, index);
-	while (ft_isdigit(format[*index]) == 1)
-		(*index)++;
 	//printf("prec -> %lu\n", p->pr);
 	//printf("after pr -> %c\n", format[*index]);
 	//while (ft_isdigit(format[*index]) == 1)
@@ -45,6 +42,7 @@ void	ft_parse(const char *format, f_list *p, int *index)
 	p->conversion = get_conversion(format, index);
 	//printf("conversion ->    %c\n", p->conversion);
 	//printf("\nafter conversion ->  %c\n", p->conversion);
+	//printf("\nafter conversion ->  %c\n", format[*index]);
 	//if (format[*index] == '%')
 	//{
 	//(*index)++;
@@ -55,8 +53,8 @@ void	ft_parse(const char *format, f_list *p, int *index)
 	//}
 	
 	//}
-	//printf("\nafter all ->   %c\n", format[*index]);
-	/*printf("\n--------------------\n");
+	/*printf("\nafter all ->   %c\n", format[*index]);
+	printf("\n--------------------\n");
 	printf("\nf_oct   -> %c\n", p->f_oct);
 	printf("\nf_plus  -> %c\n", p->f_plus);
 	printf("\nf_minus -> %c\n", p->f_minus);
@@ -70,13 +68,13 @@ void	ft_parse(const char *format, f_list *p, int *index)
 
 int		printallshit(f_list *p, va_list args)
 {
-	void *arg;
+	int *arg;
 	int	size;
 	int printsize;
 	int	val;
 
 	val = 0;
-	arg = va_arg(args, void *);
+	arg = va_arg(args, int *);
 	size = ft_getargsize(p, &arg); ///segfault here
 	if (p->conversion == 'c' || p->conversion == 'C' || p->conversion == 's'
 		|| p->conversion == 'S')
@@ -103,8 +101,9 @@ int		ft_handleshit(const char *format, va_list args)
 		return (-1);
 	ret = 0;
 	//printf("\n%s\n",format);
-	while (format[++i])
+	while (format[++i] != '\0')
 	{
+		//printf("\ni in while -> %d\n", i);
 		if (format[i] == '%')
 		{
 			if(!(p = (f_list*)malloc(sizeof(f_list))))
@@ -115,23 +114,27 @@ int		ft_handleshit(const char *format, va_list args)
 			ft_parse(format, p, &i);
 			//printf("\nafter ft_parse ->   %c\n", format[i]);
 			if (format[i] == '%')
-				i--;
+					i--;
 			if (p->conversion != 0)
 			{
 				ret += printallshit(p, args);
 			}
 			p = NULL;
 			free(p);
+		//	printf("after parse-> %c\n", format[i]);
 		}
+		//printf("format i -> %d    ", i);
 	//printf("\n%c\n",  format[i]);
-	//ft_putchar(format[i]);
+	//printf("%c", format[i]);
 	//ret++;	
 	if (ft_checkispossibletoputthisbitchinchar(format, i) == 1)
 	{
 		ft_putchar(format[i]);
 		ret++;
 	}
+	//printf("after parse-> %d\n", format[i + 1]);
 	}
+	
 	return (ret);
 }
 
@@ -146,7 +149,6 @@ int		ft_checkispossibletoputthisbitchinchar(const char *format, int i)
 		return (1);
 	if (format[i - 1] == '%' && format[i + 1] == '\0')
 		return (1);
-	//}
 	return (0);
 }
 
@@ -178,10 +180,10 @@ int		main()
 	printf("\n");
 	printf("\n");
 
-	ret = ft_printf("|%s%s bitch|", "da", "dgf");
-	//ret = ft_printf("|%s%s|", "e", "t");
+	ret = ft_printf("|%d %C %s %d %u %X %c|", 42, 'f', "fuck",  42, 42, 42, 'k');
+	//ret = ft_printf("|%042d %s|", 42, "suck");
 	printf("\n");
-	ret1 = printf("|%%|");
+	ret1 = printf("|%d %C %s %d %u %X %c|", 42, 'f', "fuck", 42, 42, 42, 'k');
 
 	printf("\n");
 
@@ -190,9 +192,8 @@ int		main()
 	printf("origin -> %d\n", ret1);
 
 
-
 //////////////test/////////
-
+/*
 
 	printf("\n");
 	printf("-----------  %s  -----------\n", "%%");
@@ -296,4 +297,5 @@ int		main()
 
 
  return (0);	
-}*/
+}
+*/

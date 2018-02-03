@@ -40,12 +40,14 @@ int			ft_getwidth(const char *format, int *index)
 {
 	int	temp;
 
-	if (format[*index] >= '0' && format[*index] <= '9') //maybe need to add check is !str ?
+	if (format[*index] <= '0' && format[*index] >= '9') //maybe need to add check is !str ?
+		return (temp = 0); 
+	temp = 0;
+	while (format[*index] != '\0' && format[*index] >= '0' && format[*index] <= '9')
 	{
-		temp = ft_atoi(&format[*index]);
+		temp = (temp * 10) + (format[*index] - 48);
+		(*index)++;
 	}
-	else
-		temp = 0;
 	return (temp);
 }
 
@@ -53,17 +55,15 @@ int			get_precision(const char *format, int *index)
 {
 	int	temp;
 
+	if (format[*index] && format[*index] != '.') //maybe need to add check is !str ?
+		return (temp = 0); 
 	temp = 0;
-	if (format[*index] == '.')
+	(*index) += 1;
+	while (format[*index] != '\0' && format[*index] >= '0' && format[*index] <= '9')
 	{
+		temp = (temp * 10) + (format[*index] - 48);
 		(*index)++;
-		if (format[*index] >= '0' && format[*index <= '9'])
-		{
-			temp = ft_atoi(&format[*index]);
-		}
 	}
-	else
-		temp = 0;
 	return (temp);
 }
 

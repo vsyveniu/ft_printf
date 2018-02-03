@@ -27,8 +27,8 @@ typedef	struct  				p_list
 	char						f_minus;
 	char						f_zero;
 	char						f_space;
-	unsigned long				w;
-	unsigned long 				pr;
+	int							w;
+	int			 				pr;
 	char						*justanothershittomanage;
 	char						conversion;
 	int							ispos;
