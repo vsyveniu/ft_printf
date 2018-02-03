@@ -27,8 +27,8 @@ typedef	struct  				p_list
 	char						f_minus;
 	char						f_zero;
 	char						f_space;
-	unsigned long				w;
-	unsigned long 				pr;
+	int							w;
+	int			 				pr;
 	char						*justanothershittomanage;
 	char						conversion;
 	int							ispos;
@@ -77,17 +77,20 @@ void	ft_puttriplecratch(char c2, char c3, int size, int size2);
 void	ft_putdoublecratch(f_list *p, char c2, int size, int size2);
 void	ft_printhash(char c);
 int		ft_checkmodifiers(f_list *p);
-int		ft_checkflag(f_list *p, void *arg, int size, int val);
-int	ft_handleleft(f_list *p, int arg, int size, int val);
-int	ft_handleright(f_list *p, int arg, int size);
-void	ft_handleneg(f_list *p, int arg, int size);
-void	ft_handlepos(f_list *p, int arg, int size);
+int		ft_checkflag(f_list *p, int *arg, int size, int val);
+int	ft_handleleft(f_list *p,  int size);
+int	ft_handleright(f_list *p,  int size);
+void	ft_handleneg(f_list *p, int size);
+void	ft_handlepos(f_list *p, int size);
 int		ft_getargsize(f_list *p, void *arg);
 int 	ft_getsizehexoctbi(f_list *p, void *arg);
 int		ft_checkmodifiers(f_list *p);
 int		ft_getargsize(f_list *p, void *arg);
 int 	ft_getsizehexoctbi(f_list *p, void *arg);
 int 	ft_printf(const char *format, ... );
+int	ft_printsize(f_list *p, unsigned long size);
+int		ft_printstrsize(f_list *p, unsigned long size);
+int		ft_checkispossibletoputthisbitchinchar(const char *format, int i);
 
 
 

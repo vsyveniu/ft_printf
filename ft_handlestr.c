@@ -1,7 +1,7 @@
 
 #include "ft_printf.h"
 
-void	ft_printchar(f_list *p, char c, int size)
+void	ft_printchar(f_list *p, unsigned char c, int size)
 {
 	(p->w && !p->f_minus) ? ft_putcratchv2(c, ' ', p->w - size) : 0;
 	(p->w && p->f_minus) ? ft_putcratch(c, ' ', p->w - 1) : 0;
@@ -58,17 +58,17 @@ void	ft_putscratchv4(char *str, char c, int size1, int size2)
 
 int		ft_printstr(f_list *p, char *str, int size)
 {
-	unsigned int i;
+	int i;
 
-	i = (unsigned int)size;
+	i = size;
 	if (!str)
 	{
 		ft_putstr("(null)");
 	}
 	(p->w && !p->f_minus && !p->pr) ? ft_putscratch(' ', str, p->w - size) : 0;
 	(p->w && p->f_minus && !p->pr) ? ft_putscratch2(' ', str, p->w - size) : 0;
-	(p->w && p->w <= p->pr && p->pr < (unsigned long)size) ? ft_putnstr(str, p->pr) : 0;
-	(p->pr < (unsigned long)size && !p->w) ? ft_putnstr(str, p->pr) : 0;
+	(p->w && p->w <= p->pr && p->pr < size) ? ft_putnstr(str, p->pr) : 0;
+	(p->pr < size && !p->w) ? ft_putnstr(str, p->pr) : 0;
 	(!p->w && !p->pr) ? ft_putstr(str) : 0;
 	(p->w && p->pr && p->w > p->pr && i > p->pr && !p->f_minus) ? ft_putscratchv3(' ', str, p->w - p->pr, p->pr) : 0;
 	(p->w && p->pr && p->w > p->pr && i < p->pr && i > 0) ? ft_putscratchv3(' ', str, p->w - p->pr + 1, p->pr) : 0;
@@ -92,10 +92,10 @@ int		ft_printstr(f_list *p, char *str, int size)
 int		ft_handlestr(f_list *p, void *arg, int size)
 {
 	if (p->conversion == 'c' || p->conversion == 'C')
-		ft_printchar(p, (unsigned char)arg, size);
+		ft_printchar(p, (*(unsigned char*)arg), size);
 	if (p->conversion == 's' || p->conversion == 'S')
 	{
-		size = ft_printstr(p, (char*)arg, size);
+		size = ft_printstr(p, (*(char**)arg), size);
 		return (size);
 	}
 	return (size);

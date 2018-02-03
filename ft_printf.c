@@ -75,16 +75,22 @@ int		printallshit(f_list *p, va_list args)
 
 	val = 0;
 	arg = va_arg(args, int *);
-	size = ft_getargsize(p, &arg); ///segfault here
+	//printf("fuck1\n");
+	size = ft_getargsize(p, &arg); ///i have chancge it don't forget to change it back if it neeeded
+	//	printf("fuck2\n");
 	if (p->conversion == 'c' || p->conversion == 'C' || p->conversion == 's'
 		|| p->conversion == 'S')
 	{
-		size = ft_handlestr(p, arg, size);
-		printsize = ft_printstrsize(p, (unsigned long)size);
+		size = ft_handlestr(p, &arg, size);
+		//printf("pichatest\n");
+		printsize = ft_printstrsize(p, size);
 		return (printsize);
 	}
+		//printf("fuck3\n");
 	val = ft_checkmodifiers(p);
-	ft_checkflag(p, arg, size, val);
+	//	printf("fuck4\n");
+	ft_checkflag(p, &arg, size, val);
+	//	printf("fuck5\n");
 	printsize = ft_printsize(p, (unsigned long)size);
 	//printf("prntsize ->   %d\n", printsize);
 	return (printsize);
@@ -180,10 +186,12 @@ int		main()
 	printf("\n");
 	printf("\n");
 
-	ret = ft_printf("|%d %C %s %d %u %X %c|", 42, 'f', "fuck",  42, 42, 42, 'k');
+	ret = ft_printf("|%d %d|", 42, 42);
+	ft_printf("\n|%d %d|\n", sizeof(42), sizeof(42));
 	//ret = ft_printf("|%042d %s|", 42, "suck");
 	printf("\n");
-	ret1 = printf("|%d %C %s %d %u %X %c|", 42, 'f', "fuck", 42, 42, 42, 'k');
+	ret1 = printf("|%d %d|", 42, 42);
+	printf("\n|%d %d|\n", sizeof(42), sizeof(42));
 
 	printf("\n");
 

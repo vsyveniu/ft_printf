@@ -54,7 +54,7 @@ int		ft_isflag(char c);
 int			ft_checkisnorepeat(char cinlist, char c);
 void	ft_errorrepeatflag();
 char	get_conversion(const char *format, int *index);
-void		ft_printchar(f_list *params, char c, int size);
+void		ft_printchar(f_list *params, unsigned char c, int size);
 int		ft_printstr(f_list *params, char *str, int size);
 int		ft_handlestr(f_list *params, void *arg, int size);
 void		ft_handledigits(f_list *params, int arg, int val);
@@ -83,13 +83,12 @@ int	ft_handleright(f_list *p,  int size);
 void	ft_handleneg(f_list *p, int size);
 void	ft_handlepos(f_list *p, int size);
 int		ft_getargsize(f_list *p, void *arg);
-int 	ft_getsizehexoctbi(f_list *p, void *arg);
 int		ft_checkmodifiers(f_list *p);
 int		ft_getargsize(f_list *p, void *arg);
-int 	ft_getsizehexoctbi(f_list *p, void *arg);
+int 	ft_getsizehexoctbi(f_list *p, int arg);
 int 	ft_printf(const char *format, ... );
-int	ft_printsize(f_list *p, unsigned long size);
-int		ft_printstrsize(f_list *p, unsigned long size);
+int	ft_printsize(f_list *p, int size);
+int		ft_printstrsize(f_list *p, int size);
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i);
 
 

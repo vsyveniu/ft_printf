@@ -1,4 +1,3 @@
-
 NAME   = libftprintf.a
 
 SRC = ./ft_printf.c get_params.c ft_errorrepeatflag.c ft_print.c gettypespec.c ft_handlestr.c ft_handledigits.c alltinyshit.c putfuncs.c printfuncs.c \
@@ -6,8 +5,6 @@ SRC = ./ft_printf.c get_params.c ft_errorrepeatflag.c ft_print.c gettypespec.c f
 CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
-
-HEADER = includes/
 
 OBJ = $(SRC:.c=.o)
 
@@ -17,7 +14,7 @@ $(NAME): $(NAME) $(OBJ)
 		 ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(FLAGS) -I $(HEADER) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
