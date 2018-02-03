@@ -4,7 +4,7 @@
 
 void	ft_printpercent()
 {
-	ft_putchar('%');
+	write(1, "%", 1);
 }
 
 void	ft_handledigits(f_list *params, int arg, int val)

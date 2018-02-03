@@ -18,8 +18,6 @@ int 	ft_getsizehexoctbi(f_list *p, int arg)
 	(p->conversion == 'o') ? systembase = 8 : 0;
 	(p->conversion == 'd') ? systembase = 10 : 0;
 	(p->conversion == 'b') ? systembase = 2 : 0;
-	//if (p->conversion == 'f')
-	//	systembase = ft_getsizetodot(p, arg);
 	if (arg < 0)
 		temp *= -1;
 	if ((arg < 10 && arg >= 0) && p->conversion != 'b')
@@ -29,7 +27,6 @@ int 	ft_getsizehexoctbi(f_list *p, int arg)
 		i *= systembase;
 		++size;
 	}
-	//	printf("picha\n");
 	return (size);
 }
 
@@ -77,7 +74,7 @@ int		ft_checkmodifiers(f_list *p)
 
 int		ft_printsize(f_list *p, int size)
 {
-	(p->conversion == '%') ? size += 1 : 0;
+	//(p->conversion == '%') ? size += 1 : 0;
 	(p->ispos == 2) ? size += 1 : 0;
 //	(p->f_plus && p->ispos == 1 ) ? size += 1 : 0;
 	(p->w && p->w > size) ? size = p->w : 0;
