@@ -12,14 +12,14 @@
 
 #include "ft_printf.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(signed long long n)
 {
-	unsigned int	i;
+	signed long long	i;
 
-	i = (unsigned int)n;
+	i = (signed long long)n;
 	if (n < 0)
 	{
-		i = (unsigned int)(-n);
+		i = (signed long long)(-n);
 		ft_putchar('-');
 	}
 	if (i > 9)

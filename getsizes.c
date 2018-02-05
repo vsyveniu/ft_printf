@@ -1,27 +1,31 @@
 
 #include "ft_printf.h"
 
-int 	ft_getsizehexoctbi(f_list *p, int arg)
+int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 {
-	int 	i;
+	 int 	i;
 	int 	size;
 	int 	systembase;
-	int		temp;
+	int	temp;
 
 	i = 1;
 	size = 0;
-	temp = arg;
+	temp = (int)arg;
+	//printf("->>> %llu\n",temp );
+	//temp = (*(signed long long*)arg);
+	//printf("->>> %llu\n", temp );
+	//printf("%lld\n", temp);
 	(temp == 0 || temp == 1) ? size += 1 : 0;
 	if (temp == 2147483647)
-		return (size = 10);
+		return (size = 19);
 	(p->conversion == 'x' || p->conversion == 'X') ? systembase = 16 : 0;
 	(p->conversion == 'o') ? systembase = 8 : 0;
 	(p->conversion == 'd') ? systembase = 10 : 0;
 	(p->conversion == 'b') ? systembase = 2 : 0;
-	if (arg < 0)
-		temp *= -1;
-	if ((arg < 10 && arg >= 0) && p->conversion != 'b')
-		systembase++;
+	//if ((signed long long)arg < 0)
+	//	temp *= -1;
+	//if (((signed long long)arg < 10 && (signed long long)arg >= 0) && p->conversion != 'b')
+	//	systembase++;
 	while (i < temp)
 	{
 		i *= systembase;
@@ -45,7 +49,7 @@ int		ft_getargsize(f_list *p, void *arg)
 		|| p->conversion == 'b' || p-> conversion == 'o'
 		|| p->conversion == 'd' || p->conversion == 'i')
 	{
-			size = ft_getsizehexoctbi(p, (*(int*)arg));
+			size = ft_getsizehexoctbi(p, arg);
 			return (size);
 	}
 	(p->conversion == '%') ? size = 1 : 0;
@@ -92,11 +96,10 @@ int		ft_printstrsize(f_list *p, int size)
 	//(p->w < p->pr) ? size = p->w : 0;
 	(p->w > p->pr) ? size = p->w : 0;
 //	(!p->w && p->pr && p->pr > size) ? size = p->pr : 0;
-	(!p->w && p->pr && p->pr < size) ? size = size - p->pr : 0;
+	//(!p->w && p->pr && p->pr < size) ? size = size - p->pr : 0;
 	//(p->w && p->w <= p->pr && p->pr < size) ? size = p->pr : 0;
-	//(!p->w && p->pr && p->pr < size) ? size = p->pr - size: 0;
+	(!p->w && p->pr && p->pr < size) ? size = p->pr - size: 0;
 	//(!p->w && p->pr && !p->f_minus && p->pr > size) ? size = p->pr - size: 0;
 	(!p->w && p->pr && p->f_minus && p->pr < size) ? size = size - p->pr: 0;
-	(p->conversion == 'c' || p->conversion == 'C') ? size = 1 : 0;
 	return (size);
 }
