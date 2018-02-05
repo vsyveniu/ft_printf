@@ -18,25 +18,25 @@ void	ft_handlepos(f_list *p, int size)
 	(!p->w && p->pr && p->f_plus) ? ft_putcratch('+','0', p->pr - size): 0;
 	(p->w && !p->pr && p->f_zero) ? ft_putnchar('0', p->w - size) : 0;
 	(!p->w && p->pr) ? ft_putnchar('0', p->pr - size): 0;	
-	(p->w && p->conversion == '%' && !p->f_minus) ? ft_putnchar(' ', p->w - size - 1) : 0;
+	(p->w && p->conversion == '%' && !p->f_minus) ? ft_putnchar(' ', p->w - size) : 0;
 	(p->w && !p->pr && !p->f_zero && !p->f_minus && p->conversion != '%') ? ft_putnchar(' ', p->w - size) : 0;
 	(p->f_plus && !p->f_zero && !p->pr) ? ft_putchar('+') : 0;
 }
 
 void	ft_handleneg(f_list *p, int size)
 {
-	//(p->ispos == 2) ? size += 1 : 0;
-	//(p->w && p->pr && p->w > p->pr && p->f_zero && !p->f_minus) ? ft_puttriplecratch('-', '0', p->w - p->pr - 1, p->pr - size + 1) : 0; 
-	//(p->w && p->pr && p->w > p->pr && p->f_zero && p->f_minus) ? ft_putcratch('-', '0', p->w - 1 - p->pr)  : 0;
-	//(p->w && p->pr && p->w > p->pr && !p->f_zero && !p->f_minus) ? ft_puttriplecratch('-', '0', p->pr - size, p->w - p->pr) : 0;
-	//(p->w && p->pr && p->w > p->pr && !p->f_zero && p->f_minus) ? ft_putcratch('-', '0', p->w - p->pr) : 0;
-	//(p->w && p->pr && p->w < p->pr) ? ft_putcratch('-','0',p->pr - size + 1) : 0;
-	//(p->w && !p->pr && p->f_zero) ? ft_putcratch('-','0',p->w - size) : 0;
-	//(!p->w && p->pr && !p->f_zero && !p->f_minus) ? ft_putcratch('-','0',p->pr - size + 1) : 0;
-	//(!p->w && p->pr && !p->f_zero &&  p->f_minus) ? ft_putcratch('-','0',p->pr - size + 1) : 0;
+	(p->ispos == 2) ? size += 1 : 0;
+	(p->w && p->pr && p->w > p->pr && p->f_zero && !p->f_minus) ? ft_puttriplecratch('-', '0', p->w - p->pr - 1, p->pr - size + 1) : 0; 
+	(p->w && p->pr && p->w > p->pr && p->f_zero && p->f_minus) ? ft_putcratch('-', '0', p->w - 1 - p->pr)  : 0;
+	(p->w && p->pr && p->w > p->pr && !p->f_zero && !p->f_minus) ? ft_puttriplecratch('-', '0', p->pr - size, p->w - p->pr) : 0;
+	(p->w && p->pr && p->w > p->pr && !p->f_zero && p->f_minus) ? ft_putcratch('-', '0', p->w - p->pr) : 0;
+	(p->w && p->pr && p->w < p->pr) ? ft_putcratch('-','0',p->pr - size + 1) : 0;
+	(p->w && !p->pr && p->f_zero) ? ft_putcratch('-','0',p->w - size) : 0;
+	(!p->w && p->pr && !p->f_zero && !p->f_minus) ? ft_putcratch('-','0',p->pr - size + 1) : 0;
+	(!p->w && p->pr && !p->f_zero &&  p->f_minus) ? ft_putcratch('-','0',p->pr - size + 1) : 0;
 	(p->w && !p->pr && !p->f_zero && !p->f_minus) ? ft_putnchar(' ', p->w - size ) : 0;
 	(p->w && !p->pr && !p->f_zero) ? ft_putchar('-') : 0;
-	//(!p->w && !p->pr) ? ft_putchar('-') : 0;//there is a fucking bug for
+	(!p->w && !p->pr) ? ft_putchar('-') : 0;//there is a fucking bug for
 
 }
 
@@ -57,7 +57,7 @@ int	ft_handleleft(f_list *p, int size)
 	(p->ispos == 2) ? size += 1 : 0;
 	(p->w && p->pr && p->w > p->pr && p->f_zero) ? ft_putnchar(' ', p->w - p->pr) : 0;
 	(p->w && !p->pr && !p->f_zero && p->conversion != '%') ? ft_putnchar(' ', p->w - size) : 0;
-	(p->w && !p->pr && !p->f_zero && p->conversion == '%') ? ft_putnchar(' ', p->w - size - 1) : 0;
+	(p->w && !p->pr && !p->f_zero && p->conversion == '%') ? ft_putnchar(' ', p->w - size) : 0;
 	(p->w && p->pr && !p->f_zero && p->w > p->pr) ? ft_putnchar(' ', p->w - p->pr) : 0;
 	return (size);
 }

@@ -68,21 +68,22 @@ void	ft_parse(const char *format, f_list *p, int *index)
 
 int		printallshit(f_list *p, va_list args)
 {
-	int *arg;
+	void *arg;
 	int	size;
 	int printsize;
 	int	val;
 
 	val = 0;
-	arg = va_arg(args, int *);
-	//printf("fuck1\n");
-	size = ft_getargsize(p, &arg); ///i have chancge it don't forget to change it back if it neeeded
+	arg = va_arg(args, void *);
+	if(arg != NULL)
+		size = ft_getargsize(p, &arg); ///i have chancge it don't forget to change it back if it neeeded
 	//	printf("fuck2\n");
+	//printf("picha\n");
 	if (p->conversion == 'c' || p->conversion == 'C' || p->conversion == 's'
 		|| p->conversion == 'S')
 	{
 		size = ft_handlestr(p, &arg, size);
-		//printf("pichatest\n");
+	//		printf("pichatest\n");
 		printsize = ft_printstrsize(p, size);
 		return (printsize);
 	}
@@ -101,24 +102,20 @@ int		ft_handleshit(const char *format, va_list args)
 	int 		ret;
 	int			i;
 	f_list		*p;
+	int len;
 
 	i = -1;
 	if (!format)
 		return (-1);
+	len = ft_strlen(format);	
 	ret = 0;
-	//printf("\n%s\n",format);
 	while (format[++i] != '\0')
 	{
-		//printf("\ni in while -> %d\n", i);
 		if (format[i] == '%')
 		{
 			if(!(p = (f_list*)malloc(sizeof(f_list))))
 				return (0);
-			//printf("\nbrfore iteration ->  %c\n", format[i]);
-			//i++;
-			//printf("\nafter iteration ->  %c\n", format[i]);
 			ft_parse(format, p, &i);
-			//printf("\nafter ft_parse ->   %c\n", format[i]);
 			if (format[i] == '%')
 					i--;
 			if (p->conversion != 0)
@@ -127,18 +124,15 @@ int		ft_handleshit(const char *format, va_list args)
 			}
 			p = NULL;
 			free(p);
-		//	printf("after parse-> %c\n", format[i]);
 		}
-		//printf("format i -> %d    ", i);
-	//printf("\n%c\n",  format[i]);
-	//printf("%c", format[i]);
-	//ret++;	
-	if (ft_checkispossibletoputthisbitchinchar(format, i) == 1)
+	if (ft_checkispossibletoputthisbitchinchar(format, i) == 1 && i < len)
 	{
-		ft_putchar(format[i]);
-		ret++;
+		if(format != 0)
+		{
+			ft_putchar(format[i]);
+			ret++;
+		}
 	}
-	//printf("after parse-> %d\n", format[i + 1]);
 	}
 	
 	return (ret);
@@ -172,25 +166,18 @@ int 	ft_printf(const char *format, ... )
 
 int		main()
 {
+	int ret1;
 	int ret;
-	int	ret1;
-	int test1;
-	char test3;
-	char *test;
-	char *test2;
-	test1 = 23242;
-	test = "1234567890";
-	test2 = "fu";
-	test3 = 'l';
+/*
 
 	printf("\n");
 	printf("\n");
 
-	ret = ft_printf("|%s%s%s%c%d|", "suck ", "fuck ", "picha ", 'f', 42);
+	ret = ft_printf("|%s %s %s %c %d|", "suck ", "fuck ", "picha ", 'f', 42);
 	//ft_printf("\n|%d %d|\n", sizeof(42), sizeof(42));
 	//ret = ft_printf("|%042d %s|", 42, "suck");
 	printf("\n");
-	ret1 = printf("|%s%s%s%c%d|", "suck ", "fuck ", "picha ", 'f', 42);
+	ret1 = printf("|%s %s %s %c %d|", "suck ", "fuck ", "picha ", 'f', 42);
 	//ret1 = printf("|%d|", 2147483647);
 	//printf("\n|%d %d|\n", sizeof(42), sizeof(42));
 
@@ -203,7 +190,7 @@ int		main()
 
 //////////////test %%%%%%%%%%/////////
 
-/*
+
 	printf("\n");
 	printf("-----------  %s  -----------\n", "%%");
 	printf("\n");
@@ -304,11 +291,11 @@ int		main()
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
 
-*/
+
 
 
 	printf("\n");
-	printf("-----------  %s  -----------\n", "%%");
+	printf("-----------  %s  -----------\n", "abc");
 	printf("\n");
 
 	ret = ft_printf("|%s|", "abc");
@@ -323,7 +310,7 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------  %s  -----------\n", "%%");
+	printf("-----------  %s  -----------\n", "this is a string");
 	printf("\n");
 
 	ret = ft_printf("|%s|", "this is a string");
@@ -339,7 +326,7 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------  %s  -----------\n", "%%");
+	printf("-----------  %s  -----------\n", "n");
 	printf("\n");
 
 	ret = ft_printf("|Line Feed %s|", "\\n");
@@ -355,7 +342,7 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------  %s  -----------\n", "%%");
+	printf("-----------  %s  -----------\n", ".2s");
 	printf("\n");
 
 	ret = ft_printf("|%.2s is a string|", "");
@@ -370,7 +357,7 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------  %s  -----------\n", "%%");
+	printf("-----------  %s  -----------\n", "-.2s");
 	printf("\n");
 
 	ret = ft_printf("|%-.2s is a string|", "this");
@@ -385,7 +372,7 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------  %s  -----------\n", "%%");
+	printf("-----------  %s  -----------\n", "-5.2s");
 	printf("\n");
 
 	ret = ft_printf("|%-5.2s is a string|", "");
@@ -400,7 +387,7 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------   %s  -----------\n", "%%");
+	printf("-----------   %s  -----------\n", "double s");
 	printf("\n");
 
 	ret = ft_printf("|%s %s|", "this", "is");
@@ -415,7 +402,7 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------  %s  -----------\n", "%%");
+	printf("-----------  %s  -----------\n", "triple s");
 	printf("\n");
 
 	ret = ft_printf("|%s %s %s|", "this", "is", "a");
@@ -430,7 +417,7 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------  %s  -----------\n", "%%");
+	printf("-----------  %s  -----------\n", "multi s");
 	printf("\n");
 
 	ret = ft_printf("|%s %s %s %s|", "this", "is", "a", "multi");
@@ -444,7 +431,7 @@ int		main()
 	printf("origin -> %d\n", ret1);
 
 	printf("\n");
-	printf("-----------  %s -----------\n", "%%");
+	printf("-----------  %s -----------\n", "multifuck s");
 	printf("\n");
 
 	ret = ft_printf("|%s%s%s%s|", "this", "is", "a", "multi");
@@ -458,7 +445,7 @@ int		main()
 	printf("origin -> %d\n", ret1);
 
 	printf("\n");
-	printf("-----------  NULL -----------\n", "%%");
+	printf("-----------  %s 	-----------\n", "null");
 	printf("\n");
 
 	ret = ft_printf("|@moulitest: %s|", NULL);
@@ -472,6 +459,99 @@ int		main()
 	printf("origin -> %d\n", ret1);
 
 
+	
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "this");
+	printf("\n");
+
+	ret = ft_printf("|%10s is a string|", "this");
+	printf("\n");
+	ret1 = printf("|%10s is a string|", "this");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "5.2");
+	printf("\n");
+
+	ret = ft_printf("|%5.2s is a string|", "this");
+	printf("\n");
+	ret1 = printf("|%5.2s is a string|", "this");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "-5.2");
+	printf("\n");
+
+	ret = ft_printf("|%-5.2s is a string|", "this");
+	printf("\n");
+	ret1 = printf("|%-5.2s is a string|", "this");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "-5.2");
+	printf("\n");
+
+	ret = ft_printf("|%-5.2s is a string|", "");
+	printf("\n");
+	ret1 = printf("|%-5.2s is a string|", "");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "-5.2");
+	printf("\n");
+
+	
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "-5.2");
+	printf("\n");
+
+	ret = ft_printf("|%-5.2s is a string|", "this");
+	printf("\n");
+	ret1 = printf("|%-5.2s is a string|", "this");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+*/
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "-5.2");
+	printf("\n");
+
+	ret = ft_printf("|%-5.2s is a string|", "this");
+	printf("\n");
+	ret1 = printf("|%-5.2s is a string|", "this");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
 
  return (0);	
-}
+}	

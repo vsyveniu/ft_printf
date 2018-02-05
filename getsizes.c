@@ -76,7 +76,7 @@ int		ft_printsize(f_list *p, int size)
 {
 	//(p->conversion == '%') ? size += 1 : 0;
 	(p->ispos == 2) ? size += 1 : 0;
-//	(p->f_plus && p->ispos == 1 ) ? size += 1 : 0;
+	(p->f_plus && p->ispos == 1 ) ? size += 1 : 0;
 	(p->w && p->w > size) ? size = p->w : 0;
 	(p->w && p->pr && p->pr > size) ? size = p->pr : 0;
 	(p->w && p->pr && p->w > p->pr && p->pr > size) ? size = p->pr : 0;
@@ -89,13 +89,14 @@ int		ft_printsize(f_list *p, int size)
 
 int		ft_printstrsize(f_list *p, int size)
 {
-	(p->w < p->pr) ? size = p->w : 0;
+	//(p->w < p->pr) ? size = p->w : 0;
 	(p->w > p->pr) ? size = p->w : 0;
-	(!p->w && p->pr && p->pr > size) ? size = p->pr : 0;
-	(!p->w && p->pr && p->pr < size) ? printf("fuck\n") : 0;
-	(p->w && p->w <= p->pr && p->pr < size) ? size = p->pr : 0;
-	(!p->w && p->pr && p->f_minus) ? size = p->pr - size: 0;
-	(!p->w && p->pr && !p->f_minus && p->pr > size) ? size = p->pr - size: 0;
+//	(!p->w && p->pr && p->pr > size) ? size = p->pr : 0;
+	(!p->w && p->pr && p->pr < size) ? size = size - p->pr : 0;
+	//(p->w && p->w <= p->pr && p->pr < size) ? size = p->pr : 0;
+	//(!p->w && p->pr && p->pr < size) ? size = p->pr - size: 0;
+	//(!p->w && p->pr && !p->f_minus && p->pr > size) ? size = p->pr - size: 0;
+	(!p->w && p->pr && p->f_minus && p->pr < size) ? size = size - p->pr: 0;
 	(p->conversion == 'c' || p->conversion == 'C') ? size = 1 : 0;
 	return (size);
 }
