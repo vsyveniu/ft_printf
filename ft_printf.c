@@ -90,7 +90,7 @@ int		printallshit(f_list *p, va_list args)
 		//printf("fuck3\n");
 	val = ft_checkmodifiers(p);
 	//	printf("fuck4\n");
-	ft_checkflag(p, arg, size, val);
+	size = ft_checkflag(p, arg, size, val);
 	//	printf("fuck5\n");
 	printsize = ft_printsize(p, (unsigned long)size);
 	//printf("prntsize ->   %d\n", printsize);
@@ -168,8 +168,8 @@ int		main()
 {
 	int ret1;
 	int ret;
-/*
 
+/*
 	printf("\n");
 	printf("\n");
 
@@ -574,9 +574,9 @@ int		main()
 	printf("-----------  %s 	-----------\n", "d");
 	printf("\n");
 
-	ret = ft_printf("|%lu|", 18446744073709551615);
+	ret = ft_printf("|%d|", 4254);
 	printf("\n");
-	ret1 = printf("|%llu|", 18446744073709551615);
+	ret1 = printf("|%d|", 4254);
 
 	printf("\n");
 

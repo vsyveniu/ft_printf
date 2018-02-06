@@ -80,12 +80,12 @@ int		ft_checkflag(f_list *p, void *arg, int size, int val)
 	if (!p->f_minus)
 	{
 		ft_handleright(p, size);
-		ft_handledigits(p, arg, val);
+		size = ft_handledigits(p, arg, val, size);
 	}
 	else if (p->f_minus)
 	{
 		ft_handleright(p, size);
-		ft_handledigits(p, arg, val);
+		size = ft_handledigits(p, arg, val, size);
 		ft_handleleft(p, size);
 	}
 	return(size);

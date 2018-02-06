@@ -3,24 +3,34 @@
 
 int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 {
-	 int 	i;
-	int 	size;
-	int 	systembase;
-	int	temp;
+	int			i;
+	int 		size;
+	int 		systembase;
+	int			temp;
 
 	i = 1;
 	size = 0;
-	temp = (int)arg;
-	//printf("->>> %llu\n",temp );
+	temp = (*(int*)arg);
+	if (temp < 0)
+	{
+		//printf("picha\n");
+		temp *= -1;
+	}
+	if (temp > 2147483647)
+		printf("picha\n");
+	//printf("->>>>  %d", temp);
+
+	//printf("->>> %d\n",temp );
 	//temp = (*(signed long long*)arg);
 	//printf("->>> %llu\n", temp );
 	//printf("%lld\n", temp);
 	(temp == 0 || temp == 1) ? size += 1 : 0;
 	if (temp == 2147483647)
-		return (size = 19);
+		return (size = 10);
 	(p->conversion == 'x' || p->conversion == 'X') ? systembase = 16 : 0;
 	(p->conversion == 'o') ? systembase = 8 : 0;
-	(p->conversion == 'd') ? systembase = 10 : 0;
+	(p->conversion == 'd' || p->conversion == 'u' ||
+		p->conversion == 'U' || p->conversion == 'i') ? systembase = 10 : 0;
 	(p->conversion == 'b') ? systembase = 2 : 0;
 	//if ((signed long long)arg < 0)
 	//	temp *= -1;
@@ -31,6 +41,7 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 		i *= systembase;
 		++size;
 	}
+	//printf("---->>>>>>>>  %lld\n", size);
 	return (size);
 }
 
@@ -47,9 +58,10 @@ int		ft_getargsize(f_list *p, void *arg)
 		size = 1;
 	if (p->conversion == 'x' || p->conversion == 'X'
 		|| p->conversion == 'b' || p-> conversion == 'o'
-		|| p->conversion == 'd' || p->conversion == 'i')
+		|| p->conversion == 'd' || p->conversion == 'i'
+		|| p->conversion == 'u' || p->conversion == 'U')
 	{
-			size = ft_getsizehexoctbi(p, arg);
+			//size = ft_getsizehexoctbi(p, arg);
 			return (size);
 	}
 	(p->conversion == '%') ? size = 1 : 0;

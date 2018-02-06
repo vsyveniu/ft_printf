@@ -19,7 +19,7 @@ void	ft_putnbr(signed long long n)
 	i = (signed long long)n;
 	if (n < 0)
 	{
-		i = (signed long long)(-n);
+		i = (signed long)(-n);
 		ft_putchar('-');
 	}
 	if (i > 9)
