@@ -9,7 +9,7 @@ void	ft_printpercent()
 
 int	ft_handledigits(f_list *params, void *arg, int val, int size)
 {
-	printf("--------->>>>>>>>>  %d", size);
+	//printf("--------->>>>>>>>>  %d", size);
 	if (params->conversion == 'd' || params->conversion == 'i')
 		size = ft_printdecimal(arg, val, size);
 	if (params->conversion == 'u' || params->conversion == 'U')

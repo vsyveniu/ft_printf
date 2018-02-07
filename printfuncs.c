@@ -44,12 +44,18 @@ int	ft_printdecimal(void *i, int val, int size)
 
 	j = 1;
 	systembase = 10;
+	
 	if (val == 0)
-	{
-		while (j < ((int)i))
+	{	
+		if ((int)i == 2147483647)
+			size = 10;
+		else
 		{
-			j *= systembase;
-			++size;
+			while (j < ((int)i))
+			{
+				j *= systembase;
+				++size;
+			}
 		}
 	}
 
@@ -69,7 +75,7 @@ int	ft_printdecimal(void *i, int val, int size)
 void	ft_printudecimal(void *i, int val)
 {
 
-printf("-------->>>>>>>>> %d\n", val);
+//printf("-------->>>>>>>>> %d\n", val);
 	(val == 0) ? ft_putnbr((unsigned int)i) : 0;
 	//(val == 1) ? ft_putnbr((short)i) : 0;
 	//(val == 2) ? ft_putnbr((char)i) : 0;

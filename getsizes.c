@@ -16,8 +16,8 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 		//printf("picha\n");
 		temp *= -1;
 	}
-	if (temp > 2147483647)
-		printf("picha\n");
+	//if (temp > 2147483647)
+		//printf("picha\n");
 	//printf("->>>>  %d", temp);
 
 	//printf("->>> %d\n",temp );
