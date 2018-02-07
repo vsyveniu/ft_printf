@@ -13,8 +13,8 @@ void	ft_putunnbr(unsigned long long n)
 	//}
 	if (i > 9)
 	{
-		ft_putnbr(i / 10);
-		ft_putnbr(i % 10);
+		ft_putunnbr(i / 10);
+		ft_putunnbr(i % 10);
 	}
 	else
 	{

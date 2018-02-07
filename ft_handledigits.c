@@ -13,7 +13,7 @@ int	ft_handledigits(f_list *params, void *arg, int val, int size)
 	if (params->conversion == 'd' || params->conversion == 'i')
 		size = ft_printdecimal(arg, val, size);
 	if (params->conversion == 'u' || params->conversion == 'U')
-		ft_printudecimal(arg, val);
+		size = ft_printudecimal(arg, val, size);
 	if (params->conversion == '%')
 		ft_printpercent();
 	if (params->conversion == 'x' || params->conversion == 'X')
