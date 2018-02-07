@@ -40,12 +40,10 @@ void	ft_printhex(char c, int i, int val)
 int	ft_base(long long arg, long long base, int size)
 {
 
-	long long i;
 	//printf("arg --->>> %lld\n", arg);
-	i = 1;
-	while (i < arg)
+	while (arg > 0)
 	{
-		i *= base;
+		arg /= base;
 		++size;
 	}
 	return (size);
@@ -56,15 +54,15 @@ int	ft_printdecimal(void *i, int val, int size)
 {
 	long long temp;
 	//printf("i - > %d", i);
-	temp = (long long)i; 
-	if (temp == 2147483647)
-		size = 10;
+	temp = (long long)i;
+	printf("%ld\n", temp); 
 	 if ((int)i == 1 || (int)i == 0)
 		size = 1;
 	else if ((int)i == -1)
 		size = 2;
 	else if (temp < 0)
 	{
+		printf("picha\n");
 		temp *= -1;
 		size = ft_base(temp, 10, size);
 		size++;
@@ -83,39 +81,39 @@ int	ft_printdecimal(void *i, int val, int size)
 }
 
 
-int	ft_unsbase(unsigned long long arg, unsigned long long base, int size)
+int	ft_unsbase(unsigned long long int arg, unsigned long long int base, int size)
 {
 
-	unsigned long long i;
+	//unsigned long long int i;
 //	printf("arg --->>> %llu\n", arg);
-	i = 1;
+	//i = 1;
 	//printf("%llu\n", arg);
-
-	while (i <= arg)
+	while (arg > 0)
 	{
-		i *= base;
-		//printf("%d\n", size);
-		size++;
+		arg /= base;
+		size += 1;
 	}
+	//size = 42;
 	return (size);
 }
 
 int		ft_printudecimal(void *i, int val, int size)
 {
-	unsigned long long temp;
+	//unsigned long long temp;
 	//printf("i - > %d", i);
-	temp = (unsigned long long)i; 
+	//temp = (unsigned long long)i; 
 	//if (temp == 42424242424242424)
 	//	size = 10;
 	//printf("%llu\n", temp);
-    if (temp == 0 || temp == 1)
+    if ((int)i == 0 || (int)i == 1)
     {
+    	//printf("picha\n");
 		size = 1;
     }
 	else
 	{
-	//	printf("%llu\n",temp );
-		size = ft_unsbase(temp, 10, size);
+		//printf("kurwa\n");
+		size = ft_unsbase((unsigned long long int)i, 10, size);
 	}
 	//printf("-------->>>>>>>>> %d\n", val);
 	(val == 0) ? ft_putunnbr((unsigned int)i) : 0;

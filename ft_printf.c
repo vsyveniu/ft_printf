@@ -574,9 +574,9 @@ int		main()
 	printf("-----------  %s 	-----------\n", "d");
 	printf("\n");
 
-	ret = ft_printf("|%u|", 0);
+	ret = ft_printf("|%d|", 2147483648);
 	printf("\n");
-	ret1 = printf("|%u|", 0);
+	ret1 = printf("|%d|", 2147483648);
 
 	printf("\n");
 
