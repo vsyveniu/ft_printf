@@ -95,6 +95,7 @@ int		ft_getintsize(void *arg, int systembase, int size);
 int	ft_intbase(int arg, int base, int size);
 int		getunsignsize(void *arg, unsigned long long systembase, int size, f_list *p);
 f_list		*ft_getflag(const char *format, f_list *params, int *index);
+int 	ft_printf(const char *format, ... );
 
 
 
