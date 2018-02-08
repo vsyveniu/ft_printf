@@ -163,13 +163,13 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-
+/*
 int		main()
 {
 	int ret1;
 	int ret;
 
-/*
+
 	printf("\n");
 	printf("\n");
 
@@ -627,7 +627,7 @@ int		main()
 	printf("\n");
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
-*/
+
 	printf("\n");
 	printf("-----------  %s 	-----------\n", "d");
 	printf("\n");
@@ -718,9 +718,9 @@ int		main()
 	printf("-----------  %s 	-----------\n", "hu");
 	printf("\n");
 
-	ret = ft_printf("|%u|", 4294967296);
+	ret = ft_printf("|{%s}|", 0);
 	printf("\n");
-	ret1 = printf("|%u|",   4294967296);
+	ret1 = printf("|{%s}|", 0);
 
 	printf("\n");
 
@@ -737,3 +737,4 @@ int		main()
 
  return (0);	
 }	
+*/
