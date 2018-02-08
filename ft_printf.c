@@ -76,7 +76,7 @@ int		printallshit(f_list *p, va_list args)
 	val = 0;
 	arg = va_arg(args, void *);
 	if(arg != NULL)
-		size = ft_getargsize(p, &arg); ///i have chancge it don't forget to change it back if it neeeded
+		size = ft_getargsize(p, arg); ///i have chancge it don't forget to change it back if it neeeded
 	//	printf("fuck2\n");
 	//printf("picha\n");
 	if (p->conversion == 'c' || p->conversion == 'C' || p->conversion == 's'
@@ -90,9 +90,9 @@ int		printallshit(f_list *p, va_list args)
 		//printf("fuck3\n");
 	val = ft_checkmodifiers(p);
 	//	printf("fuck4\n");
-	size = ft_checkflag(p, arg, size, val);
+	ft_checkflag(p, arg, size, val);
 	//	printf("fuck5\n");
-	printsize = ft_printsize(p, (unsigned long)size);
+	printsize = ft_printsize(p, size);
 	//printf("prntsize ->   %d\n", printsize);
 	return (printsize);
 }	
@@ -163,13 +163,13 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-
+/*
 int		main()
 {
 	int ret1;
 	int ret;
 
-/*
+
 	printf("\n");
 	printf("\n");
 
@@ -569,14 +569,14 @@ int		main()
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
 
-*/
+
 	printf("\n");
 	printf("-----------  %s 	-----------\n", "d");
 	printf("\n");
 
-	ret = ft_printf("|%d|", 2147483648);
+	ret = ft_printf("|%05d|", -42);
 	printf("\n");
-	ret1 = printf("|%d|", 2147483648);
+	ret1 = printf("|%05d|", -42);
 
 	printf("\n");
 
@@ -585,3 +585,4 @@ int		main()
 	printf("origin -> %d\n", ret1);
  return (0);	
 }	
+*/

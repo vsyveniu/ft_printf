@@ -57,7 +57,7 @@ char	get_conversion(const char *format, int *index);
 void		ft_printchar(f_list *params, unsigned char c, int size);
 int		ft_printstr(f_list *params, char *str, int size);
 int		ft_handlestr(f_list *params, void *arg, int size);
-int		ft_handledigits(f_list *params, void *arg, int val, int size);
+void		ft_handledigits(f_list *params, void *arg, int val);
 void		ft_putnbr(signed long long n);
 void	ft_putunnbr(unsigned long long n);
 void		ft_putnchar(char c, int size);
@@ -70,8 +70,8 @@ void	ft_putbinary(int arg);
 void	ft_printbinary(int i, int val);
 void	ft_printcocto(int i, int val);
 void	ft_printhex(char c, int i, int val);
-int		ft_printdecimal(void *i, int val, int size);
-int		ft_printudecimal(void *i, int val, int size);
+void		ft_printdecimal(void *i, int val);
+void		ft_printudecimal(void *i, int val);
 void	ft_putcratch(char c1, char c2, int size);
 void	ft_putcratchv2(char c1, char c2, int size);
 void	ft_puttriplecratch(char c2, char c3, int size, int size2);
@@ -91,6 +91,11 @@ int 	ft_printf(const char *format, ... );
 int	ft_printsize(f_list *p, int size);
 int		ft_printstrsize(f_list *p, int size);
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i);
+int	ft_base(long long arg, long long base, int size);
+int	ft_unsbase(unsigned long long int arg, unsigned long long int base, int size);
+int		ft_getintsize(void *arg, int systembase, int size);
+int	ft_intbase(int arg, int base, int size);
+int		getunsignsize(void *arg, unsigned long long systembase, int size);
 
 
 
