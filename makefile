@@ -6,7 +6,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-HEADER = ft_printf.h
+HEADER = includes/ft_printf.h
 
 OBJ = $(SRC:.c=.o)
 
@@ -16,7 +16,7 @@ $(NAME): $(NAME) $(OBJ)
 		 ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(FLAGS)  -c $< -o $@
+	$(CC) $(FLAGS) -I $(HEADER) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
