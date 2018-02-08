@@ -95,7 +95,7 @@ int	ft_base(long long arg, long long base, int size);
 int	ft_unsbase(unsigned long long int arg, unsigned long long int base, int size);
 int		ft_getintsize(void *arg, int systembase, int size);
 int	ft_intbase(int arg, int base, int size);
-int		getunsignsize(void *arg, unsigned long long systembase, int size);
+int		getunsignsize(void *arg, unsigned long long systembase, int size, f_list *p);
 
 
 

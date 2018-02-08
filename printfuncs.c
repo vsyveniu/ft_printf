@@ -65,11 +65,10 @@ void	ft_printudecimal(void *i, int val)
 	//printf("%llu\n", temp);
 	//printf("-------->>>>>>>>> %d\n", val);
 	(val == 0) ? ft_putunnbr((unsigned int)i) : 0;
-	//(val == 1) ? ft_putnbr((short)i) : 0;
-	//(val == 2) ? ft_putnbr((char)i) : 0;
+	(val == 1) ? ft_putunnbr((unsigned short)i) : 0;
 	(val == 3) ? ft_putunnbr((unsigned long long)i) : 0;
 	(val == 4) ? ft_putunnbr((unsigned long long)i) : 0;
-	//(val == 5) ? ft_putnbr((uintmax_t)i) : 0;
+	(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
 	//(val == 6) ? ft_putnbr((size_t)i) : 0;
 
 }

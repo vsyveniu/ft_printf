@@ -18,7 +18,7 @@ void	ft_handlepos(f_list *p, int size)
 	(!p->w && p->pr && p->f_plus) ? ft_putcratch('+','0', p->pr - size): 0;
 	(p->w && !p->pr && p->f_zero && !p->f_minus && p->ispos == 1 && !p->w) ? ft_putnchar('0', p->w - size) : 0;
 	(p->w && !p->pr && p->f_zero && !p->f_minus && p->ispos == 1 && p->f_plus) ? ft_putcratch('+','0', p->w - size - 1) : 0;
-	//(p->w && !p->pr && p->f_zero) ? ft_putnchar('0', p->w - size) : 0;
+	(p->w && !p->pr && p->f_zero) ? ft_putnchar('0', p->w - size) : 0;
 	(!p->w && p->pr) ? ft_putnchar('0', p->pr - size): 0;	
 	(p->w && p->conversion == '%' && !p->f_minus) ? ft_putnchar(' ', p->w - size) : 0;
 	(p->w && !p->pr && !p->f_zero && !p->f_minus && p->conversion != '%') ? ft_putnchar(' ', p->w - size) : 0;
@@ -46,7 +46,7 @@ void	ft_handleneg(f_list *p, int size)
 
 int	ft_handleright(f_list *p, int size)
 {
-		
+	//printf("--------------->>>>>>>>>>>. %d\n", p->ispos);	
 	if (p->ispos == 2)
 	{
 		ft_handleneg(p, size);
