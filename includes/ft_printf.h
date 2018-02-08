@@ -42,7 +42,6 @@ char	*ft_strchr(const char *str, int symbol);
 int		ft_checkflags(char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 int				ft_atoi(const char *str);
-f_list		*ft_getflag(const char *format,f_list *params, int *index);
 int			ft_getwidth(const char *format, int *index);
 int			get_precision(const char *format, int *index);
 int		ft_isdigit(int c);
@@ -95,6 +94,7 @@ int	ft_unsbase(unsigned long long int arg, unsigned long long int base, int size
 int		ft_getintsize(void *arg, int systembase, int size);
 int	ft_intbase(int arg, int base, int size);
 int		getunsignsize(void *arg, unsigned long long systembase, int size, f_list *p);
+f_list		*ft_getflag(const char *format, f_list *params, int *index);
 
 
 
