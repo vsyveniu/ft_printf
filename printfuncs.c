@@ -42,8 +42,12 @@ void	ft_printhex(char c, void *i, int val)
 
 void	ft_printdecimal(void *i, int val)
 {
+	int temp;
 
-	(val == 0) ? ft_putnbr((int)i) : 0;
+	temp = (int)i;
+	if ((int)i < 0)/////////////////this isa very weak crutch and it will fuck me many times int the future
+		temp *= -1;
+	(val == 0) ? ft_putnbr(temp) : 0;
 	(val == 1) ? ft_putnbr((short)i) : 0;
 	(val == 2) ? ft_putnbr((char)i) : 0;
 	(val == 3) ? ft_putnbr((long long)i) : 0;

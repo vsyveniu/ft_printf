@@ -1,3 +1,4 @@
+
 NAME   = libftprintf.a
 
 SRC = ./ft_printf.c get_params.c ft_errorrepeatflag.c ft_print.c gettypespec.c ft_handlestr.c ft_handledigits.c alltinyshit.c putfuncs.c printfuncs.c \

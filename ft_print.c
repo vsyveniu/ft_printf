@@ -9,25 +9,25 @@ void	ft_handlepos(f_list *p, int size)
 	else
 	{
 		//(p->f_oct && p->ispos == 1) ? size += 2 : 0;
-		(p->w && p->pr && p->w < p->pr && p->f_zero && p->f_plus) ? ft_putcratch('+','0',p->pr - size) : 0;
+		(p->w && p->pr && p->w < p->pr && p->f_zero && p->f_plus && p->ispos == 1) ? ft_putcratch('+','0',p->pr - size) : 0;
 		(p->w && p->pr && p->w > p->pr && !p->f_plus && !p->f_zero && !p->f_minus) ? ft_putdoublecratch(p, '0', p->w - size, p->pr - size) : 0; // need to refactor 
-		(p->w && p->pr && p->w > p->pr && p->f_plus && !p->f_zero) ? ft_puttriplecratch('+', '0', p->w - p->pr - 1, p->pr - size + 1) : 0;
+		(p->w && p->pr && p->w > p->pr && p->f_plus && !p->f_zero && p->ispos == 1) ? ft_puttriplecratch('+', '0', p->w - p->pr - 1, p->pr - size + 1) : 0;
 		(p->w && p->pr && p->w > p->pr && !p->f_plus && p->f_zero && !p->f_minus) ? ft_putdoublecratch(p, '0', p->w - p->pr, p->pr - size) : 0;
 		(p->w && p->pr && p->w > p->pr && p->f_zero && p->f_minus) ? ft_putnchar('0', p->w - p->pr - 1) : 0; 
 		(p->w && p->pr && p->w > p->pr && p->f_minus && !p->f_zero) ? ft_putnchar('0', p->w - p->pr) : 0;
 		(p->w && p->pr && p->w < p->pr && p->f_zero && !p->f_plus) ? ft_putnchar('0',p->pr - size ) : 0;
 		(p->w && p->pr && p->w < p->pr && !p->f_plus && !p->f_zero) ? ft_putnchar('0', p->pr - size) : 0;
-		(p->w && p->pr && p->w < p->pr && p->f_plus && !p->f_zero) ? ft_putcratch('+', '0', p->pr - size + 1) : 0;
+		(p->w && p->pr && p->w < p->pr && p->f_plus && !p->f_zero && p->ispos == 1) ? ft_putcratch('+', '0', p->pr - size + 1) : 0;
 		(p->w && p->pr && p->w > p->pr && p->f_plus && p->f_zero && !p->f_minus) ? ft_puttriplecratch('+', '0', p->w - p->pr - 1, p->pr - size + 1) : 0; 
 		(!p->w && p->pr && p->f_plus) ? ft_putcratch('+','0', p->pr - size): 0;
-		(p->w && !p->pr && p->f_zero && !p->f_minus && p->ispos == 1) ? ft_putnchar('0', p->w - size) : 0;
+		(p->w && !p->pr && p->f_zero && !p->f_minus && p->ispos == 1 && !p->f_plus) ? ft_putnchar('0', p->w - size) : 0;
 		(p->w && !p->pr && p->f_zero && !p->f_minus && p->ispos == 1 && p->f_plus) ? ft_putcratch('+','0', p->w - size - 1) : 0;
 		(!p->w && p->pr) ? ft_putnchar('0', p->pr - size): 0;	
 		(p->w && p->conversion == '%' && !p->f_minus) ? ft_putnchar(' ', p->w - size) : 0;
 		(p->w && !p->pr && !p->f_zero && !p->f_minus && p->conversion != '%') ? ft_putnchar(' ', p->w - size) : 0;
 		(p->f_plus && !p->f_zero && !p->pr && p->ispos == 1) ? ft_putchar('+') : 0;
 		(p->f_plus && p->ispos != 1 && p->ispos != 2) ? ft_putchar('+') : 0;
-		
+		(p->f_space) ? ft_putchar(' ') : 0;
 	}
 }
 
@@ -46,6 +46,7 @@ void	ft_handlehash(f_list *p, int size)
 void	ft_handleneg(f_list *p, int size)
 {
 	(p->ispos == 2) ? size += 1 : 0;
+	//(p->ispos == 2) ? ft_putchar('-') : 0;
 	(p->w && p->pr && p->w > p->pr && p->f_zero && !p->f_minus) ? ft_puttriplecratch('-', '0', p->w - p->pr - 1, p->pr - size + 1) : 0; 
 	(p->w && p->pr && p->w > p->pr && p->f_zero && p->f_minus) ? ft_putcratch('-', '0', p->w - 1 - p->pr)  : 0;
 	(p->w && p->pr && p->w > p->pr && !p->f_zero && !p->f_minus) ? ft_puttriplecratch('-', '0', p->pr - size, p->w - p->pr) : 0;
@@ -67,7 +68,8 @@ int	ft_handleright(f_list *p, int size)
 	{
 		ft_handleneg(p, size);
 	}
-	ft_handlepos(p, size);
+	else
+		ft_handlepos(p, size);
 	return (size); ///this is void!!!!!!!!!!
 }
 

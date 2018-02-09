@@ -18,7 +18,7 @@ int		ft_getsignsize(void *arg, long long systembase, int size)
 		//printf("picha\n");
 		temp *= -1;
 		size = ft_base(temp, systembase, size);
-		//size++;
+		//size++; ////////did nothing?
 	}
 	else
 	{
@@ -35,14 +35,13 @@ int		ft_getintsize(void *arg, int systembase, int size)
 	temp = (int)arg;
 	if (temp == 1 || temp == 0)
 		size = 1;
-	else if (temp == -1)
-		size = 1;
-	else if (temp == -2147483648)
-			size = 10;
+	//else if (temp == -2147483648)
+	//	size = 11;
 	else if (temp < 0)
 	{
 		temp *= -1;
 		size = ft_intbase(temp, systembase, size);
+		//size++; ////////////wait a sec... da fuck?!
 	}
 	else
 	{
@@ -81,7 +80,6 @@ int 	ft_gethexsize(f_list *p, unsigned long long temp, unsigned long long system
 int		getunsignsize(f_list *p, void *arg, unsigned long long systembase, int size)
 {
 	unsigned long long temp;
-
 	temp = (unsigned long long)arg;
 	if (p->conversion == 'x' || p->conversion == 'X')
 		return (size = ft_gethexsize(p,  temp, systembase, size));
@@ -122,6 +120,7 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	long long 		systembase;
 
 	size = 0;
+	//(p->f_space && p-> ispos == 1) ? size += 1 : 0;
 	(p->conversion == 'x' || p->conversion == 'X') ? systembase = 16 : 0;
 	(p->conversion == 'o') ? systembase = 8 : 0;
 	(p->conversion == 'd' || p->conversion == 'i') ? systembase = 10 : 0;
@@ -134,8 +133,10 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	}
 	else
 	{
-		if ((int)arg < 0 )
-			return (size =  ft_getintsize(arg, systembase, size));
+		if ((int)arg < 0 && p->mod == 0)
+		{
+			return (size = ft_getintsize(arg, systembase, size));
+		}
 		else
 			size = ft_getsignsize(arg, systembase, size);		
 	}
@@ -148,7 +149,7 @@ int		ft_getargsize(f_list *p, void *arg)
 
 	size = 0;
 	p->ispos = 1;
-	if (arg < 0)
+	if ((int)arg < 0)
 		p->ispos = 2;
 	//if (arg == 0)
 	//	p->ispos = 0;
