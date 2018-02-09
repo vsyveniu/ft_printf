@@ -1,42 +1,40 @@
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
-static char		*ft_handlethisbitcheshhandll(const char *format, int *index, char c)
+static int		ft_handlethisbitcheshhandll(const char *format, int *index, char c)
 {
-	char 	*temp;
+	int	temp;
 
-	temp = NULL;
+	temp = 0;
 	if (c == 'h')
 	{
 		if (format[*index + 1] == 'h')
 		{
-			temp = ft_strdup("hh");
+			temp = 2;
 			(*index)++;
 			return (temp);
 		}
-		temp = ft_strdup("h");	
+		temp = 1;	
 	}
 	else if (c == 'l')
 	{
 		if (format[*index + 1] == 'l')
 		{
-			temp = ft_strdup("ll");
+			temp = 4;
 			(*index)++;
-			free(temp);
 			return (temp);
 		}
-		temp = ft_strdup("l");
+		temp = 3;
 	}
-	free(temp);
 	return(temp);
 }
 
 
-char			*get_justanothershittomanage(const char *format, int *index) // is it bettter to fill struct with int?
+int			get_mod(const char *format, int *index) // is it bettter to fill struct with int?
 {
-	char *temp;  //is it may be int?
+	int temp;  //is it may be int?
 
-	temp = NULL;
+	temp = 0;
 	if (format[*index] == 'h' || format[*index] == 'l')
 	{
 		temp = ft_handlethisbitcheshhandll(format, index, format[*index]);
@@ -45,19 +43,18 @@ char			*get_justanothershittomanage(const char *format, int *index) // is it bet
 	}
 	if (format[*index] == 'j')
 	{
-		temp = ft_strdup("j");
+		temp = 5;
 		(*index)++;
 		return(temp);
 	}
 	if (format[*index] == 'z')
 	{
-		temp = ft_strdup("z");
+		temp = 6;
 		(*index)++;
 		return (temp);
 	}
 	temp = 0;
 	return (temp);
-
 }
 
 char			get_conversion(const char *format, int *index)

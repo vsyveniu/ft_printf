@@ -36,8 +36,8 @@ void	ft_parse(const char *format, f_list *p, int *index)
 	//printf("after pr -> %c\n", format[*index]);
 	//while (ft_isdigit(format[*index]) == 1)
 	//	(*index)++;
-	p->justanothershittomanage = get_justanothershittomanage(format, index);
-//	printf("justanotheshit -> %s\n", p->justanothershittomanage);
+	p->mod = get_mod(format, index);
+//	printf("justanotheshit -> %s\n", p->mod);
 	//printf("\nafter shit -> %c\n", format[*index]);
 	p->conversion = get_conversion(format, index);
 	//printf("conversion ->    %c\n", p->conversion);
@@ -61,7 +61,7 @@ void	ft_parse(const char *format, f_list *p, int *index)
 	printf("\nf_zero  -> %c\n", p->f_zero);
 	printf("\nw   -> %d\n", p->w);
 	printf("\nprec    -> %d\n", p->pr);
-	printf("\nmod     -> %s\n", p->justanothershittomanage);
+	printf("\nmod     -> %d\n", p->mod);
 	printf("\nconvers -> %c\n", p->conversion);
 	printf("\n--------------------\n");*/
 }
@@ -71,9 +71,7 @@ int		printallshit(f_list *p, va_list args)
 	void *arg;
 	int	size;
 	int printsize;
-	int	val;
 
-	val = 0;
 	arg = va_arg(args, void *);
 	if(arg != NULL)
 		size = ft_getargsize(p, arg); ///i have chancge it don't forget to change it back if it neeeded
@@ -82,15 +80,15 @@ int		printallshit(f_list *p, va_list args)
 	if (p->conversion == 'c' || p->conversion == 'C' || p->conversion == 's'
 		|| p->conversion == 'S')
 	{
-		size = ft_handlestr(p, &arg, size);
+		ft_handlestr(p, &arg, size);
 	//		printf("pichatest\n");
 		printsize = ft_printstrsize(p, size);
 		return (printsize);
 	}
 		//printf("fuck3\n");
-	val = ft_checkmodifiers(p);
+	//val = ft_checkmodifiers(p);
 	//	printf("fuck4\n");
-	ft_checkflag(p, arg, size, val);
+	ft_checkflag(p, arg, size);
 	//	printf("fuck5\n");
 	printsize = ft_printsize(p, size);
 	//printf("prntsize ->   %d\n", printsize);
@@ -714,13 +712,15 @@ int		main()
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
 
+
+
 	printf("\n");
 	printf("-----------  %s 	-----------\n", "hu");
 	printf("\n");
 
-	ret = ft_printf("|{%s}|", 0);
+	ret = ft_printf("|@moulitest: %#.x %#.0x|", 0, 0);
 	printf("\n");
-	ret1 = printf("|{%s}|", 0);
+	ret1 = printf("|@moulitest: %#.x %#.0x|", 0, 0);
 
 	printf("\n");
 
@@ -730,6 +730,19 @@ int		main()
 
 
 
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "hu");
+	printf("\n");
+
+	ret = ft_printf("|%x|", 0);
+	printf("\n");
+	ret1 = printf("|%x|", 0);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
 
 
 

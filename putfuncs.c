@@ -2,12 +2,12 @@
 #include "includes/ft_printf.h"
 
 
-void	ft_puthex(char conv, int arg)
+void	ft_puthex(char conv, unsigned long long int arg)
 {
-	int i;
+	unsigned long long int i;
 	char *base;
 	char *str;
-	int temp;
+	unsigned long long int temp;
 
 	i = 0;
 	temp = arg;

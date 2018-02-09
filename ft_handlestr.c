@@ -1,5 +1,5 @@
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
 
 void	ft_printchar(f_list *p, unsigned char c, int size)
 {
@@ -78,30 +78,18 @@ int		ft_printstr(f_list *p, char *str, int size)
 	(p->w && p->pr && p->w > p->pr && size == 0 && !p->f_minus) ? ft_putnchar(' ', p->w) : 0;
 	(p->w && p->pr && p->w > p->pr && p	->f_minus && size > 0) ? ft_putscratchv4(str, ' ', p->pr, p->w - p->pr) : 0;
 	(p->w && p->pr && p->w > p->pr && p->f_minus && size == 0) ? ft_putscratchv5(' ', p->w - p->pr + 1) : 0;
-	
-	/*if (p->w && p->f_minus)
-	{
-		ft_putstr(str);
-		while (i++ < size)
-			write(1, " ", 1);
-	}
-	else
-	{
-		ft_putstr(str);
-	}*/
 	return (size);
 }
 
 
-int		ft_handlestr(f_list *p, void *arg, int size)
+void		ft_handlestr(f_list *p, void *arg, int size)
 {
 	if (p->conversion == 'c' || p->conversion == 'C')
+	{
 		ft_printchar(p, (*(unsigned char*)arg), size);
+	}
 	if (p->conversion == 's' || p->conversion == 'S')
 	{
-		//printf("fuck\n");
-		size = ft_printstr(p, (*(char**)arg), size);
-		return (size);
+		ft_printstr(p, (*(char**)arg), size);
 	}
-	return (size);
 }

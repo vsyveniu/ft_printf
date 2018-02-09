@@ -9,7 +9,6 @@ void	ft_printpercent()
 
 void	ft_handledigits(f_list *params, void *arg, int val)
 {
-	//printf("--------->>>>>>>>>  %d", size);
 	if (params->conversion == 'd' || params->conversion == 'i')
 		ft_printdecimal(arg, val);
 	if (params->conversion == 'u' || params->conversion == 'U')
@@ -17,7 +16,7 @@ void	ft_handledigits(f_list *params, void *arg, int val)
 	if (params->conversion == '%')
 		ft_printpercent();
 	if (params->conversion == 'x' || params->conversion == 'X')
-		ft_printhex(params->conversion, (int)arg, val);
+		ft_printhex(params->conversion, arg, val);
 	if (params->conversion == 'o' || params->conversion == 'O')
 		ft_printcocto((int)arg, val);
 	if (params->conversion == 'b')

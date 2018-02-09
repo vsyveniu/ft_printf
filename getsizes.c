@@ -62,28 +62,39 @@ int	ft_intbase(int arg, int base, int size)
 	}
 	return (size);
 }
-int		getunsignsize(void *arg, unsigned long long systembase, int size, f_list *p)
+
+
+int 	ft_gethexsize(f_list *p, unsigned long long temp, unsigned long long systembase, int size)
+{
+	if (temp == 4294967296)
+	{
+		size = 9;
+		if (p->mod == 1 || p->mod == 2 || p->mod == 0)
+			size = 1;
+		return (size);
+	}
+	else
+		size = ft_unsbase(temp, systembase, size);
+	return (size);
+}
+
+int		getunsignsize(f_list *p, void *arg, unsigned long long systembase, int size)
 {
 	unsigned long long temp;
 
 	temp = (unsigned long long)arg;
+	if (p->conversion == 'x' || p->conversion == 'X')
+		return (size = ft_gethexsize(p,  temp, systembase, size));
 	if (temp == 1 || temp == 0)
 		size = 1;
-	else if (p->conversion == '%')
-		printf("picha\n");
-/*	else if (temp == 4294967296 &&  
-	{
-		size = 1;
-	}*/
 	else
 		size = ft_unsbase(temp, systembase, size);
 	return (size);
 }
 
 
-int	ft_unsbase(unsigned long long int arg, unsigned long long int base, int size)
+int		ft_unsbase(unsigned long long int arg, unsigned long long int base, int size)
 {
-
 	while (arg > 0)
 	{
 		arg /= base;
@@ -111,17 +122,16 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	long long 		systembase;
 
 	size = 0;
-//	printf("%d\n", p->ispos);
-	//(p->f_plus && p->ispos == 1) ? size += 1 : 0;
-	
-	//(p->f_space && p->ispos == 2) ? size -= 1 : 0;
 	(p->conversion == 'x' || p->conversion == 'X') ? systembase = 16 : 0;
 	(p->conversion == 'o') ? systembase = 8 : 0;
 	(p->conversion == 'd' || p->conversion == 'i') ? systembase = 10 : 0;
 	(p->conversion == 'u' || p->conversion == 'U') ? systembase = 10 : 0;
 	(p->conversion == 'b') ? systembase = 2 : 0;
-	if (p->conversion == 'u' || p->conversion == 'U')
-		size = getunsignsize(arg, (unsigned long long)systembase, size, p);
+	if (p->conversion == 'u' || p->conversion == 'U' || p->conversion == 'x' ||
+		p-> conversion == 'X')
+	{
+		size = getunsignsize(p, arg, (unsigned long long)systembase, size);
+	}
 	else
 	{
 		if ((int)arg < 0 )
@@ -129,25 +139,6 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 		else
 			size = ft_getsignsize(arg, systembase, size);		
 	}
-
-	//printf("%ld\n", temp); 
-
-
-
-	//if (temp > 2147483647)
-		//printf("picha\n");
-	//printf("->>>>  %d", temp);
-
-	//printf("->>> %d\n",temp );
-	//temp = (*(signed long long*)arg);
-	//printf("->>> %llu\n", temp );
-	//printf("%lld\n", temp);
-	
-	//if ((signed long long)arg < 0)
-	//	temp *= -1;
-	//if (((signed long long)arg < 10 && (signed long long)arg >= 0) && p->conversion != 'b')
-	//	systembase++;
-	//printf("---->>>>>>>>  %lld\n", size);
 	return (size);
 }
 
@@ -159,6 +150,8 @@ int		ft_getargsize(f_list *p, void *arg)
 	p->ispos = 1;
 	if (arg < 0)
 		p->ispos = 2;
+	//if (arg == 0)
+	//	p->ispos = 0;
 	if (p->conversion == 's')
 		size = ft_strlen((char*)arg);
 	if (p->conversion == 's' && (char*)arg == NULL)
@@ -177,29 +170,30 @@ int		ft_getargsize(f_list *p, void *arg)
 	return (size);
 }
 
-int		ft_checkmodifiers(f_list *p)
+/*int		ft_checkmodifiers(f_list *p)
 {
 	int val;
 
 	val = 0;
-	if ( p->justanothershittomanage && ft_strcmp(p->justanothershittomanage, "h") == 0)
+	if ( p->mod && ft_strcmp(p->mod, "h") == 0)
 		return(val = 1);
-	if (p->justanothershittomanage && ft_strcmp(p->justanothershittomanage, "hh") == 0)
+	if (p->mod && ft_strcmp(p->mod, "hh") == 0)
 		return(val = 2);
-	if (p->justanothershittomanage && ft_strcmp(p->justanothershittomanage, "ll") == 0)
+	if (p->mod && ft_strcmp(p->mod, "ll") == 0)
 		return(val = 3);
-	if (p->justanothershittomanage && ft_strcmp(p->justanothershittomanage, "l") == 0)
+	if (p->mod && ft_strcmp(p->mod, "l") == 0)
 		return(val = 4);
-	if (p->justanothershittomanage && ft_strcmp(p->justanothershittomanage, "j") == 0)
+	if (p->mod && ft_strcmp(p->mod, "j") == 0)
 		return(val = 5);
-	if (p->justanothershittomanage && ft_strcmp(p->justanothershittomanage, "z") == 0)
+	if (p->mod && ft_strcmp(p->mod, "z") == 0)
 		return(val = 6);
 	return(val);
-}
+}*/
 
 int		ft_printsize(f_list *p, int size)
 {
 	//(p->conversion == '%') ? size += 1 : 0;
+	(p->f_oct && p->ispos == 1) ? size += 2 : 0;
 	(p->ispos == 2) ? size += 1 : 0;
 	(p->f_plus && p->ispos == 1 ) ? size += 1 : 0;
 	(p->w && p->w > size) ? size = p->w : 0;
