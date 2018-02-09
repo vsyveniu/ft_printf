@@ -97,10 +97,11 @@ int		ft_getintsize(void *arg, int systembase, int size);
 int	ft_intbase(int arg, int base, int size);
 int		getunsignsize(f_list *p, void *arg, unsigned long long systembase, int size);
 f_list		*ft_getflag(const char *format, f_list *params, int *index);
-int 	ft_printf(const char *format, ... );
+
 void 	ft_crutchforhash(f_list *p, char c, int size);
 void	ft_handlehash(f_list *p, int size);
 void 	ft_crutchforhashv2(f_list *p, char c, int size);
+int 	ft_printf(const char *format, ... );
 
 
 
