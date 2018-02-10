@@ -161,13 +161,13 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-
+/*
 int		main()
 {
 	int ret1;
 	int ret;
 
-/*
+
 	printf("\n");
 	printf("\n");
 
@@ -745,7 +745,7 @@ int		main()
 	printf("origin -> %d\n", ret1);
 
 
-*/
+
 
 
 	printf("\n");
@@ -765,3 +765,4 @@ int		main()
 
  return (0);	
 }	
+*/
