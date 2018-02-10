@@ -31,12 +31,12 @@ int		ft_getsignsize(void *arg, long long systembase, int size)
 int		ft_getintsize(void *arg, int systembase, int size)
 {
 	int temp;
-
+	
 	temp = (int)arg;
 	if (temp == 1 || temp == 0)
 		size = 1;
-	//else if (temp == -2147483648)
-	//	size = 11;
+	else if (temp == -2147483648)
+		size = 11;
 	else if (temp < 0)
 	{
 		temp *= -1;
@@ -57,7 +57,7 @@ int	ft_intbase(int arg, int base, int size)
 	while (arg > 0)
 	{
 		arg /= base;
-		++size;
+		size += 1;
 	}
 	return (size);
 }
@@ -108,7 +108,7 @@ int	ft_base(long long arg, long long base, int size)
 	while (arg > 0)
 	{
 		arg /= base;
-		++size;
+		size += 1;
 	}
 	return (size);
 }
@@ -194,8 +194,11 @@ int		ft_getargsize(f_list *p, void *arg)
 int		ft_printsize(f_list *p, int size)
 {
 	//(p->conversion == '%') ? size += 1 : 0;
-	(p->f_oct && p->ispos == 1) ? size += 2 : 0;
-	(p->ispos == 2) ? size += 1 : 0;
+	//(p->f_plus) ? size += 1 : 0;
+	(p->w > size) ? size = p->w : 0;
+	(p->pr > size) ? size = p->pr : 0; //this is a shit maybe
+	/*(p->f_oct && p->ispos == 1) ? size += 2 : 0;
+	//(p->ispos == 2) ? size += 1 : 0; ///this fucks me
 	(p->f_plus && p->ispos == 1 ) ? size += 1 : 0;
 	(p->w && p->w > size) ? size = p->w : 0;
 	(p->w && p->pr && p->pr > size) ? size = p->pr : 0;
@@ -205,7 +208,8 @@ int		ft_printsize(f_list *p, int size)
 	(p->f_plus && p->ispos != 1 && p-> ispos != 2) ? size += 1 : 0;
 	//(!p->w && !p->pr) ? 
 	//(p->f_plus && p->ispos == 2) ? size -= 1 : 0;
-	//(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0; // maybe it's needed for d
+	//(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0; // maybe it's needed for d*/
+//	(p->f_plus) ? size += 1 : 0;
 	return (size);
 }
 
