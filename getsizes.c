@@ -194,9 +194,16 @@ int		ft_getargsize(f_list *p, void *arg)
 int		ft_printsize(f_list *p, int size)
 {
 	//(p->conversion == '%') ? size += 1 : 0;
-	//(p->f_plus) ? size += 1 : 0;
-	(p->w > size) ? size = p->w : 0;
+	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
+	(p->f_plus && p->ispos == 1) ? size += 1 : 0;
+	(p->f_plus && p->ispos == 0) ? size += 1 : 0;
+	(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X') ? size += 1 : 0;
+	(p->w > size && !p->f_oct) ? size = p->w : 0;
 	(p->pr > size) ? size = p->pr : 0; //this is a shit maybe
+	(p->f_oct && p->ispos != 0) ? size += 2 : 0 ;
+	(p->w > size && !p->pr) ? size = p->w : 0;
+	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
+	((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
 	/*(p->f_oct && p->ispos == 1) ? size += 2 : 0;
 	//(p->ispos == 2) ? size += 1 : 0; ///this fucks me
 	(p->f_plus && p->ispos == 1 ) ? size += 1 : 0;
