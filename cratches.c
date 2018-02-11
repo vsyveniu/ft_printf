@@ -60,8 +60,7 @@ void 	ft_crutchforhashv2(f_list *p, char c, int size)
 	if (p->conversion == 'x' || p->conversion == 'X')
 	{
 		ft_putnchar(c, size);
-		
-		
+		ft_printhash(p->conversion);
 	}
 	else if (p->conversion == 'o' || p->conversion == 'O')
 	{
@@ -69,6 +68,23 @@ void 	ft_crutchforhashv2(f_list *p, char c, int size)
 		ft_printhash(p->conversion);
 
 	}
+}
+
+void 	ft_crutchforhashv3(f_list *p, char c, char c2,  int size, int size2)
+{
+	if (p->conversion == 'x' || p->conversion == 'X')
+	{
+		ft_putnchar(c, size);
+		ft_printhash(p->conversion);
+		ft_putnchar(c2, size2);
+	}
+	else if (p->conversion == 'o' || p->conversion == 'O')
+	{
+		ft_putnchar(c, size + 1);
+		ft_printhash(p->conversion);
+		ft_putnchar(c2, size2);
+	}
+
 	
 }
 

@@ -88,7 +88,7 @@ int		ft_checkmodifiers(f_list *p);
 int		ft_getargsize(f_list *p, void *arg);
 int 	ft_getsizehexoctbi(f_list *p, void *arg);
 int 	ft_printf(const char *format, ... );
-int	ft_printsize(f_list *p, void *arg,  int size);
+int	ft_printsize(f_list *p, void *arg, int size);
 int		ft_printstrsize(f_list *p, void *arg, int size);
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i);
 int	ft_base(long long arg, long long base, int size);
@@ -102,7 +102,8 @@ void 	ft_crutchforhash(f_list *p, char c, int size);
 void	ft_handlehash(f_list *p, int size);
 void 	ft_crutchforhashv2(f_list *p, char c, int size);
 int 	ft_printf(const char *format, ... );
-
+void 	ft_crutchforhash(f_list *p, char c, int size);
+void 	ft_crutchforhashv3(f_list *p, char c, char c2,  int size, int size2);
 
 
 #endif

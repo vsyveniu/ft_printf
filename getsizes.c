@@ -36,7 +36,7 @@ int		ft_getintsize(void *arg, int systembase, int size)
 	if (temp == 1 || temp == 0)
 		size = 1;
 	else if (temp == -2147483648)
-		size = 11;
+		size = 10;
 	else if (temp < 0)
 	{
 		temp *= -1;
@@ -98,6 +98,7 @@ int		ft_unsbase(unsigned long long int arg, unsigned long long int base, int siz
 		arg /= base;
 		size += 1;
 	}
+	//printf("%d\n", size);
 	return (size);
 }
 
@@ -189,21 +190,91 @@ int		ft_getargsize(f_list *p, void *arg)
 	return(val);
 }*/
 
+int 	ft_printcrutches(f_list *p, void *arg, int size)
+{
+	if (p->mod == 0 && (long)arg == 2147483648 )
+		size = 11;
+	if (p->mod == 3 && (long)arg == 2147483648)
+		size = 10;
+	if (p->mod == 2 && (short)arg == -128)
+		size = 4;
+	if (p->mod == 4 && (long long)arg == -9223372036854775807)
+		size = 20;
+	if ((p->conversion == 'x' || p->conversion == 'X') && (long long)arg == 0)
+		size = 1;
+	if (p->mod == 5 && (long long)arg == 9223372036854775807)
+		size = 20;
+
+	return (size);
+}
+
 int		ft_printsize(f_list *p, void *arg, int size)
 {	
-	(void)arg;
 	//(p->conversion == '%') ? size += 1 : 0;
-	//printf("--------->>>>>> %d\n", p->ispos);
+	((p->mod == 1 || p->mod == 2) && p->conversion == 'd') ? size += 1 : 0;
+	(p->mod == 0 && (int)arg == 0 && p->conversion == 'd') ? size += 1 : 0;
 	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	(p->f_plus && p->ispos == 1) ? size += 1 : 0;
-	(p->f_plus && p->ispos == 0) ? size += 1 : 0;
-	(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X') ? size += 1 : 0;
+	//(p->f_plus && p->ispos == 0) ? size += 1 : 0;
+	(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X'&& p->mod != 4) ? size += 1 : 0;
 	(p->w > size && !p->f_oct) ? size = p->w : 0;
 	(p->pr > size) ? size = p->pr : 0; //this is a shit maybe
 	(p->f_oct && p->ispos != 0) ? size += 2 : 0 ;
+	
 	(p->w > size && !p->pr) ? size = p->w : 0;
 	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
 	((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
+	size = ft_printcrutches(p, arg, size);	
+	//if ((long)arg == 2147483648)
+	//	size = 11;
+
+
+
+
+
+
+
+
+
+
+
+	/*(p->ispos == 2) ? size += 1 : 0;
+	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
+	(p->f_plus && p->ispos == 0) ? size += 1 : 0;
+	(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X') ? size += 1 : 0;
+	(p->ispos == 2 && p->pr && p->w && p->pr > p->w && p->f_zero) ? size = p->pr : 0;
+	(p->w > size && !p->f_oct && !p->pr) ? size = p->w : 0;
+	
+	(p->pr > size && !p->w && !p->f_plus) ? size = p->pr : 0; //this is a shit maybe
+	(p->f_oct && p->ispos != 0) ? size += 2 : 0 ;
+	(p->w > size && !p->pr) ? size = p->w : 0;
+	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
+	
+	((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
+	(p->f_oct && p->w && p->pr && p->w > p->pr) ? size = p->w : 0;
+	(p->w == p->pr && p->f_plus && p->w != 0 && p->pr != 0) ?  size = p->w : 0;
+	//(p->w && p->pr && p->w > p->pr && p->f_plus) ? size = p->w : 0;
+	(!p->w && p->pr && p->f_plus && p->pr > size) ? size = p->pr + 1: 0;
+	(p->w == 0 && p->pr == 0 && p->f_plus) ? size += 1 : 0;*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//(!p->w && p->pr && f_plus && !p->f_oct)
+ 	//(p->f_plus && p->ispos == 1) ? size += 1 : 0;
+		//(p->f_plus) ? size += 1 : 0;  /////////////////////////////////////////////////////////need  to deep it 
 	//((p->mod == 3 || p->mod == 4) && p->ispos == 2) ? size -= 1 : 0;
 	/*(p->f_oct && p->ispos == 1) ? size += 2 : 0;
 	//(p->ispos == 2) ? size += 1 : 0; ///this fucks me
