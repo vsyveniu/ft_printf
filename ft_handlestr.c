@@ -64,10 +64,7 @@ void	ft_putscratchv5(char c,int size2)
 int		ft_printstr(f_list *p, char *str, int size)
 {
 	if (!str)
-	{
 		ft_putstr("(null)");
-		size += 5;
-	}
 	(p->w && !p->f_minus && !p->pr) ? ft_putscratch(' ', str, p->w - size) : 0;
 	(p->w && p->f_minus && !p->pr) ? ft_putscratch2(' ', str, p->w - size) : 0;
 	(p->w && p->w <= p->pr && p->pr < size) ? ft_putnstr(str, p->pr) : 0;

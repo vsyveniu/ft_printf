@@ -32,19 +32,43 @@ void	ft_putdoublecratch(f_list *p, char c2, int size, int size2)
 
 void	ft_printhash(char c)
 {
-	ft_putchar('0');
-	ft_putchar(c);
+	if (c == 'x' || c == 'X')
+	{
+		ft_putchar('0');
+		ft_putchar(c);
+	}
+	else if (c == 'o' || c == 'O')
+		ft_putchar('0');
 }
+
 void 	ft_crutchforhash(f_list *p, char c, int size)
 {
-	ft_printhash(p->conversion);
-	ft_putnchar(c, size);
+	if (p->conversion == 'x' || p->conversion == 'X')
+	{
+		ft_printhash(p->conversion);
+		ft_putnchar(c, size);
+	}
+	else if (p->conversion == 'o' || p->conversion == 'O')
+	{
+		ft_printhash(p->conversion);
+		ft_putnchar(c, size - 1);
+	}
 }
 
 void 	ft_crutchforhashv2(f_list *p, char c, int size)
 {
-	ft_putnchar(c, size);
-	ft_printhash(p->conversion);
+	if (p->conversion == 'x' || p->conversion == 'X')
+	{
+		ft_putnchar(c, size);
+		
+		
+	}
+	else if (p->conversion == 'o' || p->conversion == 'O')
+	{
+		ft_putnchar(c, size + 1);
+		ft_printhash(p->conversion);
+
+	}
 	
 }
 

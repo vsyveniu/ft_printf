@@ -151,8 +151,6 @@ int		ft_getargsize(f_list *p, void *arg)
 	p->ispos = 1;
 	if ((int)arg < 0)
 		p->ispos = 2;
-	//if (arg == 0)
-	//	p->ispos = 0;
 	if (p->conversion == 's')
 		size = ft_strlen((char*)arg);
 	if (p->conversion == 's' && (char*)arg == NULL)
@@ -191,9 +189,11 @@ int		ft_getargsize(f_list *p, void *arg)
 	return(val);
 }*/
 
-int		ft_printsize(f_list *p, int size)
-{
+int		ft_printsize(f_list *p, void *arg, int size)
+{	
+	(void)arg;
 	//(p->conversion == '%') ? size += 1 : 0;
+	//printf("--------->>>>>> %d\n", p->ispos);
 	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	(p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	(p->f_plus && p->ispos == 0) ? size += 1 : 0;
@@ -204,6 +204,7 @@ int		ft_printsize(f_list *p, int size)
 	(p->w > size && !p->pr) ? size = p->w : 0;
 	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
 	((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
+	//((p->mod == 3 || p->mod == 4) && p->ispos == 2) ? size -= 1 : 0;
 	/*(p->f_oct && p->ispos == 1) ? size += 2 : 0;
 	//(p->ispos == 2) ? size += 1 : 0; ///this fucks me
 	(p->f_plus && p->ispos == 1 ) ? size += 1 : 0;
@@ -220,14 +221,17 @@ int		ft_printsize(f_list *p, int size)
 	return (size);
 }
 
-int		ft_printstrsize(f_list *p, int size)
+int		ft_printstrsize(f_list *p, void *arg, int size)
 {
+	//printf("---------->>>>>>picha\n");
 	//(p->w < p->pr) ? size = p->w : 0;
+	if (!arg && p->conversion != 'c')
+		size = 6;
 	(p->w > p->pr) ? size = p->w : 0;
 //	(!p->w && p->pr && p->pr > size) ? size = p->pr : 0;
 	//(!p->w && p->pr && p->pr < size) ? size = size - p->pr : 0;
 	//(p->w && p->w <= p->pr && p->pr < size) ? size = p->pr : 0;
-	(!p->w && p->pr && p->pr < size) ? size = p->pr - size: 0;
+	(!p->w && p->pr && p->pr < size) ? size = size - p->pr : 0;
 	//(!p->w && p->pr && !p->f_minus && p->pr > size) ? size = p->pr - size: 0;
 	(!p->w && p->pr && p->f_minus && p->pr < size) ? size = size - p->pr: 0;
 	return (size);

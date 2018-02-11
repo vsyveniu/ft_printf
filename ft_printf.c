@@ -82,7 +82,7 @@ int		printallshit(f_list *p, va_list args)
 	{
 		ft_handlestr(p, &arg, size);
 	//		printf("pichatest\n");
-		printsize = ft_printstrsize(p, size);
+		printsize = ft_printstrsize(p, arg, size);
 		return (printsize);
 	}
 		//printf("fuck3\n");
@@ -90,7 +90,7 @@ int		printallshit(f_list *p, va_list args)
 	//	printf("fuck4\n");
 	ft_checkflag(p, arg, size);
 	//	printf("fuck5\n");
-	printsize = ft_printsize(p, size);
+	printsize = ft_printsize(p, arg, size);
 	//printf("prntsize ->   %d\n", printsize);
 	return (printsize);
 }	
@@ -161,13 +161,13 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-/*
+
 int		main()
 {
 	int ret1;
 	int ret;
 
-
+/*
 	printf("\n");
 	printf("\n");
 
@@ -743,8 +743,6 @@ int		main()
 	printf("\n");
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
-
-
 
 
 
@@ -1752,6 +1750,782 @@ int		main()
 	printf("origin -> %d\n", ret1);
 
 
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "u");
+	printf("\n");
+
+	ret = ft_printf("|%ld|", -2147483648);
+	printf("\n");
+	ret1 = printf("|%ld|", -2147483648);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "u");
+	printf("\n");
+
+	ret = ft_printf("|%ld|", 2147483648);
+	printf("\n");
+	ret1 = printf("|%ld|", 2147483648);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "u");
+	printf("\n");
+
+	ret = ft_printf("|%lld|", 9223372036854775807);
+	printf("\n");
+	ret1 = printf("|%lld|", 9223372036854775807);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "#llx");
+	printf("\n");
+
+	ret = ft_printf("|%#llx|", 9223372036854775807);
+	printf("\n");
+	ret1 = printf("|%#llx|", 9223372036854775807);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "#x");
+	printf("\n");
+
+	ret = ft_printf("|%#x|", 0);
+	printf("\n");
+	ret1 = printf("|%#x|", 0);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%.2s");
+	printf("\n");
+
+	ret = ft_printf("|%.2s is a string|", "this");
+	printf("\n");
+	ret1 = printf("|%.2s is a string|", "this");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	/////////////////////////////////////////////////////////////////////
+
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-.2s");
+	printf("\n");
+
+	ret = ft_printf("|%-.2s is a string|", "this");
+	printf("\n");
+	ret1 = printf("|%-.2s is a string|", "this");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%s NULL");
+	printf("\n");
+
+	ret = ft_printf("|@moulitest: %s|", NULL);
+	printf("\n");
+	ret1 = printf("|@moulitest: %s|", NULL);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "%s  %s NULL");
+	printf("\n");
+
+	ret = ft_printf("|%s %s|", NULL, "string");
+	printf("\n");
+	ret1 = printf("|%s %s|", NULL, "string");
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "%#6o");
+	printf("\n");
+
+	ret = ft_printf("|%#6o|", 2500);
+	printf("\n");
+	ret1 = printf("|%#6o|", 2500);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-#6o");
+	printf("\n");
+
+	ret = ft_printf("|%-#6o|", 2500);
+	printf("\n");
+	ret1 = printf("|%-#6o|", 2500);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-05o");
+	printf("\n");
+
+	ret = ft_printf("|%-05o|", 2500);
+	printf("\n");
+	ret1 = printf("|%-05o|", 2500);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-10.5o");
+	printf("\n");
+
+	ret = ft_printf("|%-10.5o|", 2500);
+	printf("\n");
+	ret1 = printf("|%-10.5o|", 2500);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%d");
+	printf("\n");
+
+	ret = ft_printf("|%d|", 2147483648);
+	printf("\n");
+	ret1 = printf("|%d|", 2147483648);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%d");
+	printf("\n");
+
+	ret = ft_printf("|%d|", -2147483648);
+	printf("\n");
+	ret1 = printf("|%d|", -2147483648);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%+d");
+	printf("\n");
+
+	ret = ft_printf("|%+d|", 0);
+	printf("\n");
+	ret1 = printf("|%+d|", 0);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-05d");
+	printf("\n");
+
+	ret = ft_printf("|%-05d|", 42);
+	printf("\n");
+	ret1 = printf("|%-05d|", 42);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-05d");
+	printf("\n");
+
+	ret = ft_printf("|%-05d|", -42);
+	printf("\n");
+	ret1 = printf("|%-05d|", -42);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%hd");
+	printf("\n");
+
+	ret = ft_printf("|%hd|", 32768);
+	printf("\n");
+	ret1 = printf("|%hd|", 32768);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%hhd");
+	printf("\n");
+
+	ret = ft_printf("|%hhd|", 128);
+	printf("\n");
+	ret1 = printf("|%hhd|", 128);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%hhd");
+	printf("\n");
+
+	ret = ft_printf("|%hhd|", -128);
+	printf("\n");
+	ret1 = printf("|%hhd|", -128);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%ld");
+	printf("\n");
+
+	ret = ft_printf("|%ld|", 2147483648);
+	printf("\n");
+	ret1 = printf("|%ld|", 2147483648);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%ld");
+	printf("\n");
+
+	ret = ft_printf("|%ld|", -2147483648);
+	printf("\n");
+	ret1 = printf("|%ld|", -2147483648);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%lld");
+	printf("\n");
+
+	ret = ft_printf("|%lld|", 9223372036854775807);
+	printf("\n");
+	ret1 = printf("|%lld|", 9223372036854775807);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%lld");
+	printf("\n");
+
+	ret = ft_printf("|%lld|", -9223372036854775807);
+	printf("\n");
+	ret1 = printf("|%lld|", -9223372036854775807);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%jd");
+	printf("\n");
+
+	ret = ft_printf("|%jd|", 9223372036854775807);
+	printf("\n");
+	ret1 = printf("|%jd|", 9223372036854775807);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%jd");
+	printf("\n");
+
+	ret = ft_printf("|%jd|", -9223372036854775807);
+	printf("\n");
+	ret1 = printf("|%jd|", -9223372036854775807);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%zd");
+	printf("\n");
+
+	ret = ft_printf("|%zd|", 4294967295);
+	printf("\n");
+	ret1 = printf("|%zd|", 4294967295);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%zd");
+	printf("\n");
+
+	ret = ft_printf("|%zd|", 4294967296);
+	printf("\n");
+	ret1 = printf("|%zd|", 4294967296);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%zd");
+	printf("\n");
+
+	ret = ft_printf("|%zd|", -1);
+	printf("\n");
+	ret1 = printf("|%zd|", -1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%4.15d");
+	printf("\n");
+
+	ret = ft_printf("|%4.15d|", 42);
+	printf("\n");
+	ret1 = printf("|%4.15d|", 42);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%10.5d");
+	printf("\n");
+
+	ret = ft_printf("|%10.5d|", 4242);
+	printf("\n");
+	ret1 = printf("|%10.5d|", 4242);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-10.5d");
+	printf("\n");
+
+	ret = ft_printf("|%-10.5d|", 4242);
+	printf("\n");
+	ret1 = printf("|%-10.5d|", 4242);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-10.5d");
+	printf("\n");
+
+	ret = ft_printf("|% 10.5d|", 4242);
+	printf("\n");
+	ret1 = printf("|% 10.5d|", 4242);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%+10.5d");
+	printf("\n");
+
+	ret = ft_printf("|%+10.5d|", 4242);
+	printf("\n");
+	ret1 = printf("|%+10.5d|", 4242);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%-+10.5d");
+	printf("\n");
+
+	ret = ft_printf("|%-+10.5d|", 4242);
+	printf("\n");
+	ret1 = printf("|%-+10.5d|", 4242);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%03.2d");
+	printf("\n");
+
+	ret = ft_printf("|%03.2d|", 0);
+	printf("\n");
+	ret1 = printf("|%03.2d|", 0);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%03.2d");
+	printf("\n");
+
+	ret = ft_printf("|%03.2d|", 1);
+	printf("\n");
+	ret1 = printf("|%03.2d|", 1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%.10d");
+	printf("\n");
+
+	ret = ft_printf("|@moulitest : %.10d|", -42);
+	printf("\n");
+	ret1 = printf("|@moulitest : %.10d|", -42);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%.d %.0d");
+	printf("\n");
+
+	ret = ft_printf("|@moulitest : %.d %.0d|", 0, 0);
+	printf("\n");
+	ret1 = printf("|@moulitest : %.d %.0d|", 0, 0);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "%5.d %5.0d");
+	printf("\n");
+
+	ret = ft_printf("|@moulitest : %5.d %5.0d|", 0, 0);
+	printf("\n");
+	ret1 = printf("|@moulitest : %5.d %5.0d|", 0, 0);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "u");
+	printf("\n");
+
+	ret = ft_printf("|%u|", -1);
+	printf("\n");
+	ret1 = printf("|%u|", -1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "u");
+	printf("\n");
+
+	ret = ft_printf("|%u|", 4294967296);
+	printf("\n");
+	ret1 = printf("|%u|", 4294967296);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "15u");
+	printf("\n");
+
+	ret = ft_printf("|%15u|", 4294967295);
+	printf("\n");
+	ret1 = printf("|%15u|", 4294967295);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "15u");
+	printf("\n");
+
+	ret = ft_printf("|%-15u|", 4294967295);
+	printf("\n");
+	ret1 = printf("|%-15u|", 4294967295);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "015u");
+	printf("\n");
+
+	ret = ft_printf("|%015u|", 4294967295);
+	printf("\n");
+	ret1 = printf("|%015u|", 4294967295);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", " u");
+	printf("\n");
+
+	ret = ft_printf("|% u|", 4294967295);
+	printf("\n");
+	ret1 = printf("|% u|", 4294967295);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "+u");
+	printf("\n");
+
+	ret = ft_printf("|%+u|", 4294967295);
+	printf("\n");
+	ret1 = printf("|%+u|", 4294967295);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "hU");
+	printf("\n");
+
+	ret = ft_printf("|%hU|", 4294967296);
+	printf("\n");
+	ret1 = printf("|%hU|", 4294967296);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "U");
+	printf("\n");
+
+	ret = ft_printf("|%U|", 4294967296);
+	printf("\n");
+	ret1 = printf("|%U|", 4294967296);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+*/
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "U");
+	printf("\n");
+
+	ret = ft_printf("|%-13.4d|", 42);
+	printf("\n");
+	ret1 = printf("|%-13.4d|", 42);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
  return (0);	
 }	
-*/
