@@ -35,9 +35,8 @@ typedef	struct  				p_list
 
 
 
-void	ft_putchar(char c);
+
 void	ft_putstr(char const *s);
-size_t		ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int symbol);
 int		ft_checkflags(char *str);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -104,6 +103,8 @@ void 	ft_crutchforhashv2(f_list *p, char c, int size);
 int 	ft_printf(const char *format, ... );
 void 	ft_crutchforhash(f_list *p, char c, int size);
 void 	ft_crutchforhashv3(f_list *p, char c, char c2,  int size, int size2);
+size_t		ft_strlen(const char *str);
+void	ft_putchar(char c);
 
 
 #endif
