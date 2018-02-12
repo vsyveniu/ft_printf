@@ -53,17 +53,17 @@ void	ft_parse(const char *format, f_list *p, int *index)
 	//}
 	
 	//}
-	/*printf("\nafter all ->   %c\n", format[*index]);
-	printf("\n--------------------\n");
-	printf("\nf_oct   -> %c\n", p->f_oct);
-	printf("\nf_plus  -> %c\n", p->f_plus);
-	printf("\nf_minus -> %c\n", p->f_minus);
-	printf("\nf_zero  -> %c\n", p->f_zero);
-	printf("\nw   -> %d\n", p->w);
-	printf("\nprec    -> %d\n", p->pr);
-	printf("\nmod     -> %d\n", p->mod);
-	printf("\nconvers -> %c\n", p->conversion);
-	printf("\n--------------------\n");*/
+	//printf("\nafter all ->   %c\n", format[*index]);
+	//printf("\n--------------------\n");
+	//printf("\nf_oct   -> %c\n", p->f_oct);
+	//printf("\nf_plus  -> %c\n", p->f_plus);
+	//printf("\nf_minus -> %c\n", p->f_minus);
+	//printf("\nf_zero  -> %c\n", p->f_zero);
+	//printf("\nw   -> %d\n", p->w);
+	//printf("\nprec    -> %d\n", p->pr);
+	//printf("\nmod     -> %d\n", p->mod);
+	//printf("\nconvers -> %c\n", p->conversion);
+	//printf("\n--------------------\n");
 }
 
 int		printallshit(f_list *p, va_list args)
@@ -125,7 +125,7 @@ int		ft_handleshit(const char *format, va_list args)
 		}
 	if (ft_checkispossibletoputthisbitchinchar(format, i) == 1 && i < len)
 	{
-		if(format != 0)
+		if(format != 0 && format[i - 1] != '%')
 		{
 			ft_putchar(format[i]);
 			ret++;
@@ -138,14 +138,25 @@ int		ft_handleshit(const char *format, va_list args)
 
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i)
 {
+	//while (format[i] != '%')
 	//printf("\nformat ->  %c\n", format[i]);
-	if (format[i - 1] != '%'){
+	//printf("\nformat ->  %c\n", format[i - 1]);
+	//if(format[i] != '+' && format [i] != '-' && format[i] != '0')
+	if ( format[i + 1] == '\0' && (format[i] == 'd' || format[i] == 'D' || format[i] == 'i' || format[i] == 'x'
+		|| format[i] == 'X' || format[i] == 'o' || format[i] == 'O' || format[i] == 'p'
+		|| format[i] == 's' || format[i] == 'c' || format[i] == 'C' || format[i] == 'u' || format[i] == 'U'
+		|| format[i] == 'r' || format[i] == 'k' || format[i] == 'b'))
+	{
+		return(0);
+	}
+	else if (format[i - 1] != '%'){
 		return (1);
 	}
-	if (format[i - 1] == '%' && format[i - 2] == '%')
+	else if (format[i - 1] == '%' && format[i - 2] == '%')
 		return (1);
-	if (format[i - 1] == '%' && format[i + 1] == '\0')
+	else if (format[i - 1] == '%' && format[i + 1] == '\0')
 		return (1);
+	
 	return (0);
 }
 
@@ -2576,9 +2587,40 @@ int		main()
 	printf("-----------  %s 	-----------\n", "U");
 	printf("\n");
 
-	ret = ft_printf("|%D|", 9223);
+	ret = ft_printf("%X%X%X%X%X", 1, 100, 999, 42, 999988888);
 	printf("\n");
-	ret1 = printf("|%D|", 9223);
+	ret1 = printf("%X%X%X%X%X",  1, 100, 999, 42, 999988888);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "U");
+	printf("\n");
+
+	ret = ft_printf("%2d %2d%D%D% d %d%d\n", 42, 52, 62, 72 , 82, 92, 102);
+	ret = ft_printf("%2s %2s%s%s% s sssoooo pichakurwa---------->>>>>> %s%s%s%s", "42", "52", "62", "72" , "82", "92", "102", "picha ", "kurwa");
+	//printf("\n%p\n", 42424242);
+	printf("\n");
+	ret1 = printf("|%8d|",  42);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "U");
+	printf("\n");
+
+	ret = ft_printf("%zd", 42424242);
+	printf("\n");
+	ret1 = printf("%zd",  42424242);
 
 	printf("\n");
 

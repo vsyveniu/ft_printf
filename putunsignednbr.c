@@ -1,11 +1,11 @@
 
 #include "includes/ft_printf.h"
 
-void	ft_putunnbr(unsigned long long n)
+void	ft_putunnbr(uintmax_t n)
 {
-	unsigned long long	i;
+	uintmax_t	i;
 
-	i = (unsigned long long)n;
+	i = (uintmax_t)n;
 	//if (n < 0)
 	//{
 	//	i = (signed long long)(-n);

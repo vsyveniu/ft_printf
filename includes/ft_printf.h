@@ -57,8 +57,8 @@ int		ft_printstr(f_list *params, char *str, int size);
 void		ft_handlestr(f_list *p, void *arg, int size);
 
 void		ft_handledigits(f_list *params, void *arg, int val);
-void		ft_putnbr(signed long long n);
-void	ft_putunnbr(unsigned long long n);
+void		ft_putnbr(intmax_t n);
+void	ft_putunnbr(uintmax_t n);
 void		ft_putnchar(char c, int size);
 void	ft_printhash(char c);
 void	ft_putcratchv2(char c1, char c2, int size);

@@ -50,6 +50,7 @@ void	ft_printdecimal(void *i, int val)
 	temp = (int)i;
 	if ((int)i < 0)/////////////////this isa very weak crutch and it will fuck me many times int the future
 		temp *= -1;
+	//printf("------------->>>>>>>>>>>> %d <<<<<<<<<<<<<<<------------", (int)i);
 	(val == 0) ? ft_putnbr(temp) : 0;
 	(val == 1) ? ft_putnbr((short)i) : 0;
 	(val == 2) ? ft_putnbr((char)i) : 0;

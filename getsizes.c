@@ -126,7 +126,7 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 
 	(p->conversion == 'x' || p->conversion == 'X') ? systembase = 16 : 0;
 	(p->conversion == 'o') ? systembase = 8 : 0;
-	(p->conversion == 'd' || p->conversion == 'i') ? systembase = 10 : 0;
+	(p->conversion == 'd' || p->conversion == 'i' || p->conversion == 'D') ? systembase = 10 : 0;
 	(p->conversion == 'u' || p->conversion == 'U') ? systembase = 10 : 0;
 	(p->conversion == 'b') ? systembase = 2 : 0;
 	if (p->conversion == 'u' || p->conversion == 'U' || p->conversion == 'x' ||
@@ -164,7 +164,7 @@ int		ft_getargsize(f_list *p, void *arg)
 		|| p->conversion == 'b' || p-> conversion == 'o'
 		|| p->conversion == 'd' || p->conversion == 'i'
 		|| p->conversion == 'u' || p->conversion == 'U'
-		|| p->conversion == 'p')
+		|| p->conversion == 'p' || p->conversion == 'D')
 	{
 			size = ft_getsizehexoctbi(p, arg);
 			return (size);

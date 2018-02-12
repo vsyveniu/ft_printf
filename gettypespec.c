@@ -71,7 +71,8 @@ char			get_conversion(const char *format, int *index)
 	{
 		temp = format[*index];
 		//printf("\nindex in -> %c\n", format[*index]);
-		(*index)++;
+		if (format[*index + 1] != '\0')
+			(*index)++;
 		//printf("\nindex in -> %c\n", format[*index]);
 	}
 	else
