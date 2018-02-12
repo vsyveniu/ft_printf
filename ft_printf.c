@@ -2570,6 +2570,23 @@ int		main()
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
 
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "U");
+	printf("\n");
+
+	ret = ft_printf("|%llx|", 9223372036854775807);
+	printf("\n");
+	ret1 = printf("|%llx|", 9223372036854775807);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
  return (0);	
 }	
 */

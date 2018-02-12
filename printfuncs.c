@@ -36,9 +36,12 @@ void	ft_printhex(char c, void *i, int val)
 }
 
 
-
-
-
+void	ft_printpointer(char c, void *i)
+{
+	ft_putchar('0');
+	ft_putchar('x');
+	ft_printhex(c, i, 4);
+}
 
 void	ft_printdecimal(void *i, int val)
 {

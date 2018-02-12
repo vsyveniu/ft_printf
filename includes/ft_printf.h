@@ -90,11 +90,11 @@ int 	ft_printf(const char *format, ... );
 int	ft_printsize(f_list *p, void *arg, int size);
 int		ft_printstrsize(f_list *p, void *arg, int size);
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i);
-int	ft_base(long long arg, long long base, int size);
-int	ft_unsbase(unsigned long long int arg, unsigned long long int base, int size);
+int	ft_base(intmax_t arg, intmax_t base, int size);
+int	ft_unsbase(uintmax_t arg, uintmax_t base, int size);
 int		ft_getintsize(void *arg, int systembase, int size);
 int	ft_intbase(int arg, int base, int size);
-int		getunsignsize(f_list *p, void *arg, unsigned long long systembase, int size);
+int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size);
 f_list		*ft_getflag(const char *format, f_list *params, int *index);
 
 void 	ft_crutchforhash(f_list *p, char c, int size);
@@ -105,6 +105,8 @@ void 	ft_crutchforhash(f_list *p, char c, int size);
 void 	ft_crutchforhashv3(f_list *p, char c, char c2,  int size, int size2);
 size_t		ft_strlen(const char *str);
 void	ft_putchar(char c);
+void	ft_printpointer(char c, void *i);
+void	ft_putpoint(char conv, void *arg);
 
 
 #endif

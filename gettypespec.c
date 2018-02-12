@@ -67,7 +67,7 @@ char			get_conversion(const char *format, int *index)
 		|| format[*index] == 'U' || format[*index] == 'x' || format[*index] == 'X'
 		|| format[*index] == 'c' || format[*index] == 'C' || format[*index] == 'b'
 		|| format[*index] == 'r' || format[*index] == 'k' || format[*index] == 'f'
-		|| format[*index] == '%')
+		|| format[*index] == '%' || format[*index] == 'p')
 	{
 		temp = format[*index];
 		//printf("\nindex in -> %c\n", format[*index]);

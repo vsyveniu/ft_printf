@@ -11,7 +11,7 @@ void	ft_puthex(char conv, unsigned long long int arg)
 
 	i = 0;
 	temp = arg;
-	(conv == 'x') ? base = "0123456789abcdef" : 0;
+	(conv == 'x' || conv == 'p') ? base = "0123456789abcdef" : 0;
 	(conv == 'X') ? base = "0123456789ABCDEF" : 0;
 	while ((temp /= 16) > 0)
 		i++;
@@ -29,6 +29,42 @@ void	ft_puthex(char conv, unsigned long long int arg)
 		write(1, &str[i], 1);
 	free(str);
 }
+
+
+/*void	ft_putpoint(char conv, void *arg)
+{
+
+	unsigned long long temp;
+	temp = &arg;
+	//printf("%p\n", temp);
+	unsigned long long int i;
+	char *base;
+	char *str;
+	void *temp;
+
+
+	temp = &arg;
+
+	i = 0;
+	(conv == 'p') ? base = "0123456789abcdef" : 0;
+	//(conv == 'p') ? base = "0123456789ABCDEF" : 0;
+	while ((temp /= 16) > 0)
+		i++;
+	str = (char *)malloc(sizeof(char) * i + 1);
+	i = 0;
+	if (arg == 0)
+		ft_putchar('0');
+	while (temp)
+	{
+		str[i++] = base[temp % 16];
+		temp /= 16;
+	}
+	str[i] = '\0';
+	while(i-- > 0)
+		write(1, &str[i], 1);
+	free(str);
+}*/
+
 
 void	ft_putocto(int arg)
 {

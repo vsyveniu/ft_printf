@@ -1,12 +1,12 @@
 
 #include "includes/ft_printf.h"
 
-int		ft_getsignsize(void *arg, long long systembase, int size)
+int		ft_getsignsize(void *arg, intmax_t systembase, int size)
 {
-	long long temp;
+	intmax_t temp;
 
 
-	temp = (long long)arg;
+	temp = (intmax_t)arg;
 	//temp = -4278;
 	//printf("%lld\n", temp);
 	if (temp == 1 || temp == 0)
@@ -63,7 +63,7 @@ int	ft_intbase(int arg, int base, int size)
 }
 
 
-int 	ft_gethexsize(f_list *p, unsigned long long temp, unsigned long long systembase, int size)
+int 	ft_gethexsize(f_list *p, uintmax_t temp, uintmax_t systembase, int size)
 {
 	if (temp == 4294967296)
 	{
@@ -77,11 +77,12 @@ int 	ft_gethexsize(f_list *p, unsigned long long temp, unsigned long long system
 	return (size);
 }
 
-int		getunsignsize(f_list *p, void *arg, unsigned long long systembase, int size)
+int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size)
 {
-	unsigned long long temp;
-	temp = (unsigned long long)arg;
-	if (p->conversion == 'x' || p->conversion == 'X')
+	uintmax_t temp;
+	temp = (uintmax_t)arg;
+
+	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'p')
 		return (size = ft_gethexsize(p,  temp, systembase, size));
 	if (temp == 1 || temp == 0)
 		size = 1;
@@ -91,7 +92,7 @@ int		getunsignsize(f_list *p, void *arg, unsigned long long systembase, int size
 }
 
 
-int		ft_unsbase(unsigned long long int arg, unsigned long long int base, int size)
+int		ft_unsbase(uintmax_t arg, uintmax_t base, int size)
 {
 	while (arg > 0)
 	{
@@ -102,7 +103,7 @@ int		ft_unsbase(unsigned long long int arg, unsigned long long int base, int siz
 	return (size);
 }
 
-int	ft_base(long long arg, long long base, int size)
+int	ft_base(intmax_t arg, intmax_t base, int size)
 {
 
 	//printf("arg --->>> %lld\n", arg);
@@ -122,13 +123,14 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 
 	size = 0;
 	//(p->f_space && p-> ispos == 1) ? size += 1 : 0;
+
 	(p->conversion == 'x' || p->conversion == 'X') ? systembase = 16 : 0;
 	(p->conversion == 'o') ? systembase = 8 : 0;
 	(p->conversion == 'd' || p->conversion == 'i') ? systembase = 10 : 0;
 	(p->conversion == 'u' || p->conversion == 'U') ? systembase = 10 : 0;
 	(p->conversion == 'b') ? systembase = 2 : 0;
 	if (p->conversion == 'u' || p->conversion == 'U' || p->conversion == 'x' ||
-		p-> conversion == 'X')
+		p-> conversion == 'X' || p->conversion == 'p')
 	{
 		size = getunsignsize(p, arg, (unsigned long long)systembase, size);
 	}
@@ -161,7 +163,8 @@ int		ft_getargsize(f_list *p, void *arg)
 	if (p->conversion == 'x' || p->conversion == 'X'
 		|| p->conversion == 'b' || p-> conversion == 'o'
 		|| p->conversion == 'd' || p->conversion == 'i'
-		|| p->conversion == 'u' || p->conversion == 'U')
+		|| p->conversion == 'u' || p->conversion == 'U'
+		|| p->conversion == 'p')
 	{
 			size = ft_getsizehexoctbi(p, arg);
 			return (size);
@@ -211,6 +214,7 @@ int 	ft_printcrutches(f_list *p, void *arg, int size)
 int		ft_printsize(f_list *p, void *arg, int size)
 {	
 	//(p->conversion == '%') ? size += 1 : 0;
+	(p->conversion == 'p') ? size += 2 : 0;
 	((p->mod == 1 || p->mod == 2) && p->conversion == 'd') ? size += 1 : 0;
 	(p->mod == 0 && (int)arg == 0 && p->conversion == 'd') ? size += 1 : 0;
 	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
