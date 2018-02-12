@@ -46,7 +46,7 @@ void	ft_printpointer(char c, void *i)
 void	ft_printdecimal(void *i, int val)
 {
 	int temp;
-
+	//printf("------------>>>>>>>>>%d\n", val);
 	temp = (int)i;
 	if ((int)i < 0)/////////////////this isa very weak crutch and it will fuck me many times int the future
 		temp *= -1;
@@ -56,7 +56,7 @@ void	ft_printdecimal(void *i, int val)
 	(val == 3) ? ft_putnbr((long)i) : 0;
 	(val == 4) ? ft_putunnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
 	(val == 5) ? ft_putunnbr((intmax_t)i) : 0;
-	(val == 6) ? ft_putunnbr((size_t)i) : 0;
+	(val == 6) ? ft_putnbr((size_t)i) : 0;
 }
 
 

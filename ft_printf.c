@@ -2576,9 +2576,9 @@ int		main()
 	printf("-----------  %s 	-----------\n", "U");
 	printf("\n");
 
-	ret = ft_printf("|%llx|", 9223372036854775807);
+	ret = ft_printf("|%D|", 9223);
 	printf("\n");
-	ret1 = printf("|%llx|", 9223372036854775807);
+	ret1 = printf("|%D|", 9223);
 
 	printf("\n");
 
