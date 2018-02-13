@@ -8,7 +8,6 @@ int		ft_getsignsize(void *arg, intmax_t systembase, int size)
 
 	temp = (intmax_t)arg;
 	//temp = -4278;
-	//printf("%lld\n", temp);
 	if (temp == 1 || temp == 0)
 		size = 1;
 	else if (temp == -1)
@@ -33,6 +32,7 @@ int		ft_getintsize(void *arg, int systembase, int size)
 	int temp;
 	
 	temp = (int)arg;
+	//printf("%d\n", temp);
 	if (temp == 1 || temp == 0)
 		size = 1;
 	else if (temp == -2147483648)
@@ -45,6 +45,7 @@ int		ft_getintsize(void *arg, int systembase, int size)
 	}
 	else
 	{
+		//printf("\npicha\n");
 		size = ft_intbase(temp, systembase, size);
 	}
 	return (size);
@@ -99,7 +100,7 @@ int		ft_unsbase(uintmax_t arg, uintmax_t base, int size)
 		arg /= base;
 		size += 1;
 	}
-	//printf("%d\n", size);
+	
 	return (size);
 }
 
@@ -112,6 +113,7 @@ int	ft_base(intmax_t arg, intmax_t base, int size)
 		arg /= base;
 		size += 1;
 	}
+	//printf("\n%d\n", size);
 	return (size);
 }
 
@@ -138,11 +140,13 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	{
 		if ((int)arg < 0 && p->mod == 0)
 		{
+			
 			return (size = ft_getintsize(arg, systembase, size));
 		}
 		else
 			size = ft_getsignsize(arg, systembase, size);		
 	}
+	//printf("------->>>>>>size  %d\n", size);
 	return (size);
 }
 
@@ -167,9 +171,11 @@ int		ft_getargsize(f_list *p, void *arg)
 		|| p->conversion == 'p' || p->conversion == 'D')
 	{
 			size = ft_getsizehexoctbi(p, arg);
+				//printf("------->>>>>>||||| size  %d\n", size);
 			return (size);
 	}
 	(p->conversion == '%') ? size = 1 : 0;
+
 	return (size);
 }
 
@@ -228,7 +234,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->w > size && !p->pr) ? size = p->w : 0;
 	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
 	((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
-	size = ft_printcrutches(p, arg, size);	
+	//size = ft_printcrutches(p, arg, size);	
 	//if ((long)arg == 2147483648)
 	//	size = 11;
 

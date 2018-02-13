@@ -41,16 +41,16 @@ char	*ft_strchr(const char *str, int symbol);
 int		ft_checkflags(char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 int				ft_atoi(const char *str);
-int			ft_getwidth(const char *format, int *index);
+int			ft_getwidth(char *format, int *i);
 int			get_precision(const char *format, int *index);
 int		ft_isdigit(int c);
-int		get_mod(const char *format, int *index);
+int		get_mod(char *format, int index);
 char	*ft_strdup(char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_isflag(char c);
 int			ft_checkisnorepeat(char cinlist, char c);
 void	ft_errorrepeatflag();
-char	get_conversion(const char *format, int *index);
+char	get_conversion(char format);
 void		ft_printchar(f_list *params, unsigned char c, int size);
 int		ft_printstr(f_list *params, char *str, int size);
 
@@ -95,7 +95,7 @@ int	ft_unsbase(uintmax_t arg, uintmax_t base, int size);
 int		ft_getintsize(void *arg, int systembase, int size);
 int	ft_intbase(int arg, int base, int size);
 int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size);
-f_list		*ft_getflag(const char *format, f_list *params, int *index);
+f_list		*ft_getflag(char c, f_list *params);
 
 void 	ft_crutchforhash(f_list *p, char c, int size);
 void	ft_handlehash(f_list *p, int size);
@@ -107,6 +107,9 @@ size_t		ft_strlen(const char *str);
 void	ft_putchar(char c);
 void	ft_printpointer(char c, void *i);
 void	ft_putpoint(char conv, void *arg);
+int		ft_ismod(char c);
+int		ft_isconv(char c);
+char	*ft_strsub(char const *s, unsigned int start, size_t len);
 
 
 #endif

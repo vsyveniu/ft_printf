@@ -16,9 +16,121 @@
 #include <unistd.h>
 
 
-void	ft_parse(const char *format, f_list *p, int *index)
+void 	ft_postparse(char *format, char *crutch, char *crutchpr, f_list *p)
 {
-	(*index) += 1;
+	int i;
+
+	i = 0;
+	p->mod = 0;
+	p->pr = 0;
+	p->w = 0;
+	while(format[i++] != '\0')
+	{
+		while (ft_isflag(format[i]) == 1)
+		{
+			p = ft_getflag(format[i], p);
+			i++;
+		}
+		if(format[i] == 'h' || format[i] == 'l' || format[i] == 'j'
+			|| format[i] == 'z')
+		{
+			p->mod = get_mod(format, i); 
+		}
+		if (format[i] >= '0' && format[i] <= '9' && format[i - 1] != '.')
+			p->w = ft_atoi(crutch);
+		if (format[i] == '.' && format[i + 1] >= '0' && format[i + 1] <= '9')
+			p->pr = ft_atoi(crutchpr);
+		if (ft_isconv(format[i]) == 1)
+			p->conversion = get_conversion(format[i]);
+	}
+}
+
+char 	*ft_parsecrutchw(char *temp)
+{
+	int i;
+	int k;
+	int j;
+	char *temp2;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (temp[i++] != '\0')
+	{
+		if (temp[i] >= '1' && temp[i] <= '9')
+		{
+			j = i;
+			break ;
+		}
+	}
+	while ( temp[i] != '\0' && temp[i] >= '0' && temp[i] <= '9')
+		i++;
+
+	temp2 = ft_strsub(temp, j, i - j);
+ return(temp2);
+}
+
+
+char 	*ft_parsecrutchpr(char *temp)
+{
+	int i;
+	int k;
+	int j;
+	char *temp2;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (temp[i++] != '\0')
+	{
+		if (temp[i] == '.')
+		{
+			i += 1;
+			j = i;
+			break ;
+		}
+	}
+	while (temp[i] != '\0' && temp[i] >= '0' && temp[i] <= '9')
+		i++;
+
+	temp2 = ft_strsub(temp, j, i - j);
+ return(temp2);
+}
+
+
+int		ft_parse(const char *format, int *i,  f_list *p)
+{	
+	int t;
+	int j;
+	int ret;
+	char *temp;
+	char *crutchw;
+	char *crutchpr;
+
+	t = (*(int*)i);
+	j = 0;
+
+	while (format[t++] != '\0')
+	{
+		if (ft_isconv(format[t]) == 1)
+			break ;
+	}
+	temp = ft_strsub(format, (*(int*)i), (t + 1) - (*(int*)i));
+	ret = (t + 1) - (*(int*)i);
+	crutchw = ft_parsecrutchw(temp);
+	crutchpr = ft_parsecrutchpr(temp);
+	ft_postparse(temp,crutchw, crutchpr, p);
+//	printf("\n------------------------------->>>>>>>>>>> %s\n", temp);
+	//temp = ft_strsub()
+	//printf("-------->>>>>>>>>pichaaa!\n");
+	//printf("-------->>>>>>>>> format %s\n", format);
+	//printf("|||||||||||%d\n", (*(int*)i));
+	//while (format[i] != '\0')
+	//{
+		//while (ft_isconv)
+//	i++;
+//	}
+	/*(*index) += 1;
 	//printf("\nbefore all->  %c\n", format[*index]);
 	while (ft_isflag(format[*index]) == 1)
 	{
@@ -32,6 +144,7 @@ void	ft_parse(const char *format, f_list *p, int *index)
 	//printf("\nafter w -> %c\n", format[*index]);
 	//printf("\nbefore precision -> %c\n", format[*index]);
 	p->pr = get_precision(format, index);
+	//printf("------------>>>>>>>> %c\n", format[*index]);
 	//printf("prec -> %lu\n", p->pr);
 	//printf("after pr -> %c\n", format[*index]);
 	//while (ft_isdigit(format[*index]) == 1)
@@ -51,20 +164,80 @@ void	ft_parse(const char *format, f_list *p, int *index)
 	//	(*index)--;
 	//printf("after all ->   %c\n", format[*index]);
 	//}
-	
+	*/
 	//}
 	//printf("\nafter all ->   %c\n", format[*index]);
-	//printf("\n--------------------\n");
-	//printf("\nf_oct   -> %c\n", p->f_oct);
-	//printf("\nf_plus  -> %c\n", p->f_plus);
-	//printf("\nf_minus -> %c\n", p->f_minus);
-	//printf("\nf_zero  -> %c\n", p->f_zero);
-	//printf("\nw   -> %d\n", p->w);
-	//printf("\nprec    -> %d\n", p->pr);
-	//printf("\nmod     -> %d\n", p->mod);
-	//printf("\nconvers -> %c\n", p->conversion);
-	//printf("\n--------------------\n");
+
+	//(*index)++;
+	//printf("----------->>>%c\n", format[*index]);
+	/*if (ft_isconv(format[*index] == 0))
+	{
+		printf("----------||||||||||||||||||picha\n");
+			p = ft_getflag(format, p, index);
+			if ((format[*index] >= 0 && format[*index] <= 9) && format[*index - 1] != '.')
+				p->w = ft_getwidth(format, index);
+			if (format[*index] == '.')
+			{
+				//(*index)++;
+				p->pr = get_precision(format, index);
+			}
+			if (ft_ismod(format[*index]) == 1 && p->mod == 0)
+				p->mod = get_mod(format, index);
+		//	(*index)++;
+	}
+	 if (ft_isconv(format[*index]) == 1)
+		{
+			p->conversion = get_conversion(format, index);
+			//(*index)++;
+		}
+	printf("------------>>>>>>> fff %c\n", format[*index]);
+	//(*index)++;
+		//printf("\nconvers -> %c\n", p->conversion);
+	*/	
+	/*printf("\n--------------------\n");
+	printf("\nf_oct   -> %c\n", p->f_oct);
+	printf("\nf_plus  -> %c\n", p->f_plus);
+	printf("\nf_minus -> %c\n", p->f_minus);
+	printf("\nf_zero  -> %c\n", p->f_zero);
+	printf("\nw   -> %d\n", p->w);
+	printf("\nprec    -> %d\n", p->pr);
+	printf("\nmod     -> %d\n", p->mod);
+	printf("\nconvers -> %c\n", p->conversion);
+	printf("\n--------------------\n");
+	//printf("\nconvers -> %c\n", p->conversion);*/
+
+
+
+	return(ret);
 }
+
+int		ft_ismod(char c)
+{
+	if (c == 'h' || c == 'l' || c == 'z'
+		|| c == 'j')
+	{
+		return (1);
+	}
+
+	return (0);	
+}
+
+
+int		ft_isconv(char c)
+{
+	if (c == 's' || c == 'S' || c == 'd' 
+		|| c == 'd' || c == 'D' || c == 'i'
+		|| c == 'o' || c == 'O' || c == 'u'
+		|| c == 'U' || c == 'x' || c == 'X'
+		|| c == 'c' || c == 'C' || c == 'b'
+		|| c == 'r' || c == 'k' || c == 'f'
+		|| c == '%' || c == 'p'){
+		return(1);
+	}
+	else
+		return(0);
+}
+
 
 int		printallshit(f_list *p, va_list args)
 {
@@ -77,6 +250,7 @@ int		printallshit(f_list *p, va_list args)
 		size = ft_getargsize(p, arg); ///i have chancge it don't forget to change it back if it neeeded
 	//	printf("fuck2\n");
 	//printf("picha\n");
+	//printf("\nsiex in allshit ------------+++++++++= %d\n", size);
 	if (p->conversion == 'c' || p->conversion == 'C' || p->conversion == 's'
 		|| p->conversion == 'S')
 	{
@@ -90,7 +264,9 @@ int		printallshit(f_list *p, va_list args)
 	//	printf("fuck4\n");
 	ft_checkflag(p, arg, size);
 	//	printf("fuck5\n");
+	//printf("\nsiex in allshit ------------+++++++++= %d\n", size);
 	printsize = ft_printsize(p,arg,size);
+	//printf("\nsiex in allshit ------------+++++++++= %d\n", printsize);
 	//printf("prntsize ->   %d\n", printsize);
 	return (printsize);
 }	
@@ -101,39 +277,47 @@ int		ft_handleshit(const char *format, va_list args)
 	int			i;
 	f_list		*p;
 	int len;
+	int val;
 
 	i = -1;
+	val = 0;
 	if (!format)
 		return (-1);
 	len = ft_strlen(format);	
 	ret = 0;
-	while (format[++i] != '\0')
-	{
+	while (format[++i] != '\0' && i <= len)
+	{	
 		if (format[i] == '%')
 		{
 			if(!(p = (f_list*)malloc(sizeof(f_list))))
 				return (0);
-			ft_parse(format, p, &i);
-			if (format[i] == '%')
-					i--;
+			val = ft_parse(format, &i, p);
+			i += val;
 			if (p->conversion != 0)
-			{
 				ret += printallshit(p, args);
-			}
 			p = NULL;
 			free(p);
 		}
-	if (ft_checkispossibletoputthisbitchinchar(format, i) == 1 && i < len)
-	{
-		if(format != 0 && format[i - 1] != '%')
+		if(format[i] != 0)
 		{
 			ft_putchar(format[i]);
 			ret++;
 		}
 	}
-	}
+	//printf("ret -------------------->>>>>>>>>>>>>%d\n", ret);
 	return (ret);
 }
+
+/*int		ft_isitpossible(const char *format, int i)
+{
+	while(format[i] != '%')
+	{
+		if(format[i])
+	i--;	
+	}
+
+	return(1);
+}*/
 
 
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i)
@@ -142,21 +326,19 @@ int		ft_checkispossibletoputthisbitchinchar(const char *format, int i)
 	//printf("\nformat ->  %c\n", format[i]);
 	//printf("\nformat ->  %c\n", format[i - 1]);
 	//if(format[i] != '+' && format [i] != '-' && format[i] != '0')
-	if ( format[i + 1] == '\0' && (format[i] == 'd' || format[i] == 'D' || format[i] == 'i' || format[i] == 'x'
+	/*if ( format[i + 1] == '\0' && (format[i] == 'd' || format[i] == 'D' || format[i] == 'i' || format[i] == 'x'
 		|| format[i] == 'X' || format[i] == 'o' || format[i] == 'O' || format[i] == 'p'
 		|| format[i] == 's' || format[i] == 'c' || format[i] == 'C' || format[i] == 'u' || format[i] == 'U'
 		|| format[i] == 'r' || format[i] == 'k' || format[i] == 'b'))
 	{
 		return(0);
-	}
-	else if (format[i - 1] != '%'){
+	}*/
+	if (format[i - 1] != '%')
 		return (1);
-	}
-	else if (format[i - 1] == '%' && format[i - 2] == '%')
+	if (format[i - 1] == '%' && format[i - 2] == '%')
 		return (1);
-	else if (format[i - 1] == '%' && format[i + 1] == '\0')
+	if (format[i - 1] == '%' && format[i + 1] == '\0')
 		return (1);
-	
 	return (0);
 }
 
@@ -171,13 +353,13 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-/*
+
 int		main()
 {
 	int ret1;
 	int ret;
 
-
+/*
 	printf("\n");
 	printf("\n");
 
@@ -2597,30 +2779,34 @@ int		main()
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
 
-
-	printf("\n");
+*/
+/*	printf("\n");
 	printf("-----------  %s 	-----------\n", "U");
 	printf("\n");
 
-	ret = ft_printf("%2d %2d%D%D% d %d%d\n", 42, 52, 62, 72 , 82, 92, 102);
-	ret = ft_printf("%2s %2s%s%s% s sssoooo pichakurwa---------->>>>>> %s%s%s%s", "42", "52", "62", "72" , "82", "92", "102", "picha ", "kurwa");
+	//ret = ft_printf("%2d %2d%D%D% d %d%d\n", 42, 52, 62, 72 , 82, 92, 102);
+	ret = ft_printf("%2s %s%s%s% s sssoooo pichakurwa---------->>>>>> %s%s%s%s", " 42 ", "52 ", "62 ", "72 " , "82 ", "92 ", "102 ", "picha ", "kurwa");
 	//printf("\n%p\n", 42424242);
 	printf("\n");
 	ret1 = printf("|%8d|",  42);
 
 	printf("\n");
 
+
+
 	printf("\n");
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
+
+
 
 	printf("\n");
 	printf("-----------  %s 	-----------\n", "U");
 	printf("\n");
 
-	ret = ft_printf("%zd", 42424242);
+	ret = ft_printf("%+d picha? %s%c %c", 42, "kurwa!", 'j', 'j');
 	printf("\n");
-	ret1 = printf("%zd",  42424242);
+	ret1 = printf("%+d picha? %s%c %c", 42, "kurwa!", 'j', 'j');
 
 	printf("\n");
 
@@ -2629,6 +2815,37 @@ int		main()
 	printf("origin -> %d\n", ret1);
 
 
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "U");
+	printf("\n");
+
+	ret = ft_printf("%2d %2.3d%d", 42, 52 ,62);
+	printf("\n");
+	ret1 = printf("|%+h8-----  - + 000-----++++++6+++++.3+++000000   hd|", 424242);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+*/
+
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "U");
+	printf("\n");
+
+	ret = ft_printf("|%d|", 42);
+	printf("\n");
+	ret1 =   printf("|%d|", 42);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+
  return (0);	
 }	
-*/

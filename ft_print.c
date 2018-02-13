@@ -37,8 +37,8 @@ void	ft_handlepos(f_list *p, int size)
 		ft_handlehash(p, size);
 	else if (p->conversion == '%')
 		ft_handleBITCH(p, size);
-	else if (p->f_minus)
-		ft_preleft(p, size);
+	//else if (p->f_minus)
+	//	ft_preleft(p, size);
 	else
 	{
 		(p->f_plus) ? size += 1 : 0;
@@ -51,7 +51,7 @@ void	ft_handlepos(f_list *p, int size)
 		(p->pr && p->w > p->pr  && p->w > size && p->f_plus ) ? ft_puttriplecratch('+','0',p->w - p->pr - 1, p->pr - size) : 0;///////////
 		(p->w < p->pr  && p->w > size && !p->f_minus && p->f_plus) ? ft_putcratch('+','0', p->pr - size) : 0;
 		(p->f_plus && !p->w) ? ft_putchar('+') : 0;
-		(p->pr > size && !p->f_plus && !p->f_minus) ? ft_putnchar('0', p->pr - size) : 0;
+		//(p->pr > size && !p->f_plus && !p->f_minus) ? ft_putnchar('0', p->pr - size) : 0; /////////this is a place with size bug
 		(p->f_space && !p->f_plus && !p->w && !p->pr) ? ft_putchar(' ') : 0;
 		(p->w && p->pr && p->w > p->pr && !p->f_zero) ? ft_putnchar(' ', p->w - size) : 0;
 
@@ -270,25 +270,23 @@ int	ft_handleright(f_list *p, int size)
 
 int		ft_checkflag(f_list *p, void *arg, int size)
 {
-	if ((long)arg == 2147483648 && p->mod == 0)
+	/*if ((long)arg == 2147483648 && p->mod == 0)
 		write(1, "-2147483648", 11);
 	else if ((long)arg == -2147483648 && p->mod == 0)
 		write(1, "-2147483648", 11);
 	else if ((short)arg == -128 && p->mod == 2)
 		write (1, "-128", 4);
 	else if ((long long)arg == -9223372036854775807)
-		write (1, "-9223372036854775807", 20);
-	else if (!p->f_minus)
-	{
-		ft_handleright(p, size);
-		ft_handledigits(p, arg, p->mod);
-	}
-	else if (p->f_minus)
+		write (1, "-9223372036854775807", 20);*/
+	if (p->f_minus)
 	{
 		ft_handleright(p, size);
 		ft_handledigits(p, arg, p->mod);
 		ft_handleleft(p, size);
 	}
+	else
+		ft_handleright(p, size);
+		ft_handledigits(p, arg, p->mod);
 	return(size);
 }
 

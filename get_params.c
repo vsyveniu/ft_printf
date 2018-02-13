@@ -18,35 +18,41 @@ int			ft_checkisnorepeat(char cinlist, char c)
 	return (1);
 }
 
-f_list		*ft_getflag(const char *format, f_list *params, int *index)
+f_list		*ft_getflag(char c, f_list *params)
 {
-	if (format[*index] == '#' && (ft_checkisnorepeat(params->f_oct, '#'))) 
+	if (c == '#' && (ft_checkisnorepeat(params->f_oct, '#'))) 
 		params->f_oct = '#';
-	if (format[*index] == '#' && (ft_checkisnorepeat(params->f_oct, '#'))) 
-		params->f_oct = '#';
-	if (format[*index] == '+' && (ft_checkisnorepeat(params->f_plus, '+'))) 
+	if (c == '+' && (ft_checkisnorepeat(params->f_plus, '+'))) 
 		params->f_plus = '+';
-	if (format[*index] == '-' && (ft_checkisnorepeat(params->f_minus, '-'))) 
+	if (c == '-' && (ft_checkisnorepeat(params->f_minus, '-'))) 
 		params->f_minus = '-';
-	if (format[*index] == ' ' && (ft_checkisnorepeat(params->f_space, ' '))) 
+	if (c == ' ' && (ft_checkisnorepeat(params->f_space, ' '))) 
 		params->f_space = ' ';
-	if (format[*index] == '0' && (ft_checkisnorepeat(params->f_space, '0')))
+	if (c == '0' && (ft_checkisnorepeat(params->f_space, '0')))
 		params->f_zero = '0';
 	return (params);
 }
 
 
-int			ft_getwidth(const char *format, int *index)
+int			ft_getwidth(char *format, int *i)
 {
 	int	temp;
+	//printf("i-------->>>>>> %d\n", i);
+	//while (format[i++] <= '0' && format[i++] >= '9' && format[i++] != '.');
+	//printf("i-------->>>>>> %d\n", i);
+	//printf("j-------->>>>> %d\n", j);
+//	temp = ft_strsub(format, j, i - j);
 
-	if (format[*index] <= '0' && format[*index] >= '9') //maybe need to add check is !str ?
-		return (temp = 0); 
-	temp = 0;
-	while (format[*index] != '\0' && format[*index] >= '0' && format[*index] <= '9')
+//	printf("\n|||||||||||||||  %s\n", temp);
+
+	//printf("--------------------------->>>>>>>>>>>>>>>. %d\n", (*(int*)i));
+//	printf("f --------------------------->>>>>>>>>>>>>>>. %c\n", format[*i]);
+
+	//temp = 0;
+	while (format[*i] >= '0' && format[*i] <= '9')
 	{
-		temp = (temp * 10) + (format[*index] - 48);
-		(*index)++;
+		temp = (temp * 10) + (format[*i] - 48);
+		(*i)++;
 	}
 	return (temp);
 }
