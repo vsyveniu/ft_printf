@@ -37,18 +37,8 @@ f_list		*ft_getflag(char c, f_list *params)
 int			ft_getwidth(char *format, int *i)
 {
 	int	temp;
-	//printf("i-------->>>>>> %d\n", i);
-	//while (format[i++] <= '0' && format[i++] >= '9' && format[i++] != '.');
-	//printf("i-------->>>>>> %d\n", i);
-	//printf("j-------->>>>> %d\n", j);
-//	temp = ft_strsub(format, j, i - j);
-
-//	printf("\n|||||||||||||||  %s\n", temp);
-
-	//printf("--------------------------->>>>>>>>>>>>>>>. %d\n", (*(int*)i));
-//	printf("f --------------------------->>>>>>>>>>>>>>>. %c\n", format[*i]);
-
-	//temp = 0;
+	//printf("-------------------------> %c\n", format[*i]);
+	temp = 0;
 	while (format[*i] >= '0' && format[*i] <= '9')
 	{
 		temp = (temp * 10) + (format[*i] - 48);
@@ -57,18 +47,16 @@ int			ft_getwidth(char *format, int *i)
 	return (temp);
 }
 
-int			get_precision(const char *format, int *index)
+int			get_precision(const char *format, int *i)
 {
 	int	temp;
 
-	if (format[*index] && format[*index] != '.') //maybe need to add check is !str ?
-		return (temp = 0); 
 	temp = 0;
-	(*index) += 1;
-	while (format[*index] != '\0' && format[*index] >= '0' && format[*index] <= '9')
+	//(*i) += 1;
+	while (format[*i] >= '0' && format[*i] <= '9')
 	{
-		temp = (temp * 10) + (format[*index] - 48);
-		(*index)++;
+		temp = (temp * 10) + (format[*i] - 48);
+		(*i)++;
 	}
 	return (temp);
 }

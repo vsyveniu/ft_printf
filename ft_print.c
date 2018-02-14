@@ -285,8 +285,10 @@ int		ft_checkflag(f_list *p, void *arg, int size)
 		ft_handleleft(p, size);
 	}
 	else
+	{
 		ft_handleright(p, size);
 		ft_handledigits(p, arg, p->mod);
+	}
 	return(size);
 }
 

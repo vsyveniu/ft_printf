@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 
-void 	ft_postparse(char *format, char *crutch, char *crutchpr, f_list *p)
+/*void 	ft_postparse(char *format, char *crutch, char *crutchpr, f_list *p)
 {
 	int i;
 
@@ -96,11 +96,25 @@ char 	*ft_parsecrutchpr(char *temp)
 	temp2 = ft_strsub(temp, j, i - j);
  return(temp2);
 }
+*/
 
-
-int		ft_parse(const char *format, int *i,  f_list *p)
+int		ft_parse(char *f, int *i, va_list args)
 {	
-	int t;
+	int ret;
+	f_list	*p;
+
+	ret = 0;
+
+
+	if(!(p = (f_list*)malloc(sizeof(f_list))))
+		return (0);
+	p->w = 0;
+	p->pr = 0;
+	p->mod = 0;
+
+
+	//ret = printallshit(p, args);
+	/*int t;
 	int j;
 	int ret;
 	char *temp;
@@ -109,17 +123,22 @@ int		ft_parse(const char *format, int *i,  f_list *p)
 
 	t = (*(int*)i);
 	j = 0;
-
+	//printf("\n%d\n", t);
 	while (format[t++] != '\0')
 	{
 		if (ft_isconv(format[t]) == 1)
 			break ;
 	}
 	temp = ft_strsub(format, (*(int*)i), (t + 1) - (*(int*)i));
-	ret = (t + 1) - (*(int*)i);
+	//printf("\n----------%s-----------   \n", temp);
+	//printf("\n%d\n", t);
+	//ret = (t) - (*(int*)i);
+	ret = t;
 	crutchw = ft_parsecrutchw(temp);
 	crutchpr = ft_parsecrutchpr(temp);
 	ft_postparse(temp,crutchw, crutchpr, p);
+	//temp = NULL;
+	free(temp);
 //	printf("\n------------------------------->>>>>>>>>>> %s\n", temp);
 	//temp = ft_strsub()
 	//printf("-------->>>>>>>>>pichaaa!\n");
@@ -129,30 +148,80 @@ int		ft_parse(const char *format, int *i,  f_list *p)
 	//{
 		//while (ft_isconv)
 //	i++;
-//	}
-	/*(*index) += 1;
-	//printf("\nbefore all->  %c\n", format[*index]);
-	while (ft_isflag(format[*index]) == 1)
+//	}*/
+	//printf("\nbefore all->  %c\n", f[*i]);
+	//write(1, "fuck", 4);
+	(*i)++;
+	while (f[*i] != '\0')
 	{
-		p = ft_getflag(format, p, index);
-		(*index)++;
+		//printf("------------------->>>>>>>>>>>>>>>>  %c\n", f[*i]);
+		if(ft_isflag(f[*i]) == 1)
+			p = ft_getflag(f[*i], p);
+		if (ft_ismod(f[*i]) == 1)
+			p->mod = get_mod(f, i);
+		if (f[*i] >= '1' && f[*i] <= '9' && f[*i - 1] != '.' && p->w == 0)
+		{
+			p->w = ft_getwidth(f, i);
+			while (ft_isdigit(f[*i]) == 1)
+				(*i)++;
+			
+		}
+		if (f[*i] == '.' && ft_isdigit(f[*i + 1]) == 1)
+		{
+			(*i)++;
+			//printf("--------------->>>>>>>>>> %c\n", f[*i]);
+			p->pr = get_precision(f, i);
+			while (ft_isdigit(f[*i]) == 1)
+				(*i)++;
+		}
+		if (ft_isconv(f[*i]) == 1)
+		{
+			p->conversion = get_conversion(f, i);
+			break ;
+		}
+		(*i)++;	
 	}
+	ret = printallshit(p, args);
+	/*while (ft_isflag(f[*i]) == 1)
+	{
+		p = ft_getflag(f[*i], p);
+		(*i)++;
+	}
+	
+		
+		if (f[*i] == 'h' )
+		{
+			p->mod = get_mod(f, i);
+		}
+		if (ft_isdigit(f[*i]) == 1 && f[*i - 1] != '.')
+		{
+			p->w = ft_getwidth(f, i);
+		}
+		if (f[*i] == '.' && ft_isdigit(f[*i + 1]) == 1)
+		{
+			p->pr = get_precision(f, i);
+		}
+		if (ft_isconv(f[*i]) == 1)
+		{
+			p->conversion = get_conversion(f, i);
+		}*/
+	//printf("-------------->>>>>> %c\n", f[*i]);
 	//printf("\nafter flags -> %c\n", format[*index]);
 	//printf("\nbefore width -> %c\n", format[*index]);
-	p->w = ft_getwidth(format, index);
+	//p->w = ft_getwidth(f, i);
 	//printf("w -> %lu\n", p->w);
 	//printf("\nafter w -> %c\n", format[*index]);
 	//printf("\nbefore precision -> %c\n", format[*index]);
-	p->pr = get_precision(format, index);
+	//p->pr = get_precision(f, i);
 	//printf("------------>>>>>>>> %c\n", format[*index]);
 	//printf("prec -> %lu\n", p->pr);
 	//printf("after pr -> %c\n", format[*index]);
 	//while (ft_isdigit(format[*index]) == 1)
 	//	(*index)++;
-	p->mod = get_mod(format, index);
+//	p->mod = get_mod(format, i);
 //	printf("justanotheshit -> %s\n", p->mod);
 	//printf("\nafter shit -> %c\n", format[*index]);
-	p->conversion = get_conversion(format, index);
+	//p->conversion = get_conversion(f, i);/*
 	//printf("conversion ->    %c\n", p->conversion);
 	//printf("\nafter conversion ->  %c\n", p->conversion);
 	//printf("\nafter conversion ->  %c\n", format[*index]);
@@ -164,7 +233,6 @@ int		ft_parse(const char *format, int *i,  f_list *p)
 	//	(*index)--;
 	//printf("after all ->   %c\n", format[*index]);
 	//}
-	*/
 	//}
 	//printf("\nafter all ->   %c\n", format[*index]);
 
@@ -194,7 +262,7 @@ int		ft_parse(const char *format, int *i,  f_list *p)
 	//(*index)++;
 		//printf("\nconvers -> %c\n", p->conversion);
 	*/	
-	/*printf("\n--------------------\n");
+	/*	printf("\n--------------------\n");
 	printf("\nf_oct   -> %c\n", p->f_oct);
 	printf("\nf_plus  -> %c\n", p->f_plus);
 	printf("\nf_minus -> %c\n", p->f_minus);
@@ -203,12 +271,13 @@ int		ft_parse(const char *format, int *i,  f_list *p)
 	printf("\nprec    -> %d\n", p->pr);
 	printf("\nmod     -> %d\n", p->mod);
 	printf("\nconvers -> %c\n", p->conversion);
-	printf("\n--------------------\n");
-	//printf("\nconvers -> %c\n", p->conversion);*/
+	printf("\n--------------------\n");*/
+	//printf("\nconvers -> %c\n", p->conversion);
+	//printf("\nret in parse--------------->>>>>>>>>> %d\n", ret);*/
 
 
 
-	return(ret);
+	return(ret - 1);
 }
 
 int		ft_ismod(char c)
@@ -271,40 +340,104 @@ int		printallshit(f_list *p, va_list args)
 	return (printsize);
 }	
 
+void	ft_putnnstr(char *str, int start)
+{
+	while (str[start] != '\0')
+	{
+		ft_putchar(str[start]);
+		start++;
+	}
+}
+
+void	ft_putnnnstr(char *str, int start, int end)
+{
+	while(start < end)
+	{
+		ft_putchar(str[start]);
+		start++;
+	}
+}
+
 int		ft_handleshit(const char *format, va_list args)
 {
+	int			ret;
+	int			start;
+	int 		i;
+	char 		*f;
+	int 		len;
+
+	ret = 0;
+	f = (char*)format;
+	start = 0;
+	i = 0;
+	len = ft_strlen(format);
+	while (f[i] != '\0' && i <= len)
+	{
+		if (f[i] == '%')
+		{	
+			ft_putnnnstr(f, start, i);
+			ret += ft_parse(f, &i, args);
+			start = i + 1;
+			//printf("------------------->>>>>>> %d\n", start);
+		}
+		else if (f[i] != '\0' && i <= len)
+		{
+			ret++;
+			i++;
+			//ft_putchar(f[i]);
+		}	
+	}
+	ft_putnnnstr(f, start, len);
+	
+
+
+
+
+
+	/*
 	int 		ret;
 	int			i;
+	int			j;
 	f_list		*p;
 	int len;
 	int val;
 
 	i = -1;
 	val = 0;
-	if (!format)
-		return (-1);
+	j = 0;
+	//if (!format)
+	//	return (-1);
 	len = ft_strlen(format);	
 	ret = 0;
 	while (format[++i] != '\0' && i <= len)
 	{	
+		//printf("\n--------------||||||| format in main  %c    i in main  %d\n", format[i], i);
 		if (format[i] == '%')
 		{
+			j = i;
+			//printf("\ni -%d\n", i);
+			//printf("\ni-----------------int loop %d\n", i);
 			if(!(p = (f_list*)malloc(sizeof(f_list))))
 				return (0);
 			val = ft_parse(format, &i, p);
-			i += val;
+
+			i += val - 1;
 			if (p->conversion != 0)
 				ret += printallshit(p, args);
 			p = NULL;
 			free(p);
+			//printf("\ni - %d\n", i);
 		}
-		if(format[i] != 0)
+		if(format[i] != 0 && ft_checkispossibletoputthisbitchinchar(format, i) == 1)
 		{
+			//printf("\n");
 			ft_putchar(format[i]);
+			//printf("\n");
 			ret++;
 		}
+	//printf("\nfin i - %d\n", i);
 	}
-	//printf("ret -------------------->>>>>>>>>>>>>%d\n", ret);
+	//printf("ret -------------------->>>>>>>>>>>>>%d\n", ret);*/
 	return (ret);
 }
 
@@ -322,23 +455,14 @@ int		ft_handleshit(const char *format, va_list args)
 
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i)
 {
-	//while (format[i] != '%')
-	//printf("\nformat ->  %c\n", format[i]);
-	//printf("\nformat ->  %c\n", format[i - 1]);
-	//if(format[i] != '+' && format [i] != '-' && format[i] != '0')
-	/*if ( format[i + 1] == '\0' && (format[i] == 'd' || format[i] == 'D' || format[i] == 'i' || format[i] == 'x'
-		|| format[i] == 'X' || format[i] == 'o' || format[i] == 'O' || format[i] == 'p'
-		|| format[i] == 's' || format[i] == 'c' || format[i] == 'C' || format[i] == 'u' || format[i] == 'U'
-		|| format[i] == 'r' || format[i] == 'k' || format[i] == 'b'))
-	{
-		return(0);
-	}*/
 	if (format[i - 1] != '%')
 		return (1);
 	if (format[i - 1] == '%' && format[i - 2] == '%')
 		return (1);
-	if (format[i - 1] == '%' && format[i + 1] == '\0')
-		return (1);
+	//if (format[i - 1] == '%' && format[i + 1] == '\0')
+	//	return (1);
+	//if (format[i - 1] == '%' && ft_isconv(format[i]) == 1)
+	//	return (0);
 	return (0);
 }
 
@@ -353,13 +477,12 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-
+/*
 int		main()
 {
 	int ret1;
 	int ret;
 
-/*
 	printf("\n");
 	printf("\n");
 
@@ -2829,15 +2952,15 @@ int		main()
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
 
-*/
+
 
 		printf("\n");
 	printf("-----------  %s 	-----------\n", "U");
 	printf("\n");
-
-	ret = ft_printf("|%d|", 42);
+ 
+	ret = ft_printf("%-6O", 2500);
 	printf("\n");
-	ret1 =   printf("|%d|", 42);
+	ret1 =   printf("%-6O", 2500);
 
 	printf("\n");
 
@@ -2849,3 +2972,4 @@ int		main()
 
  return (0);	
 }	
+*/

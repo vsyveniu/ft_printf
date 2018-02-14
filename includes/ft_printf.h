@@ -44,13 +44,13 @@ int				ft_atoi(const char *str);
 int			ft_getwidth(char *format, int *i);
 int			get_precision(const char *format, int *index);
 int		ft_isdigit(int c);
-int		get_mod(char *format, int index);
+int		get_mod(char *format, int *i);
 char	*ft_strdup(char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_isflag(char c);
 int			ft_checkisnorepeat(char cinlist, char c);
 void	ft_errorrepeatflag();
-char	get_conversion(char format);
+char	get_conversion(char *format, int *i);
 void		ft_printchar(f_list *params, unsigned char c, int size);
 int		ft_printstr(f_list *params, char *str, int size);
 
@@ -110,6 +110,12 @@ void	ft_putpoint(char conv, void *arg);
 int		ft_ismod(char c);
 int		ft_isconv(char c);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
+char 	*ft_parsecrutchw(char *temp);
+char 	*ft_parsecrutchpr(char *temp);
+int		ft_parse(char *format, int *i, va_list args);
+void 	ft_postparse(char *format, char *crutch, char *crutchpr, f_list *p);
+void	ft_putnstr(char *str, int size);
+int		printallshit(f_list *p, va_list args);
 
 
 #endif

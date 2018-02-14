@@ -77,6 +77,7 @@ void	ft_putocto(int arg)
 
 	i = 0;
 	temp = arg;
+	//printf("------------------------>>>>>>>>>>>>>>>>>>. %d\n", temp);
 	while ((temp /= 8) > 0)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
