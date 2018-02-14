@@ -8,6 +8,7 @@ int		ft_getsignsize(void *arg, intmax_t systembase, int size)
 
 	temp = (intmax_t)arg;
 	//temp = -4278;
+	//printf("---------------->>>>>>>>> %jd\n", temp);
 	if (temp == 1 || temp == 0)
 		size = 1;
 	else if (temp == -1)
@@ -138,13 +139,15 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	}
 	else
 	{
-		if ((int)arg < 0 && p->mod == 0)
+		//printf("--------------------------->>>>>>>>>>>>>>>>>. %d",(int)arg);
+		if ((int)arg < 0)
 		{
-			
 			return (size = ft_getintsize(arg, systembase, size));
 		}
 		else
+		{
 			size = ft_getsignsize(arg, systembase, size);		
+		}
 	}
 	//printf("------->>>>>>size  %d\n", size);
 	return (size);
@@ -155,7 +158,9 @@ int		ft_getargsize(f_list *p, void *arg)
 	int		size;
 
 	size = 0;
-	p->ispos = 1;
+	p->ispos = 0;
+	if ((int)arg > 0)
+		p->ispos = 1;
 	if ((int)arg < 0)
 		p->ispos = 2;
 	if (p->conversion == 's')
@@ -171,11 +176,9 @@ int		ft_getargsize(f_list *p, void *arg)
 		|| p->conversion == 'p' || p->conversion == 'D')
 	{
 			size = ft_getsizehexoctbi(p, arg);
-				//printf("------->>>>>>||||| size  %d\n", size);
 			return (size);
 	}
 	(p->conversion == '%') ? size = 1 : 0;
-
 	return (size);
 }
 
@@ -188,9 +191,9 @@ int		ft_getargsize(f_list *p, void *arg)
 		return(val = 1);
 	if (p->mod && ft_strcmp(p->mod, "hh") == 0)
 		return(val = 2);
-	if (p->mod && ft_strcmp(p->mod, "ll") == 0)
-		return(val = 3);
 	if (p->mod && ft_strcmp(p->mod, "l") == 0)
+		return(val = 3);
+	if (p->mod && ft_strcmp(p->mod, "ll") == 0)
 		return(val = 4);
 	if (p->mod && ft_strcmp(p->mod, "j") == 0)
 		return(val = 5);
@@ -201,18 +204,20 @@ int		ft_getargsize(f_list *p, void *arg)
 
 int 	ft_printcrutches(f_list *p, void *arg, int size)
 {
-	if (p->mod == 0 && (long)arg == 2147483648 )
-		size = 11;
-	if (p->mod == 3 && (long)arg == 2147483648)
-		size = 10;
-	if (p->mod == 2 && (short)arg == -128)
-		size = 4;
-	if (p->mod == 4 && (long long)arg == -9223372036854775807)
-		size = 20;
+	//if (p->mod == 0 && (long)arg == 2147483648 )
+	//	size = 11;
+	//if (p->mod == 3 && (long)arg == 2147483648)
+	//	size = 10;
+///	if (p->mod == 2 && (short)arg == -128)
+//		size = 4;
+	//if (p->mod == 4 && (long long)arg == -9223372036854775807)
+	//	size = 20;
 	if ((p->conversion == 'x' || p->conversion == 'X') && (long long)arg == 0)
 		size = 1;
-	if (p->mod == 5 && (long long)arg == 9223372036854775807)
-		size = 20;
+	//if (p->mod == 5 && (long long)arg == 9223372036854775807)
+	//{
+	//	size = 19;
+	//}
 
 	return (size);
 }
@@ -220,21 +225,30 @@ int 	ft_printcrutches(f_list *p, void *arg, int size)
 int		ft_printsize(f_list *p, void *arg, int size)
 {	
 	//(p->conversion == '%') ? size += 1 : 0;
+	//printf("\n----------->>>>>>>>>>size   %d\n",  size);
+	//printf("\n----------->>>>>>>>>>ispos  %d\n", p->ispos);
+	//printf("\n----------->>>>>>>>>>p->mod %d\n", p->mod);
 	(p->conversion == 'p') ? size += 2 : 0;
-	((p->mod == 1 || p->mod == 2) && p->conversion == 'd') ? size += 1 : 0;
+	(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X') ? size += 1 : 0; /// this is condition for maybe simple int!!!!!!!!!!!!!!dont lose it!!!!!!!!!!!!!!!
+	(p->f_oct) ? size += 2 : 0;
+	//(p->ispos == 0 && (p->conversion == 'x' || p->conversion == 'X')) ? size = 1 : 0;
+
+
+
+	//((p->mod == 1 || p->mod == 2) && p->conversion == 'd') ? size += 1 : 0;
 	(p->mod == 0 && (int)arg == 0 && p->conversion == 'd') ? size += 1 : 0;
 	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	(p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	//(p->f_plus && p->ispos == 0) ? size += 1 : 0;
-	(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X'&& p->mod != 4) ? size += 1 : 0;
+	//(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X'&& p->mod != 4) ? size += 1 : 0;
 	(p->w > size && !p->f_oct) ? size = p->w : 0;
 	(p->pr > size) ? size = p->pr : 0; //this is a shit maybe
-	(p->f_oct && p->ispos != 0) ? size += 2 : 0 ;
+	//(p->f_oct && p->ispos != 0) ? size += 2 : 0 ;
 	
 	(p->w > size && !p->pr) ? size = p->w : 0;
 	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
 	((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
-	//size = ft_printcrutches(p, arg, size);	
+	size = ft_printcrutches(p, arg, size);	
 	//if ((long)arg == 2147483648)
 	//	size = 11;
 

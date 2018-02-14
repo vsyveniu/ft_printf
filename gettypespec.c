@@ -8,7 +8,7 @@ static int		ft_handlethisbitcheshhandll(char *format, int *i)
 	temp = 0;
 	if (format[*i] == 'h')
 	{
-		if (format[*i - 1] == 'h')
+		if (format[*i + 1] == 'h')
 		{
 			temp = 2;
 			(*i)++;
@@ -18,7 +18,7 @@ static int		ft_handlethisbitcheshhandll(char *format, int *i)
 	}
 	if (format[*i] == 'l')
 	{
-		if (format[*i - 1] == 'l')
+		if (format[*i + 1] == 'l')
 		{
 			temp = 4;
 			(*i)++;
@@ -26,6 +26,7 @@ static int		ft_handlethisbitcheshhandll(char *format, int *i)
 		}
 		temp = 3;
 	}
+	//printf("----------------|||||||||| %d\n", temp);
 	return(temp);
 }
 

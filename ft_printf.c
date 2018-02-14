@@ -48,7 +48,7 @@
 char 	*ft_parsecrutchw(char *temp)
 {
 	int i;
-	int k;
+	int k;2
 	int j;
 	char *temp2;
 
@@ -262,7 +262,7 @@ int		ft_parse(char *f, int *i, va_list args)
 	//(*index)++;
 		//printf("\nconvers -> %c\n", p->conversion);
 	*/	
-	/*	printf("\n--------------------\n");
+		/*printf("\n--------------------\n");
 	printf("\nf_oct   -> %c\n", p->f_oct);
 	printf("\nf_plus  -> %c\n", p->f_plus);
 	printf("\nf_minus -> %c\n", p->f_minus);
@@ -271,8 +271,8 @@ int		ft_parse(char *f, int *i, va_list args)
 	printf("\nprec    -> %d\n", p->pr);
 	printf("\nmod     -> %d\n", p->mod);
 	printf("\nconvers -> %c\n", p->conversion);
-	printf("\n--------------------\n");*/
-	//printf("\nconvers -> %c\n", p->conversion);
+	printf("\n--------------------\n");
+	//printf("\nconvers -> %c\n", p->conversion);*/
 	//printf("\nret in parse--------------->>>>>>>>>> %d\n", ret);*/
 
 
@@ -315,8 +315,7 @@ int		printallshit(f_list *p, va_list args)
 	int printsize;
 
 	arg = va_arg(args, void *);
-	if(arg != NULL)
-		size = ft_getargsize(p, arg); ///i have chancge it don't forget to change it back if it neeeded
+	size = ft_getargsize(p, arg); ///i have chancge it don't forget to change it back if it neeeded
 	//	printf("fuck2\n");
 	//printf("picha\n");
 	//printf("\nsiex in allshit ------------+++++++++= %d\n", size);
@@ -378,66 +377,14 @@ int		ft_handleshit(const char *format, va_list args)
 			ft_putnnnstr(f, start, i);
 			ret += ft_parse(f, &i, args);
 			start = i + 1;
-			//printf("------------------->>>>>>> %d\n", start);
 		}
 		else if (f[i] != '\0' && i <= len)
 		{
 			ret++;
 			i++;
-			//ft_putchar(f[i]);
 		}	
 	}
 	ft_putnnnstr(f, start, len);
-	
-
-
-
-
-
-	/*
-	int 		ret;
-	int			i;
-	int			j;
-	f_list		*p;
-	int len;
-	int val;
-
-	i = -1;
-	val = 0;
-	j = 0;
-	//if (!format)
-	//	return (-1);
-	len = ft_strlen(format);	
-	ret = 0;
-	while (format[++i] != '\0' && i <= len)
-	{	
-		//printf("\n--------------||||||| format in main  %c    i in main  %d\n", format[i], i);
-		if (format[i] == '%')
-		{
-			j = i;
-			//printf("\ni -%d\n", i);
-			//printf("\ni-----------------int loop %d\n", i);
-			if(!(p = (f_list*)malloc(sizeof(f_list))))
-				return (0);
-			val = ft_parse(format, &i, p);
-
-			i += val - 1;
-			if (p->conversion != 0)
-				ret += printallshit(p, args);
-			p = NULL;
-			free(p);
-			//printf("\ni - %d\n", i);
-		}
-		if(format[i] != 0 && ft_checkispossibletoputthisbitchinchar(format, i) == 1)
-		{
-			//printf("\n");
-			ft_putchar(format[i]);
-			//printf("\n");
-			ret++;
-		}
-	//printf("\nfin i - %d\n", i);
-	}
-	//printf("ret -------------------->>>>>>>>>>>>>%d\n", ret);*/
 	return (ret);
 }
 
@@ -2958,9 +2905,39 @@ int		main()
 	printf("-----------  %s 	-----------\n", "U");
 	printf("\n");
  
-	ret = ft_printf("%-6O", 2500);
+	ret = ft_printf("%jx", 4294967295);
 	printf("\n");
-	ret1 =   printf("%-6O", 2500);
+	ret1 =   printf("%jx", 4294967295);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "U");
+	printf("\n");
+ 
+	ret = ft_printf("%llx",  9223372036854775807);
+	printf("\n");
+	ret1 =   printf("%llx",  9223372036854775807);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+
+		printf("\n");
+	printf("-----------  %s 	-----------\n", "d");
+	printf("\n");
+ 
+	ret = ft_printf("%hd",  32767);
+	printf("\n");
+	ret1 =   printf("%hd",  32767);
 
 	printf("\n");
 

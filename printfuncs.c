@@ -55,6 +55,7 @@ void	ft_printdecimal(void *i, int val)
 	(val == 1) ? ft_putnbr((short)i) : 0;
 	(val == 2) ? ft_putnbr((char)i) : 0;
 	(val == 3) ? ft_putnbr((long)i) : 0;
+	//printf("-------------->%d\n", val);
 	(val == 4) ? ft_putunnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
 	(val == 5) ? ft_putunnbr((intmax_t)i) : 0;
 	(val == 6) ? ft_putnbr((size_t)i) : 0;
