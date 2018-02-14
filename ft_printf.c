@@ -377,7 +377,7 @@ int		ft_handleshit(const char *format, va_list args)
 		{	
 			ft_putnnnstr(f, start, i);
 			ret += ft_parse(f, &i, args);
-			start = i;
+			start = i + 1;
 		}
 		else if (f[i] != '\0' && i <= len)
 		{
