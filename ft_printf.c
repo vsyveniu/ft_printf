@@ -2950,9 +2950,9 @@ int		main()
 	printf("-----------  %s 	-----------\n", "d");
 	printf("\n");
  
-	ret = ft_printf("@moulitest: %c", 0);
+	ret = ft_printf("%4.4d", 4242);
 	printf("\n");
-	ret1 =   printf("@moulitest: %c", 0);
+	ret1 =   printf("%4.4d", 4242);
 
 	printf("\n");
 

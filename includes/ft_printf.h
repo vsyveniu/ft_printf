@@ -92,7 +92,7 @@ int		ft_printstrsize(f_list *p, void *arg, int size);
 int		ft_checkispossibletoputthisbitchinchar(const char *format, int i);
 int	ft_base(intmax_t arg, intmax_t base, int size);
 int	ft_unsbase(uintmax_t arg, uintmax_t base, int size);
-int		ft_getintsize(void *arg, int systembase, int size);
+int		ft_getintsize(void *arg, int systembase, int size, f_list *p);
 int	ft_intbase(int arg, int base, int size);
 int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size);
 f_list		*ft_getflag(char c, f_list *params);

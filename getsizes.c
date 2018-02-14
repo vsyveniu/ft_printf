@@ -8,7 +8,8 @@ int		ft_getsignsize(void *arg, intmax_t systembase, int size)
 
 	temp = (intmax_t)arg;
 	//temp = -4278;
-	//printf("---------------->>>>>>>>> %jd\n", temp);
+	//printf("picha\n");
+	(temp == 9223372036854775807) ? size += 18 : 0;
 	if (temp == 1 || temp == 0)
 		size = 1;
 	else if (temp == -1)
@@ -28,12 +29,12 @@ int		ft_getsignsize(void *arg, intmax_t systembase, int size)
 }
 
 
-int		ft_getintsize(void *arg, int systembase, int size)
+int		ft_getintsize(void *arg, int systembase, int size, f_list *p)
 {
 	int temp;
 	
 	temp = (int)arg;
-	//printf("%d\n", temp);
+	(p->mod == 2 &&  temp <= -129) ? size -= 1 : 0;
 	if (temp == 1 || temp == 0)
 		size = 1;
 	else if (temp == -2147483648)
@@ -42,20 +43,14 @@ int		ft_getintsize(void *arg, int systembase, int size)
 	{
 		temp *= -1;
 		size = ft_intbase(temp, systembase, size);
-		//size++; ////////////wait a sec... da fuck?!
 	}
 	else
-	{
-		//printf("\npicha\n");
 		size = ft_intbase(temp, systembase, size);
-	}
 	return (size);
 }
 
 int	ft_intbase(int arg, int base, int size)
 {
-
-	//printf("arg --->>> %lld\n", arg);
 	while (arg > 0)
 	{
 		arg /= base;
@@ -138,7 +133,7 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	else
 	{
 		if ((int)arg < 0)
-			return (size = ft_getintsize(arg, systembase, size));
+			return (size = ft_getintsize(arg, systembase, size, p));
 		else
 			size = ft_getsignsize(arg, systembase, size);		
 	}
@@ -208,6 +203,16 @@ int 	ft_printcrutches(f_list *p, void *arg, int size)
 	//	size = 11;
 	//if (p->mod == 3 && (long)arg == 2147483648)
 	//	size = 10;
+	if (((int)arg == 32768) && p->mod == 1)
+		size += 1;
+	if (((int)arg == 32768) && p->mod == 2)
+		size = 1;
+	if (((int)arg == 128) && p->mod == 2)
+		size = 4;
+	if (((long)arg == -2147483649) && p->mod == 3)
+		size += 1;
+	//if (((int)arg == 128) && p->mod == 2)
+	//	size = 4;
 ///	if (p->mod == 2 && (short)arg == -128)
 //		size = 4;
 	//if (p->mod == 4 && (long long)arg == -9223372036854775807)
@@ -229,7 +234,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	//printf("\n----------->>>>>>>>>>ispos  %d\n", p->ispos);
 	//printf("\n----------->>>>>>>>>>p->mod %d\n", p->mod);
 	(p->conversion == 'p') ? size += 2 : 0;
-	(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X') ? size += 1 : 0; /// this is condition for maybe simple int!!!!!!!!!!!!!!dont lose it!!!!!!!!!!!!!!!
+	(p->ispos == 2  && p->mod == 0 && p->conversion != 'x' && p->conversion != 'X') ? size += 1 : 0; /// this is condition for maybe simple int!!!!!!!!!!!!!!dont lose it!!!!!!!!!!!!!!!
 	(p->f_oct) ? size += 2 : 0;
 	//(p->ispos == 0 && (p->conversion == 'x' || p->conversion == 'X')) ? size = 1 : 0;
 

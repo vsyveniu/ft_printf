@@ -45,7 +45,8 @@ void	ft_handlepos(f_list *p, int size)
 		(p->w && !p->pr && !p->f_zero && p->ispos == 1 && !p->f_minus) ? ft_putnchar(' ', p->w - size) : 0;
 		(p->w > size && p->f_plus && !p->pr) ? ft_putcratch('+', '0', p->w - size) : 0;
 		(p->w > size && !p->f_plus && !p->f_minus && p->f_zero) ? ft_putnchar('0', p->w - size) : 0;
-		(p->w > p->pr && p->pr > size && !p->f_plus) ? ft_putcratch(' ', '0', p->pr - size) : 0;
+		(p->w > p->pr && p->pr >= size && !p->f_plus) ? ft_putdoublecratch(p, '0',p->w - p->pr, p->pr - size) : 0;
+		//(p->w > p->pr && p->pr > size && !p->f_plus) ? ft_putcratch(' ', '0', p->pr - size) : 0;
 		(p->pr > p->w  && p->w > size && !p->f_plus ) ? ft_putnchar('0', p->pr - size) : 0;
 		
 		(p->pr && p->w > p->pr  && p->w > size && p->f_plus ) ? ft_puttriplecratch('+','0',p->w - p->pr - 1, p->pr - size) : 0;///////////
@@ -53,7 +54,8 @@ void	ft_handlepos(f_list *p, int size)
 		(p->f_plus && !p->w) ? ft_putchar('+') : 0;
 		//(p->pr > size && !p->f_plus && !p->f_minus) ? ft_putnchar('0', p->pr - size) : 0; /////////this is a place with size bug
 		(p->f_space && !p->f_plus && !p->w && !p->pr) ? ft_putchar(' ') : 0;
-		(p->w && p->pr && p->w > p->pr && !p->f_zero) ? ft_putnchar(' ', p->w - size) : 0;
+		//(p->w && p->pr && p->w > p->pr && !p->f_zero) ? ft_putnchar(' ', p->w - size) : 0;
+		(!p->w && p->pr && p->pr > size) ? ft_putnchar('0', p->pr - size) : 0;
 
 		//printf("------------>>>>>>>> size %d\n", size);
 		//printf("------------>>>>>>>> pr %d\n", p->pr);
@@ -212,11 +214,11 @@ void	ft_handleneg(f_list *p, int size)
 	(p->w && !p->pr && !p->f_zero && !p->f_minus) ? ft_putnchar(' ', p->w - size ) : 0;
 	//(p->ispos == 2 && !p->f_zero) ? ft_putchar('-') : 0;
 
-	(p->ispos == 2 && p->f_zero && !p->w) ? ft_putchar('-') : 0;
-	(p->ispos == 2 && p->f_minus) ? ft_putchar('-') : 0;
-	(p->ispos == 2 && !p->f_minus && p->f_plus && !p->f_zero) ? ft_putchar('-') : 0;
-	(p->ispos == 2 && !p->f_minus && !p->f_plus && !p->f_zero && p->w && !p->pr) ? ft_putchar('-') : 0;
-	(p->ispos == 2 && !p->f_minus && !p->f_plus && !p->f_zero && !p->w && !p->pr) ? ft_putchar('-') : 0;
+	(p->ispos == 2 && p->f_zero && !p->w && p->mod == 0) ? ft_putchar('-') : 0;
+	(p->ispos == 2 && p->f_minus && p->mod == 0) ? ft_putchar('-') : 0;
+	(p->ispos == 2 && !p->f_minus && p->f_plus && !p->f_zero && p->mod == 0) ? ft_putchar('-') : 0;
+	(p->ispos == 2 && !p->f_minus && !p->f_plus && !p->f_zero && p->w && !p->pr && p->mod == 0) ? ft_putchar('-') : 0;
+	(p->ispos == 2 && !p->f_minus && !p->f_plus && !p->f_zero && !p->w && !p->pr && p->mod == 0) ? ft_putchar('-') : 0;
 
 		//(p->f_space && !p->f_plus) ? ft_putchar(' ') : 0;
 		//(p->ispos == 2) ? size += 1: 0;
