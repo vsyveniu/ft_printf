@@ -125,8 +125,6 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	long long 		systembase;
 
 	size = 0;
-	//(p->f_space && p-> ispos == 1) ? size += 1 : 0;
-
 	(p->conversion == 'x' || p->conversion == 'X') ? systembase = 16 : 0;
 	(p->conversion == 'o') ? systembase = 8 : 0;
 	(p->conversion == 'd' || p->conversion == 'i' || p->conversion == 'D') ? systembase = 10 : 0;
@@ -139,17 +137,24 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	}
 	else
 	{
-		//printf("--------------------------->>>>>>>>>>>>>>>>>. %d",(int)arg);
 		if ((int)arg < 0)
-		{
 			return (size = ft_getintsize(arg, systembase, size));
-		}
 		else
-		{
 			size = ft_getsignsize(arg, systembase, size);		
-		}
 	}
-	//printf("------->>>>>>size  %d\n", size);
+	return (size);
+}
+
+int 	ft_getstrsize(f_list *p, void *arg, int size)
+{
+	if (!arg && (p->conversion == 's' || p->conversion == 'S'))
+		size = 6;
+	else if (!arg && (p->conversion == 'c'|| p->conversion =='C'))
+		size = 1;
+	else if(arg && (p->conversion == 's' || p->conversion == 'S'))
+		size = ft_strlen((char*)arg);
+	else if (arg && (p->conversion == 'c' || p->conversion == 'C'))
+		size = 1;
 	return (size);
 }
 
@@ -163,16 +168,11 @@ int		ft_getargsize(f_list *p, void *arg)
 		p->ispos = 1;
 	if ((int)arg < 0)
 		p->ispos = 2;
-	if (p->conversion == 's')
-		size = ft_strlen((char*)arg);
-	if (p->conversion == 's' && (char*)arg == NULL)
-		size = 6;
-	if (p->conversion == 'c' || p->conversion == 'C')
-		size = 1;
-	if (p->conversion == 'x' || p->conversion == 'X'
-		|| p->conversion == 'b' || p-> conversion == 'o'
-		|| p->conversion == 'd' || p->conversion == 'i'
-		|| p->conversion == 'u' || p->conversion == 'U'
+	if (p->conversion == 's' || p->conversion == 'S' || p->conversion == 'c'
+		|| p->conversion == 'C')
+		size = ft_getstrsize(p, arg, size);
+	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'b' || p-> conversion == 'o'
+		|| p->conversion == 'd' || p->conversion == 'i'|| p->conversion == 'u' || p->conversion == 'U'
 		|| p->conversion == 'p' || p->conversion == 'D')
 	{
 			size = ft_getsizehexoctbi(p, arg);

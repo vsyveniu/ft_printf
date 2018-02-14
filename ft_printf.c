@@ -322,6 +322,7 @@ int		printallshit(f_list *p, va_list args)
 	if (p->conversion == 'c' || p->conversion == 'C' || p->conversion == 's'
 		|| p->conversion == 'S')
 	{
+
 		ft_handlestr(p, &arg, size);
 	//		printf("pichatest\n");
 		printsize = ft_printstrsize(p, arg, size);
@@ -2935,9 +2936,23 @@ int		main()
 	printf("-----------  %s 	-----------\n", "d");
 	printf("\n");
  
-	ret = ft_printf("%hd",  32767);
+	ret = ft_printf("@moulitest: %s", NULL);
 	printf("\n");
-	ret1 =   printf("%hd",  32767);
+	ret1 =   printf("@moulitest: %s", NULL);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", "d");
+	printf("\n");
+ 
+	ret = ft_printf("@moulitest: %c", 0);
+	printf("\n");
+	ret1 =   printf("@moulitest: %c", 0);
 
 	printf("\n");
 

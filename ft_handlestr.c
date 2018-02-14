@@ -81,6 +81,9 @@ int		ft_printstr(f_list *p, char *str, int size)
 
 void		ft_handlestr(f_list *p, void *arg, int size)
 {
+	if (!arg)
+		if(p->conversion == 's' || p->conversion == 'S')
+			ft_putstr("null");
 	if (p->conversion == 'c' || p->conversion == 'C')
 	{
 		ft_printchar(p, (*(unsigned char*)arg), size);
