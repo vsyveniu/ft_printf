@@ -67,22 +67,23 @@ void	ft_putpoint(void *arg)
 }
 
 
-void	ft_putocto(int arg)
+void	ft_putocto(unsigned long long int arg)
 {
-	int i;
+	unsigned long long int i;
 	char *base;
 	char *str;
-	int temp;
+	unsigned long long int temp;
 	
 	base = "012345678";
 
 	i = 0;
 	temp = arg;
-	//printf("------------------------>>>>>>>>>>>>>>>>>>. %d\n", temp);
 	while ((temp /= 8) > 0)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
+	if (arg == 0)
+		ft_putchar('0');
 	while (arg)
 	{
 		str[i++] = base[arg % 8];

@@ -31,7 +31,7 @@ int		ft_getsignsize(void *arg, intmax_t systembase, int size)
 int		ft_getintsize(void *arg, int systembase, int size, f_list *p)
 {
 	int temp;
-	
+
 	temp = (int)arg;
 	(p->mod == 2 &&  temp <= -129) ? size -= 1 : 0;
 	if (temp == 1 || temp == 0)
@@ -69,6 +69,8 @@ int 	ft_gethexsize(f_list *p, uintmax_t temp, uintmax_t systembase, int size)
 			size = 1;
 		return (size);
 	}
+	if (temp == 0)
+		size = 1;
 	else
 		size = ft_unsbase(temp, systembase, size);
 	return (size);
@@ -82,7 +84,9 @@ int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size)
 	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'p')
 		return (size = ft_gethexsize(p,  temp, systembase, size));
 	if (temp == 1 || temp == 0)
+	{
 		size = 1;
+	}
 	else
 		size = ft_unsbase(temp, systembase, size);
 	return (size);
@@ -128,7 +132,7 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 	(p->conversion == 'b') ? systembase = 2 : 0;
 	(p->conversion == 'p') ? systembase = 16 : 0;
 	if (p->conversion == 'u' || p->conversion == 'U' || p->conversion == 'x' ||
-		p-> conversion == 'X' || p->conversion == 'p')
+		p-> conversion == 'X' || p->conversion == 'p' || p->conversion == 'o' || p->conversion == 'O')
 	{
 		size = getunsignsize(p, arg, (unsigned long long)systembase, size);
 	}
@@ -169,6 +173,7 @@ int		ft_getargsize(f_list *p, void *arg)
 		|| p->conversion == 'C')
 		size = ft_getstrsize(p, arg, size);
 	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'b' || p-> conversion == 'o'
+		|| p->conversion == 'O'
 		|| p->conversion == 'd' || p->conversion == 'i'|| p->conversion == 'u' || p->conversion == 'U'
 		|| p->conversion == 'p' || p->conversion == 'D')
 	{
@@ -246,8 +251,9 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	//printf("\n----------->>>>>>>>>>p->neg %d\n", p->negmark);
 	(p->conversion == 'p') ? size += 2 : 0;
 	//(p->conversion == 'p') ? size += 2 : 0;
-	(p->ispos == 2  && p->mod == 0 && p->conversion != 'x' && p->conversion != 'X' && p->conversion != 'p') ? size += 1 : 0; /// this is condition for maybe simple int!!!!!!!!!!!!!!dont lose it!!!!!!!!!!!!!!!
-	(p->f_oct) ? size += 2 : 0;
+	(p->ispos == 2  && p->mod == 0 && (p->conversion == 'd' || p->conversion == 'i' || p->conversion == 'D')) ? size += 1 : 0; /// this is condition for maybe simple int!!!!!!!!!!!!!!dont lose it!!!!!!!!!!!!!!!
+	(p->f_oct && p->conversion != 'o' && p->conversion != 'O') ? size += 2 : 0;
+	(p->f_oct && (p->conversion == 'o' || p->conversion == 'O') && p->ispos == 1) ? size += 1 : 0;
 	(p->mod == 2 && p->negmark == 1) ? size += 1 : 0;
 	//(p->mod == 5 && p->ispos == 2) ? size += 1 : 0;
 	(p->mod == 3 && p->ispos == 2) ? size += 1 : 0;
@@ -258,7 +264,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 
 
 	//((p->mod == 1 || p->mod == 2) && p->conversion == 'd') ? size += 1 : 0;
-	(p->mod == 0 && (int)arg == 0 && p->conversion == 'd') ? size += 1 : 0;
+	//(p->mod == 0 && (int)arg == 0 && p->conversion == 'd') ? size += 1 : 0;
 	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	(p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	//(p->f_plus && p->ispos == 0) ? size += 1 : 0;

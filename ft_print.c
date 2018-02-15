@@ -235,12 +235,12 @@ void	ft_handleneg(f_list *p, int size)
 	(p->w && !p->pr && !p->f_zero && !p->f_minus) ? ft_putnchar(' ', p->w - size ) : 0;
 	//(p->ispos == 2 && !p->f_zero) ? ft_putchar('-') : 0;
 
-	(p->negmark == 1 && p->f_zero && !p->w && p->mod == 0) ? ft_putchar('-') : 0;
-	(p->negmark == 1 && p->f_minus && p->mod == 0) ? ft_putchar('-') : 0;
+	(p->negmark == 1 && p->f_zero && !p->w && p->mod == 0 && (p->conversion != 'o' || p->conversion != 'O')) ? ft_putchar('-') : 0;
+	(p->negmark == 1 && p->f_minus && p->mod == 0 && (p->conversion != 'o' || p->conversion != 'O')) ? ft_putchar('-') : 0;
 	(p->negmark == 1 && !p->f_minus && p->f_plus && !p->f_zero && p->mod == 0) ? ft_putchar('-') : 0;
 	(p->negmark == 1 && !p->f_minus && !p->f_plus && !p->f_zero && p->w && !p->pr && p->mod == 0) ? ft_putchar('-') : 0;
 	(p->negmark == 1 && !p->f_minus && !p->f_plus && !p->f_zero && !p->w && !p->pr && p->mod == 0) ? ft_putchar('-') : 0;
-	(p->mod == 2 && p->negmark == 1) ? ft_putchar('-') : 0;
+	(p->mod == 2 && p->negmark == 1 && (p->conversion != 'o' || p->conversion != 'O')) ? ft_putchar('-') : 0;
 
 		//(p->f_space && !p->f_plus) ? ft_putchar(' ') : 0;
 		//(p->ispos == 2) ? size += 1: 0;
@@ -278,7 +278,7 @@ void	ft_handleneg(f_list *p, int size)
 int	ft_handleright(f_list *p, int size)
 {
 	//printf("--------------->>>>>>>>>>>. %d\n", p->ispos);	
-	if (p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X' && p->conversion != 'u' && p->conversion != 'U' && p->mod != 3 && p->mod != 4)
+	if (p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X' && p->conversion != 'u' && p->conversion != 'U' && p->mod != 3 && p->mod != 4 && p->conversion != 'o' && p->conversion != 'O')
 	{
 		ft_handleneg(p, size);
 	}

@@ -3094,9 +3094,11 @@ int		main()
 	printf("-----------  %s 	-----------\n", "-+10.5d");
 	printf("\n");
  
-	ret = ft_printf("%p", 2500);
+	ret = ft_printf("%llD", -2147);
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
-	ret1 =   printf("%p", 2500);
+	ret1 =   printf("%llD", -2147);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
 	//ret1 =   printf("|%x|", 42);
 
 	printf("\n");

@@ -15,12 +15,12 @@ void	ft_printbinary(int i, int val)
 
 void	ft_printcocto(void *i, int val)
 {
-	(val == 0) ? ft_putocto((int)i) : 0;
-	(val == 1) ? ft_putocto((short)i) : 0;
+	(val == 0) ? ft_putocto((unsigned int)i) : 0;
+	(val == 1) ? ft_putocto((unsigned short)i) : 0;
 	(val == 2) ? ft_putocto((char)i) : 0;
-	(val == 3) ? ft_putocto((unsigned long)i) : 0;
-	(val == 4) ? ft_putocto((long)i) : 0;
-	(val == 5) ? ft_putocto((uintmax_t)i) : 0;
+	(val == 3) ? ft_putocto((unsigned long long int)i) : 0;
+	(val == 4) ? ft_putocto((unsigned long long int)i) : 0;
+	(val == 5) ? ft_putocto((unsigned long long int)i) : 0;
 	(val == 6) ? ft_putocto((size_t)i) : 0;
 }
 
@@ -64,6 +64,16 @@ void	ft_printdecimal(void *i, int val)
 	//printf("-------------->%d\n", val);
 	(val == 4) ? ft_putnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
 	(val == 5) ? ft_putnbr((intmax_t)i) : 0;
+	(val == 6) ? ft_putnbr((size_t)i) : 0;
+}
+
+void	ft_printlongdecimal(void *i, int val)
+{
+	
+	(val == 0) ? ft_putnbr((long)i) : 0;
+	(val == 3) ? ft_putnbr((long)i) : 0;
+	(val == 4) ? ft_putnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
+	(val == 5) ? ft_putnbr((unsigned long long int )i) : 0;
 	(val == 6) ? ft_putnbr((size_t)i) : 0;
 }
 
