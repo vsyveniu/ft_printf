@@ -2951,9 +2951,9 @@ int		main()
 	printf("-----------  %s 	-----------\n", "d");
 	printf("\n");
  
-	ret = ft_printf("%hhd", -130);
+	ret = ft_printf("Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. %p", 42, 55);
 	printf("\n");
-	ret1 =   printf("%hhd", -130);
+	ret1 =   printf("Lalalala, 100% des gens qui parlent à Ly adorent Ly. Ou Presque. %p", 42, 55);
 
 	printf("\n");
 
