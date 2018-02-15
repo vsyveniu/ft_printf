@@ -53,7 +53,13 @@ void	ft_printdecimal(void *i, int val)
 	//printf("------------->>>>>>>>>>>> %d <<<<<<<<<<<<<<<------------", (int)i);
 	(val == 0) ? ft_putnbr(temp) : 0;
 	(val == 1) ? ft_putnbr((short int )i) : 0;
-	(val == 2) ? ft_putnbr((char)i) : 0;
+	if (val == 2)
+	{
+		if (temp < 0)
+			ft_putnbr((char)i);
+		else
+	 		ft_putunnbr((unsigned char)i);
+	}
 	(val == 3) ? ft_putnbr((long)i) : 0;
 	//printf("-------------->%d\n", val);
 	(val == 4) ? ft_putunnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!

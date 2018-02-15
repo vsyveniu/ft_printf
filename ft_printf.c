@@ -425,12 +425,12 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-/*
+
 int		main()
 {
 	int ret1;
 	int ret;
-
+/*
 	printf("\n");
 	printf("\n");
 
@@ -2946,13 +2946,14 @@ int		main()
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
 
+*/
 	printf("\n");
 	printf("-----------  %s 	-----------\n", "d");
 	printf("\n");
  
-	ret = ft_printf("%4.4d", 4242);
+	ret = ft_printf("%hhd", -130);
 	printf("\n");
-	ret1 =   printf("%4.4d", 4242);
+	ret1 =   printf("%hhd", -130);
 
 	printf("\n");
 
@@ -2964,4 +2965,3 @@ int		main()
 
  return (0);	
 }	
-*/
