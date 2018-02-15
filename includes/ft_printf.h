@@ -31,6 +31,7 @@ typedef	struct  				p_list
 	int							mod;
 	char						conversion;
 	int							ispos;
+	int 						negmark;
 }								f_list;
 
 
@@ -105,8 +106,8 @@ void 	ft_crutchforhash(f_list *p, char c, int size);
 void 	ft_crutchforhashv3(f_list *p, char c, char c2,  int size, int size2);
 size_t		ft_strlen(const char *str);
 void	ft_putchar(char c);
-void	ft_printpointer(char c, void *i);
-void	ft_putpoint(char conv, void *arg);
+void	ft_printpointer(void *i);
+void	ft_putpoint(void *arg);
 int		ft_ismod(char c);
 int		ft_isconv(char c);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);

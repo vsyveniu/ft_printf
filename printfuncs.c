@@ -36,11 +36,11 @@ void	ft_printhex(char c, void *i, int val)
 }
 
 
-void	ft_printpointer(char c, void *i)
+void	ft_printpointer(void *i)
 {
 	ft_putchar('0');
 	ft_putchar('x');
-	ft_printhex(c, i, 4);
+	ft_putpoint(i);
 }
 
 void	ft_printdecimal(void *i, int val)
@@ -55,15 +55,15 @@ void	ft_printdecimal(void *i, int val)
 	(val == 1) ? ft_putnbr((short int )i) : 0;
 	if (val == 2)
 	{
-		if (temp < 0)
-			ft_putnbr((char)i);
+		if (temp == -128)
+			write(1, "-128", 4);
 		else
-	 		ft_putunnbr((unsigned char)i);
+		   	ft_putnbr((char)i);
 	}
 	(val == 3) ? ft_putnbr((long)i) : 0;
 	//printf("-------------->%d\n", val);
-	(val == 4) ? ft_putunnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
-	(val == 5) ? ft_putunnbr((intmax_t)i) : 0;
+	(val == 4) ? ft_putnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
+	(val == 5) ? ft_putnbr((intmax_t)i) : 0;
 	(val == 6) ? ft_putnbr((size_t)i) : 0;
 }
 

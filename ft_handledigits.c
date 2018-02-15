@@ -22,7 +22,7 @@ void	ft_handledigits(f_list *params, void *arg, int val)
 	if (params->conversion == 'b')
 		ft_printbinary((int)arg, val);
 	if (params->conversion == 'p')
-		ft_printpointer(params->conversion, arg);
+		ft_printpointer(arg);
 //	if (params->conversion == 'k')
 //		ft_printdate((int)arg);
 //	if (params->conversion == 'r')

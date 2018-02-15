@@ -31,39 +31,40 @@ void	ft_puthex(char conv, unsigned long long int arg)
 }
 
 
-/*void	ft_putpoint(char conv, void *arg)
+void	ft_putpoint(void *arg)
 {
 
-	unsigned long long temp;
-	temp = &arg;
+	unsigned long long int temp;
+	unsigned long long int temptemp;
+	//temp = &arg;
 	//printf("%p\n", temp);
 	unsigned long long int i;
 	char *base;
 	char *str;
-	void *temp;
+	//void *temp;
 
-
-	temp = &arg;
+	temp = (unsigned long long)arg;
+	temptemp = temp;
 
 	i = 0;
-	(conv == 'p') ? base = "0123456789abcdef" : 0;
-	//(conv == 'p') ? base = "0123456789ABCDEF" : 0;
-	while ((temp /= 16) > 0)
+	base = "0123456789abcdef";
+	while ((temptemp /= 16) > 0)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (arg == 0)
+	if (temp == 0)
 		ft_putchar('0');
 	while (temp)
 	{
 		str[i++] = base[temp % 16];
 		temp /= 16;
+	//printf("\n---->>>>>  %llu\n", temp);
 	}
 	str[i] = '\0';
 	while(i-- > 0)
 		write(1, &str[i], 1);
 	free(str);
-}*/
+}
 
 
 void	ft_putocto(int arg)
