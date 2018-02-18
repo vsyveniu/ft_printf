@@ -20,7 +20,7 @@ void	ft_printcocto(void *i, int val)
 	(val == 2) ? ft_putocto((char)i) : 0;
 	(val == 3) ? ft_putocto((unsigned long long int)i) : 0;
 	(val == 4) ? ft_putocto((unsigned long long int)i) : 0;
-	(val == 5) ? ft_putocto((unsigned long long int)i) : 0;
+	(val == 5) ? ft_putocto((unsigned int)i) : 0;
 	(val == 6) ? ft_putocto((size_t)i) : 0;
 }
 

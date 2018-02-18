@@ -117,6 +117,7 @@ int		ft_parse(char *format, int *i, va_list args);
 void 	ft_postparse(char *format, char *crutch, char *crutchpr, f_list *p);
 void	ft_putnstr(char *str, int size);
 int		printallshit(f_list *p, va_list args);
+void	ft_printlongdecimal(void *i, int val);
 
 
 #endif
