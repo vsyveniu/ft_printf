@@ -225,6 +225,8 @@ int 	ft_printcrutches(f_list *p, void *arg, int size)
 		size += 1;
 	if (((long)arg == -2147483647) && p->conversion == 'D' && p->mod == 0)
 		size += 1;
+	if (((unsigned long)arg == 4294967296) && (p->conversion == 'u' || p->conversion == 'U') && p->mod == 0)
+		size = 1;
 	//if (((uintmax_t)arg == 9223372036854775808) && p->mod == 5)
 	//	size += 20;
 	//if (((uintmax_t)arg == -9223372036854775808) && p->mod == 5)
@@ -283,10 +285,10 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	
 	(p->w > size && !p->pr) ? size = p->w : 0;
 	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
-	((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
+	//((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
 	(p->conversion == 0 && p->w && !p->f_minus) ? size = p->w - 1: 0;
 	
-	//size = ft_printcrutches(p, arg, size);	
+	size = ft_printcrutches(p, arg, size);	
 	//if ((long)arg == 2147483648)
 	//	size = 11;
 

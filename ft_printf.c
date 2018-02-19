@@ -190,7 +190,7 @@ int		ft_parse(char *f, int *i, va_list args)
 		}
 	(*i)++;	
 	}
-	ret = printallshit(p, args, i);
+	ret = printallshit(p, args);
 	/*while (ft_isflag(f[*i]) == 1)
 	{
 		p = ft_getflag(f[*i], p);
@@ -317,7 +317,7 @@ int		ft_isconv(char c)
 }
 
 
-int		printallshit(f_list *p, va_list args, int *i)
+int		printallshit(f_list *p, va_list args)
 {
 	void *arg;
 	int	size;
@@ -340,7 +340,7 @@ int		printallshit(f_list *p, va_list args, int *i)
 		//printf("fuck3\n");
 	//val = ft_checkmodifiers(p);
 	//	printf("fuck4\n");
-	ft_checkflag(p, arg, size, i);
+	ft_checkflag(p, arg, size);
 	//	printf("fuck5\n");
 	//printf("\nsiex in allshit ------------+++++++++= %d\n", size);
 	printsize = ft_printsize(p,arg,size);
@@ -386,7 +386,7 @@ int		ft_handleshit(const char *format, va_list args)
 		{	
 			ft_putnnnstr(f, start, i);
 			ret += ft_parse(f, &i, args);
-			start = i;
+			start = i + 1;
 		}
 		else if (f[i] != '\0')
 		{
@@ -394,11 +394,11 @@ int		ft_handleshit(const char *format, va_list args)
 			i++;
 		}	
 	}
-	ft_putnnnstr(f, start + 1, len);
+	ft_putnnnstr(f, start, len);
 	return (ret);
 }
-
-/*int		ft_isitpossible(const char *format, int i)
+/*
+int		ft_isitpossible(const char *format, int i)
 {
 	while(format[i] != '%')
 	{
@@ -2257,17 +2257,17 @@ int		main()
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
 
-
 */
+
 
 	printf("\n");
 	printf("-----------  %s 	-----------\n", "LONGMINLLI");
 	printf("\n");
  
-	ret = ft_printf("{ 123 %-15ZZZ-123}", 123);
+	ret = ft_printf("%+10d", 42);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
-	ret1 =   printf("{ 123 %-15ZZZ-123}", 123);
+	ret1 =   printf("%+10d", 42);
 	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
 	//ret1 =   printf("|%x|", 42);
 
