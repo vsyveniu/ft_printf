@@ -255,6 +255,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	//printf("\n----------->>>>>>>>>>ispos  %d\n", p->ispos);
 	//printf("\n----------->>>>>>>>>>p->mod %d\n", p->mod);
 	//printf("\n----------->>>>>>>>>>p->neg %d\n", p->negmark);
+	//printf("\n----------->>>>>>>>>>p->conversion %c\n", p->conversion);
 	(p->conversion == 'p') ? size += 2 : 0;
 	//(p->conversion == 'p') ? size += 2 : 0;
 	(p->ispos == 2  && p->mod == 0 && (p->conversion == 'd' || p->conversion == 'i')) ? size += 1 : 0; /// this is condition for maybe simple int!!!!!!!!!!!!!!dont lose it!!!!!!!!!!!!!!!
@@ -283,6 +284,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->w > size && !p->pr) ? size = p->w : 0;
 	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
 	((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
+	(p->conversion == 0 && p->w && !p->f_minus) ? size = p->w - 1: 0;
 	
 	//size = ft_printcrutches(p, arg, size);	
 	//if ((long)arg == 2147483648)

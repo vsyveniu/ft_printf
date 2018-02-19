@@ -82,13 +82,6 @@ void	ft_printlongdecimal(void *i, int val)
 
 void	ft_printudecimal(void *i, int val)
 {
-	//unsigned long long temp;
-	//printf("i - > %d", i);
-	//temp = (unsigned long long)i; 
-	//if (temp == 42424242424242424)
-	//	size = 10;
-	//printf("%llu\n", temp);
-	//printf("-------->>>>>>>>> %d\n", val);
 	(val == 0) ? ft_putunnbr((unsigned int)i) : 0;
 	(val == 1) ? ft_putunnbr((unsigned short)i) : 0;
 	(val == 3) ? ft_putunnbr((unsigned long long)i) : 0;
@@ -97,3 +90,14 @@ void	ft_printudecimal(void *i, int val)
 	//(val == 6) ? ft_putnbr((size_t)i) : 0;
 
 }
+
+void	ft_printnotvalid(void *i, int *index)
+{
+	char *c;
+
+	c = (char*)i;
+
+
+	printf("%c\n", c[*index]);
+}
+

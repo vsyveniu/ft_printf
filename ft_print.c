@@ -56,7 +56,8 @@ void	ft_handlepos(f_list *p, int size)
 		//(p->f_plus) ? size += 1 : 0;
 		//printf("-=----------------------------.>>>>>>>>>>>>>>>>>>. picha\n");
 			//printf("-------------- %d\n", size);
-		(p->w && !p->pr && !p->f_zero && p->ispos == 1 && !p->f_minus) ? ft_putnchar(' ', p->w - size) : 0;
+		(p->w && !p->pr && !p->f_zero && p->ispos == 1 && !p->f_minus && p->conversion) ? ft_putnchar(' ', p->w - size) : 0;
+		(p->w && p->conversion == 0 && !p->f_minus) ? ft_putnchar(' ', p->w - size - 1) : 0;
 		(p->w > size && p->f_plus && !p->pr) ? ft_putcratch('+', '0', p->w - size) : 0;
 		
 
@@ -146,7 +147,8 @@ int	ft_handleleft(f_list *p, int size)
 	(p->f_oct && (p->conversion == 'o' || p->conversion == 'O')) ? size -= 1 : 0;
 	
 	(p->w && p->pr && p->w > p->pr && p->f_zero) ? ft_putnchar(' ', p->w - p->pr - 1) : 0;
-	(p->w && !p->pr && !p->f_zero && p->conversion != '%' && p->conversion != 'o' && p->conversion != 'O') ? ft_putnchar(' ', p->w - size) : 0;
+	(p->w && !p->pr && !p->f_zero && p->conversion != '%' && p->conversion != 'o' && p->conversion != 'O' && p->conversion) ? ft_putnchar(' ', p->w - size) : 0;
+	(p->w && p->conversion == 0) ? ft_putnchar(' ', p->w - size - 1) : 0;
 	(p->w && !p->pr && !p->f_zero &&(p->conversion == 'o' || p->conversion == 'O')) ? ft_putnchar(' ', p->w - size) : 0;
 	
 	(p->w && !p->pr && !p->f_zero && p->conversion == '%') ? ft_putnchar(' ', p->w - size) : 0;
@@ -156,6 +158,7 @@ int	ft_handleleft(f_list *p, int size)
 	(p->w && p->f_zero && !p->pr && !p->f_minus) ? ft_putnchar(' ', p->w - size) : 0 ;
 	(p->f_zero && p->w && p->ispos == 2) ? ft_putnchar(' ', p->w - size) : 0;
 	(p->w && p->f_zero && p->f_minus && p->ispos == 1 && !p->f_oct) ? ft_putnchar(' ', p->w - size) : 0;
+	//(p->conversion == 0 && p->w) ? ft_putnchar(' ', p->w - size) : 0;
 	/*(p->f_oct) ? size += 2 : 0;
 	if(p->w && !p->pr)
 	{
@@ -292,7 +295,7 @@ int	ft_handleright(f_list *p, int size)
 
 
 
-int		ft_checkflag(f_list *p, void *arg, int size)
+int		ft_checkflag(f_list *p, void *arg, int size, int *i)
 {
 	/*if ((long)arg == 2147483648 && p->mod == 0)
 		write(1, "-2147483648", 11);
@@ -305,13 +308,13 @@ int		ft_checkflag(f_list *p, void *arg, int size)
 	if (p->f_minus)
 	{
 		ft_handleright(p, size);
-		ft_handledigits(p, arg, p->mod);
+		ft_handledigits(p, arg, p->mod, i);
 		ft_handleleft(p, size);
 	}
 	else
 	{
 		ft_handleright(p, size);
-		ft_handledigits(p, arg, p->mod);
+		ft_handledigits(p, arg, p->mod, i);
 	}
 	return(size);
 }

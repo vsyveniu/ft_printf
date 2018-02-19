@@ -57,7 +57,7 @@ int		ft_printstr(f_list *params, char *str, int size);
 
 void		ft_handlestr(f_list *p, void *arg, int size);
 
-void		ft_handledigits(f_list *params, void *arg, int val);
+void		ft_handledigits(f_list *params, void *arg, int val, int*i);
 void		ft_putnbr(intmax_t n);
 void	ft_putunnbr(uintmax_t n);
 void		ft_putnchar(char c, int size);
@@ -78,7 +78,7 @@ void	ft_puttriplecratch(char c2, char c3, int size, int size2);
 void	ft_putdoublecratch(f_list *p, char c2, int size, int size2);
 void	ft_printhash(char c);
 int		ft_checkmodifiers(f_list *p);
-int		ft_checkflag(f_list *p, void *arg, int size);
+int		ft_checkflag(f_list *p, void *arg, int size, int *i);
 int	ft_handleleft(f_list *p,  int size);
 int	ft_handleright(f_list *p,  int size);
 void	ft_handleneg(f_list *p, int size);
@@ -116,8 +116,9 @@ char 	*ft_parsecrutchpr(char *temp);
 int		ft_parse(char *format, int *i, va_list args);
 void 	ft_postparse(char *format, char *crutch, char *crutchpr, f_list *p);
 void	ft_putnstr(char *str, int size);
-int		printallshit(f_list *p, va_list args);
+int		printallshit(f_list *p, va_list args, int *i);
 void	ft_printlongdecimal(void *i, int val);
+void	ft_printnotvalid(void *i, int* index);
 
 
 #endif

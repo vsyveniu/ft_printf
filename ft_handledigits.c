@@ -7,7 +7,7 @@ void	ft_printpercent()
 	write(1, "%", 1);
 }
 
-void	ft_handledigits(f_list *params, void *arg, int val)
+void	ft_handledigits(f_list *params, void *arg, int val, int *i)
 {
 	if (params->conversion == 'd' || params->conversion == 'i')
 		ft_printdecimal(arg, val);
