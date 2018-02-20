@@ -2,7 +2,7 @@
 #include "includes/ft_printf.h"
 
 
-void	ft_puthex(char conv, unsigned long long int arg)
+void	ft_puthex(char conv, f_list *p, unsigned long long int arg)
 {
 	unsigned long long int i;
 	char *base;
@@ -17,7 +17,7 @@ void	ft_puthex(char conv, unsigned long long int arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (arg == 0)
+	if (arg == 0 && p->f_oct)
 		ft_putchar('0');
 	while (arg)
 	{

@@ -276,7 +276,8 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->f_space && p->ispos == 1) ? retsize += 1 : 0;
 	(p->f_plus && p->ispos == 1) ? retsize += 1 : 0;
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0;
-	(p->f_oct &&  !p->w && !p->pr && (p->conversion == 'x' || p->conversion == 'X')) ? retsize += 2 : 0;
+	(p->f_oct  && p->ispos == 1 && !p->w && !p->pr && (p->conversion == 'x' || p->conversion == 'X')) ? retsize += 2 : 0;
+	//retsize = ft_printcrutches(p, arg, size);	
 
 	/*(p->conversion == 'p') ? size += 2 : 0;
 	(p->ispos == 2  && p->mod == 0 && (p->conversion == 'd' || p->conversion == 'i')) ? size += 1 : 0; 
@@ -291,7 +292,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->w > size && !p->pr) ? size = p->w : 0;
 	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
 	(p->conversion == 0 && p->w && !p->f_minus) ? size = p->w - 1: 0;
-	size = ft_printcrutches(p, arg, size);	
+	
 
 
 

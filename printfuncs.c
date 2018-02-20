@@ -24,15 +24,15 @@ void	ft_printcocto(void *i, int val)
 	(val == 6) ? ft_putocto((size_t)i) : 0;
 }
 
-void	ft_printhex(char c, void *i, int val)
+void	ft_printhex(char c,f_list *p, void *i, int val)
 {
-	(val == 0) ? ft_puthex(c, (unsigned int)i) : 0;
-	(val == 1) ? ft_puthex(c, (unsigned short)i) : 0;
-	(val == 2) ? ft_puthex(c, (char)i) : 0;
-	(val == 3) ? ft_puthex(c, (unsigned long long int)i) : 0;
-	(val == 4) ? ft_puthex(c, (unsigned long int)i) : 0;
-	(val == 5) ? ft_puthex(c, (uintmax_t)i) : 0;
-	(val == 6) ? ft_puthex(c, (size_t)i) : 0;
+	(val == 0) ? ft_puthex(c, p, (unsigned int)i) : 0;
+	(val == 1) ? ft_puthex(c, p, (unsigned short)i) : 0;
+	(val == 2) ? ft_puthex(c, p, (char)i) : 0;
+	(val == 3) ? ft_puthex(c, p, (unsigned long long int)i) : 0;
+	(val == 4) ? ft_puthex(c, p, (unsigned long int)i) : 0;
+	(val == 5) ? ft_puthex(c, p, (uintmax_t)i) : 0;
+	(val == 6) ? ft_puthex(c, p, (size_t)i) : 0;
 }
 
 
