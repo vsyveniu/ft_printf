@@ -261,7 +261,6 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	//printf("\n----------->>>>>>>>>>p->mod %d\n", p->mod);
 	//printf("\n----------->>>>>>>>>>p->neg %d\n", p->negmark);
 	//printf("\n----------->>>>>>>>>>p->conversion %c\n", p->conversion);
-
 	(p->w && !p->pr && p->w >= size) ? retsize = p->w : 0; //10
 	(!p->w && p->pr && p->pr >= size) ? retsize = p->pr : 0; //.10
 	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 1) ? retsize = p->w : 0; //15.10
@@ -274,6 +273,10 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->w && p->pr && p->w > p->pr  && p->pr < size && p->w >= size && p->ispos == 2) ? retsize = p->w : 0; //10.1
 	(!p->w && p->pr && p->pr < size && p->ispos == 1) ? retsize = size : 0;
 	(!p->w && p->pr && p->pr < size && p->ispos == 2) ? retsize = size + 1: 0;
+	(p->f_space && p->ispos == 1) ? retsize += 1 : 0;
+	(p->f_plus && p->ispos == 1) ? retsize += 1 : 0;
+	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0;
+	(p->f_oct &&  !p->w && !p->pr && (p->conversion == 'x' || p->conversion == 'X')) ? retsize += 2 : 0;
 
 	/*(p->conversion == 'p') ? size += 2 : 0;
 	(p->ispos == 2  && p->mod == 0 && (p->conversion == 'd' || p->conversion == 'i')) ? size += 1 : 0; 
@@ -299,7 +302,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 
 
 
-	/*(p->ispos == 2) ? size += 1 : 0;
+	(p->ispos == 2) ? size += 1 : 0;
 	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	(p->f_plus && p->ispos == 0) ? size += 1 : 0;
 	(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X') ? size += 1 : 0;

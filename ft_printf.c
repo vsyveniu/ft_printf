@@ -434,27 +434,27 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-
+/*
 int		main()
 {
 	int ret1;
 	int ret;
-/*
+
 	
 	
 
-*/
+
 
 
 	printf("\n");
 	printf("-----------  %s 	-----------\n", " 08.10");
 	printf("\n");
  
-	//ret = ft_printf("{%-.1d}", -42);
-	ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	ret = ft_printf("{%  d}", -42);
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
-	//ret1 =   printf("{%-.1d}", -42);
-	ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
+	ret1 =   printf("{%  d}", -42);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
 	//ret1 =   printf("|%x|", 42);
 
 	printf("\n");
@@ -465,3 +465,4 @@ int		main()
 
  return (0);	
 }	
+*/

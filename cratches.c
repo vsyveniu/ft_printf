@@ -30,8 +30,8 @@ void	ft_putdoublecratchhash(f_list *p, char c2, int size, int size2)
 {
 	
 	ft_putnchar(' ', size);
-	//if((p->conversion == 'x' || p->conversion == 'X') && p->f_oct)
-	//	ft_printhash(p->conversion);
+	if((p->conversion == 'x' || p->conversion == 'X') && p->f_oct)
+		ft_printhash(p->conversion);
 	ft_putnchar(c2, size2);
 }
 
