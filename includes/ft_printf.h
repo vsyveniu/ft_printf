@@ -103,7 +103,7 @@ void	ft_handlehash(f_list *p, int size);
 void 	ft_crutchforhashv2(f_list *p, char c, int size);
 int 	ft_printf(const char *format, ... );
 void 	ft_crutchforhash(f_list *p, char c, int size);
-void 	ft_crutchforhashv3(f_list *p, char c, char c2,  int size, int size2);
+void 	ft_crutchforhashv3(f_list *p,char c,  int size, int size2);
 size_t		ft_strlen(const char *str);
 void	ft_putchar(char c);
 void	ft_printpointer(void *i);

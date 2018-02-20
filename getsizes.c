@@ -252,46 +252,43 @@ int 	ft_printcrutches(f_list *p, void *arg, int size)
 int		ft_printsize(f_list *p, void *arg, int size)
 {	
 	(void)arg;
+	int retsize;
+
+	retsize = size;
 	//(p->conversion == '%') ? size += 1 : 0;
 	//printf("\n----------->>>>>>>>>>size   %d\n",  size);
 	//printf("\n----------->>>>>>>>>>ispos  %d\n", p->ispos);
 	//printf("\n----------->>>>>>>>>>p->mod %d\n", p->mod);
 	//printf("\n----------->>>>>>>>>>p->neg %d\n", p->negmark);
 	//printf("\n----------->>>>>>>>>>p->conversion %c\n", p->conversion);
-	(p->conversion == 'p') ? size += 2 : 0;
-	//(p->conversion == 'p') ? size += 2 : 0;
-	(p->ispos == 2  && p->mod == 0 && (p->conversion == 'd' || p->conversion == 'i')) ? size += 1 : 0; /// this is condition for maybe simple int!!!!!!!!!!!!!!dont lose it!!!!!!!!!!!!!!!
+
+	(p->w && !p->pr && p->w >= size) ? retsize = p->w : 0; //10
+	(!p->w && p->pr && p->pr >= size) ? retsize = p->pr : 0; //.10
+	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 1) ? retsize = p->w : 0; //15.10
+	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 2) ? size = p->w : 0; //15.10
+	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->ispos == 1) ? retsize = p->pr : 0; //10.15
+	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->ispos == 2) ? retsize = p->pr + 1 : 0; //10.15
+	(p->w && p->pr && p->pr == p->w  && p->pr >= size && p->w >= size && p->ispos == 1) ? retsize = p->pr : 0; //10.10
+	(p->w && p->pr && p->pr == p->w  && p->pr >= size && p->w >= size && p->ispos == 2) ? retsize = p->pr + 1: 0; //10.10
+	(p->w && p->pr && p->w > p->pr  && p->pr < size && p->w >= size && p->ispos == 1) ? retsize = p->w : 0; //10.1
+	(p->w && p->pr && p->w > p->pr  && p->pr < size && p->w >= size && p->ispos == 2) ? retsize = p->w : 0; //10.1
+	(!p->w && p->pr && p->pr < size && p->ispos == 1) ? retsize = size : 0;
+	(!p->w && p->pr && p->pr < size && p->ispos == 2) ? retsize = size + 1: 0;
+
+	/*(p->conversion == 'p') ? size += 2 : 0;
+	(p->ispos == 2  && p->mod == 0 && (p->conversion == 'd' || p->conversion == 'i')) ? size += 1 : 0; 
 	(p->f_oct && p->conversion != 'o' && p->conversion != 'O') ? size += 2 : 0;
 	(p->f_oct && (p->conversion == 'o' || p->conversion == 'O') && p->ispos == 1) ? size += 1 : 0;
 	(p->mod == 2 && p->negmark == 1) ? size += 1 : 0;
-	//(p->mod == 5 && p->ispos == 2) ? size += 1 : 0;
 	(p->mod == 3 && p->ispos == 2) ? size += 1 : 0;
-	//(p->mod == 0 && p->ispos == 2 && p->conversion == 'D') ? size += 1 : 0;
-	//(p->mod == 4 && p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i')) ? size += 1 : 0;
-	//(p->mod == 2 && p->negmark == 0) ? size -= 1 : 0;
-	//(p->ispos == 0 && (p->conversion == 'x' || p->conversion == 'X')) ? size = 1 : 0;
-
-
-
-	//((p->mod == 1 || p->mod == 2) && p->conversion == 'd') ? size += 1 : 0;
-	//(p->mod == 0 && (int)arg == 0 && p->conversion == 'd') ? size += 1 : 0;
 	(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0;
 	(p->f_plus && p->ispos == 1) ? size += 1 : 0;
-	//(p->f_plus && p->ispos == 0) ? size += 1 : 0;
-	//(p->ispos == 2 && p->conversion != 'x' && p->conversion != 'X'&& p->mod != 4) ? size += 1 : 0;
 	(p->w > size && !p->f_oct) ? size = p->w : 0;
 	(p->pr > size) ? size = p->pr : 0; //this is a shit maybe
-	//(p->f_oct && p->ispos != 0) ? size += 2 : 0 ;
-	
 	(p->w > size && !p->pr) ? size = p->w : 0;
 	(p->conversion == '%' && p->f_space) ? size -= 1 : 0;
-	//((p->conversion == 'u' || p->conversion == 'U') && p->ispos == 2) ? size -= 1 : 0;
 	(p->conversion == 0 && p->w && !p->f_minus) ? size = p->w - 1: 0;
-	
 	size = ft_printcrutches(p, arg, size);	
-	//if ((long)arg == 2147483648)
-	//	size = 11;
-
 
 
 
@@ -353,7 +350,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	//(p->f_plus && p->ispos == 2) ? size -= 1 : 0;
 	//(p->f_space && !p->f_plus && p->ispos == 1) ? size += 1 : 0; // maybe it's needed for d*/
 //	(p->f_plus) ? size += 1 : 0;
-	return (size);
+	return (retsize);
 }
 
 int		ft_printstrsize(f_list *p, void *arg, int size)
