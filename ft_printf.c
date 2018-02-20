@@ -450,10 +450,10 @@ int		main()
 	printf("-----------  %s 	-----------\n", " 08.10");
 	printf("\n");
  
-	ret = ft_printf("{%010d}", -42);
+	ret = ft_printf("{%#10.10x}", 42);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
-	ret1 =   printf("{%010d}", -42);
+	ret1 =   printf("{%#10.10x}", 42);
 	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
 	//ret1 =   printf("|%x|", 42);
 
