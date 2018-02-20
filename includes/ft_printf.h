@@ -75,7 +75,7 @@ void		ft_printudecimal(void *i, int val);
 void	ft_putcratch(char c1, char c2, int size);
 void	ft_putcratchv2(char c1, char c2, int size);
 void	ft_puttriplecratch(char c2, char c3, int size, int size2);
-void	ft_putdoublecratch(f_list *p, char c2, int size, int size2);
+void	ft_putdoublecratch(char c1, char c2, int size, int size2);
 void	ft_printhash(char c);
 int		ft_checkmodifiers(f_list *p);
 int		ft_checkflag(f_list *p, void *arg, int size);
