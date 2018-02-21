@@ -62,8 +62,8 @@ void	ft_printdecimal(void *i, int val)
 	}
 	(val == 3) ? ft_putnbr((long)i) : 0;
 	(val == 4) ? ft_putunnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
-	(val == 5) ? ft_putnbr((intmax_t)i) : 0;
-	(val == 6) ? ft_putnbr((size_t)i) : 0;
+	(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
+	(val == 6) ? ft_putnbr((ssize_t)i) : 0;
 }
 
 void	ft_printlongdecimal(void *i, int val)
@@ -78,15 +78,28 @@ void	ft_printlongdecimal(void *i, int val)
 
 
 
-void	ft_printudecimal(void *i, int val)
-{
-	(val == 0) ? ft_putunnbr((unsigned int)i) : 0;
-	(val == 1) ? ft_putunnbr((unsigned short)i) : 0;
-	(val == 3) ? ft_putunnbr((unsigned long long)i) : 0;
-	(val == 4) ? ft_putunnbr((unsigned long long)i) : 0;
-	(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
-	//(val == 6) ? ft_putnbr((size_t)i) : 0;
-
+void	ft_printudecimal(f_list *p, void *i, int val)
+{	
+	if (p->conversion == 'u')
+	{
+		(val == 0) ? ft_putunnbr((unsigned int)i) : 0;
+		(val == 1) ? ft_putunnbr((unsigned short int)i) : 0;
+		(val == 2) ? ft_putunnbr((unsigned char)i) : 0;
+		(val == 3) ? ft_putunnbr((unsigned long long)i) : 0;
+		(val == 4) ? ft_putunnbr((unsigned long long)i) : 0;
+		(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
+		(val == 6) ? ft_putnbr((size_t)i) : 0;
+	}
+	else if (p->conversion == 'U')
+	{
+		(val == 0) ? ft_putunnbr((unsigned long int)i) : 0;
+		(val == 1) ? ft_putunnbr((unsigned long int)i) : 0;
+		(val == 2) ? ft_putunnbr((unsigned long int)i) : 0;
+		(val == 3) ? ft_putunnbr((unsigned long long)i) : 0;
+		(val == 4) ? ft_putunnbr((unsigned long long)i) : 0;
+		(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
+		(val == 6) ? ft_putnbr((size_t)i) : 0;
+	}
 }
 
 void	ft_printnotvalid(void *i, int *index)

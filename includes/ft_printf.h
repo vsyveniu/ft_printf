@@ -71,7 +71,7 @@ void	ft_printbinary(int i, int val);
 void	ft_printcocto(void *i, int val);
 void	ft_printhex(char c,f_list *p, void *i, int val);
 void		ft_printdecimal(void *i, int val);
-void		ft_printudecimal(void *i, int val);
+void		ft_printudecimal(f_list *p, void *i, int val);
 void	ft_putcratch(char c1, char c2, int size);
 void	ft_putcratchv2(char c1, char c2, int size);
 void	ft_puttriplecratch(char c2, char c3, int size, int size2);

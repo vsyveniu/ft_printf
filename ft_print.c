@@ -31,7 +31,7 @@ void	ft_handlepos(f_list *p, int size)
 		//{
 		if ((p->w || p->pr) && !p->f_plus && !p->f_zero && !p->f_space) //// only width and precision
 		{
-			//printf("bitch\n");
+			
 			(p->conversion == 'p') ? size += 2 : 0;
 			(p->w && !p->pr && p->w >= size && !p->f_minus && !p->f_oct && p->ispos != 0) ? ft_putnchar(' ', p->w - size) : 0; //10
 			(p->w && !p->pr && p->w >= size && !p->f_minus && !p->f_oct && p->ispos == 0) ? ft_putnchar(' ', p->w - size) : 0; //10
@@ -75,7 +75,7 @@ void	ft_handlepos(f_list *p, int size)
 		}
 		else if ((p->w || p->pr) && p->f_space && !p->f_plus)  /// width/precision and zero and plus
 		{
-			//printf("fuck\n");
+
 			(p->w && !p->pr && p->w >= size && !p->f_zero && !p->f_oct) ? ft_putcratch(' ',' ', p->w - size - 1) : 0; // 1Ω
 			(p->w && !p->pr && p->w >= size && p->f_zero) ? ft_putcratch(' ','0', p->w - size - 1) : 0; // 010
 			(p->pr && !p->w && p->pr >= size) ? ft_putcratch(' ', '0', p->pr - size) : 0;      // 010
@@ -85,12 +85,14 @@ void	ft_handlepos(f_list *p, int size)
 			(p->w && p->pr && p->w == p->pr ) ? ft_putcratch(' ','0',p->pr - size) : 0;  //+010.10
 			(!p->w && p->pr && p->pr < size) ? ft_putchar (' '): 0;  //.3
 		}
-		else if (!p->w && !p->pr && p->f_space && !p->f_plus)  /// width/precision and zero and plus
+		else if (!p->w && !p->pr && p->f_space && !p->f_plus && p->ispos != 2)  /// width/precision and zero and plus
 		{
 			ft_putchar(' ');
 		}
 		else if(!p->w && !p->pr && p->f_plus && (p->ispos == 1 || p->ispos == 0))
 			ft_putchar('+');
+		else if (p->ispos == 0 && (p->mod == 4 || p->mod == 5) && !p->crutchmark)
+			ft_putchar('-');
 		//(p->f_plus) ? size += 1 : 0;
 		//printf("-=----------------------------.>>>>>>>>>>>>>>>>>>. picha\n");
 			//printf("-------------- %d\n", size);
@@ -123,8 +125,10 @@ void	ft_handlepos(f_list *p, int size)
 
 int	ft_handleleft(f_list *p, int size)
 {
+	//printf("----------------->>>>>>>>> picha\n");
+	//printf("---------->>>>>>> %d\n", size);
 	(p->conversion == 'p') ? size += 2 : 0;
-	(p->ispos == 2) ? size += 1 : 0;
+	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i')) ? size += 1 : 0;
 	(p->f_oct && (p->conversion == 'x' || p->conversion == 'X')) ? size += 2 : 0;
 	(p->f_oct && (p->conversion == 'o' || p->conversion == 'O')) ? size += 1 : 0;
 	(p->w && !p->pr && !p->f_oct) ? ft_putnchar(' ', p->w - size) : 0;
@@ -232,6 +236,7 @@ void	ft_handleneg(f_list *p, int size)
 			(p->w && p->pr && p->pr > p->w) ? ft_putcratch('-','0', p->pr - size) : 0; // 10.15
 			(p->w && p->pr && p->w == p->pr) ? ft_putcratch('-', '0', p->pr - size) : 0; //15.15
 			(!p->w && p->pr && p->pr < size) ? ft_putchar('-') : 0;
+
 		}
 		/*else if ((p->w || p->pr) && p->f_zero)  /// width/precision and plus
 		{

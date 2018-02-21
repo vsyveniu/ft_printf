@@ -3,8 +3,7 @@
 
 
 void	ft_printpercent()
-{
-	write(1, "%", 1);
+{	write(1, "%", 1);
 }
 
 void	ft_handledigits(f_list *params, void *arg, int val)
@@ -14,7 +13,7 @@ void	ft_handledigits(f_list *params, void *arg, int val)
 	if (params-> conversion == 'D')
 		ft_printlongdecimal(arg, val);
 	if (params->conversion == 'u' || params->conversion == 'U')
-		ft_printudecimal(arg, val);
+		ft_printudecimal(params, arg, val);
 	if (params->conversion == '%')
 		ft_printpercent();
 	if (params->conversion == 'x' || params->conversion == 'X')

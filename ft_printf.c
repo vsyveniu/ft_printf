@@ -440,7 +440,7 @@ int		main()
 	int ret1;
 	int ret;
 
-	
+	/*
 	
 
 
@@ -450,10 +450,36 @@ int		main()
 	printf("-----------  %s 	-----------\n", " -5.2o");
 	printf("\n");
  
-	ret = ft_printf("%lld", -9223372036854775808);
+	ret = ft_printf("{%U}", 4294967296);
+	printf("\ncustom -> %d\n", ret);
+	ret = ft_printf("{%u}", 4294967296);
+	printf("\ncustom -> %d\n", ret);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
-	ret1 =   printf("%lld", -9223372036854775808);
+	ret1 =   printf("{%U}", 4294967296);
+	printf("\norigin -> %d\n", ret1);
+	ret1 =   printf("{%u}", 4294967296);
+	printf("\norigin -> %d\n", ret1);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
+	//ret1 =   printf("|%x|", 42);
+
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", " -5.2o");
+	printf("\n");
+ 
+	ret = ft_printf("{%hU}", 4294967296);
+	printf("\ncustom -> %d\n", ret);
+	ret = ft_printf("{%hu}", 4294967296);
+	printf("\ncustom -> %d\n", ret);
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+	ret1 =   printf("{%hU}", 4294967296);
+		printf("\norigin -> %d\n", ret1);
+	ret1 =   printf("{%hu} ", 4294967296);
+		printf("\norigin -> %d\n", ret1);
+
 	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
 	//ret1 =   printf("|%x|", 42);
 
@@ -462,6 +488,113 @@ int		main()
 	printf("\n");
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
+	printf("\n");
+	printf("-----------  %s 	-----------\n", " -5.2o");
+	printf("\n");
+ 
+	ret = ft_printf("{%hhU} || ", 4294967296);
+	ret = ft_printf("{%hhu} || ", 4294967296);
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+	ret1 =   printf("{%hhU} || ", 4294967296);
+	ret1 =   printf("{%hhu}", 4294967296);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
+	//ret1 =   printf("|%x|", 42);
+
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", " -5.2o");
+	printf("\n");
+ 
+	ret = ft_printf("{%lU}", 4294967296);
+	ret = ft_printf("{%lu}", 4294967296);
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+	ret1 =   printf("{%lU}", 4294967296);
+	ret1 =   printf("{%lu}", 4294967296);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
+	//ret1 =   printf("|%x|", 42);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", " -5.2o");
+	printf("\n");
+ 
+	ret = ft_printf("{%llU}", 4294967296);
+	ret = ft_printf("{%llu}", 4294967296);
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+	ret1 =   printf("{%llU}", 4294967296);
+	ret1 =   printf("{%llu}", 4294967296);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
+	//ret1 =   printf("|%x|", 42);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", " -5.2o");
+	printf("\n");
+ 
+	ret = ft_printf("{%jU}", 4294967296);
+	ret = ft_printf("{%ju}", 4294967296);
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+	ret1 =   printf("{%jU}", 4294967296);
+	ret1 =   printf("{%ju}", 4294967296);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
+	//ret1 =   printf("|%x|", 42);
+
+	printf("\n");
+	printf("-----------  %s 	-----------\n", " -5.2o");
+	printf("\n");
+ 
+	ret = ft_printf("{%zU}", 4294967296);
+	ret = ft_printf("{%zu}", 4294967296);
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+	ret1 =   printf("{%zU}", 4294967296);
+	ret1 =   printf("{%zu}", 4294967296);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
+	//ret1 =   printf("|%x|", 42);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("custom -> %d\n", ret);
+	printf("origin -> %d\n", ret1);
+*/
+
+	ret = ft_printf("{%   % )");
+	printf("\n");
+	ret1 = printf("{%   % )");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\norigin -> %d\n", ret1);
+	printf("\norigin -> %d\n", ret1);
+	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
+	//ret1 =   printf("|%x|", 42);
 
  return (0);	
 }	
