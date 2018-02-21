@@ -111,7 +111,7 @@ int		ft_parse(char *f, int *i, va_list args)
 	p->w = 0;
 	p->pr = 0;
 	p->mod = 0;
-	p->negmark = 0;
+	p->crutchmark = 0;
 	p->conversion = 0;
 
 
@@ -281,8 +281,8 @@ int		ft_parse(char *f, int *i, va_list args)
 	printf("\nmod     -> %d\n", p->mod);
 	printf("\nconvers -> %c\n", p->conversion);
 	printf("\n--------------------\n");
-	//printf("\nconvers -> %c\n", p->conversion)
-	//printf("\nret in parse--------------->>>>>>>>>> %d\n", ret);*/
+	//printf("\nconvers -> %c\n", p->conversion)*/
+	//printf("\nret in parse--------------->>>>>>>>>> %d\n", ret);
 
 
 
@@ -434,7 +434,7 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-/*
+
 int		main()
 {
 	int ret1;
@@ -447,13 +447,13 @@ int		main()
 
 
 	printf("\n");
-	printf("-----------  %s 	-----------\n", " 08.10");
+	printf("-----------  %s 	-----------\n", " -5.2o");
 	printf("\n");
  
-	ret = ft_printf("{%#6o}", 2500);
+	ret = ft_printf("%lld", -9223372036854775808);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
-	ret1 =   printf("{%#6o}", 2500);
+	ret1 =   printf("%lld", -9223372036854775808);
 	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
 	//ret1 =   printf("|%x|", 42);
 
@@ -465,4 +465,3 @@ int		main()
 
  return (0);	
 }	
-*/

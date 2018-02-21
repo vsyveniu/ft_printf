@@ -31,7 +31,7 @@ typedef	struct  				p_list
 	int							mod;
 	char						conversion;
 	int							ispos;
-	int 						negmark;
+	int 						crutchmark;
 }								f_list;
 
 
@@ -64,7 +64,7 @@ void		ft_putnchar(char c, int size);
 void	ft_printhash(char c);
 void	ft_putcratchv2(char c1, char c2, int size);
 void	ft_putcratch(char c1, char c2, int size);
-void	ft_puthex(char c, f_list *p, unsigned long long int arg);
+void	ft_puthex(char c, f_list *p, uintmax_t arg);
 void	ft_putocto(unsigned long long int arg);
 void	ft_putbinary(int arg);
 void	ft_printbinary(int i, int val);

@@ -19,7 +19,7 @@ void	ft_puttriplecratch(char c2, char c3, int size, int size2)
 	ft_putnchar(c3, size2);
 }
 
-void	ft_putdoublecratch(char c1,char c2, int size, int size2)
+void	ft_putdoublecratch(char c1, char c2, int size, int size2)
 {
 	
 	ft_putnchar(c1, size);

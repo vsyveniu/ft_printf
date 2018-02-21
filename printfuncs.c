@@ -61,15 +61,13 @@ void	ft_printdecimal(void *i, int val)
 		   	ft_putnbr((char)i);
 	}
 	(val == 3) ? ft_putnbr((long)i) : 0;
-	//printf("-------------->%d\n", val);
-	(val == 4) ? ft_putnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
+	(val == 4) ? ft_putunnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
 	(val == 5) ? ft_putnbr((intmax_t)i) : 0;
 	(val == 6) ? ft_putnbr((size_t)i) : 0;
 }
 
 void	ft_printlongdecimal(void *i, int val)
 {
-	
 	(val == 0) ? ft_putnbr((long)i) : 0;
 	(val == 3) ? ft_putnbr((long)i) : 0;
 	(val == 4) ? ft_putnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!

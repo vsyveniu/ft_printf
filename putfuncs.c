@@ -2,12 +2,12 @@
 #include "includes/ft_printf.h"
 
 
-void	ft_puthex(char conv, f_list *p, unsigned long long int arg)
+void	ft_puthex(char conv, f_list *p, uintmax_t arg)
 {
-	unsigned long long int i;
+	uintmax_t i;
 	char *base;
 	char *str;
-	unsigned long long int temp;
+	uintmax_t temp;
 
 	i = 0;
 	temp = arg;
@@ -17,7 +17,7 @@ void	ft_puthex(char conv, f_list *p, unsigned long long int arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (arg == 0 && p->f_oct)
+	if ((arg == 0 && p->f_oct) || (arg == 0 && (p->mod == 0 || p->mod == 1 || p->mod == 2)))
 		ft_putchar('0');
 	while (arg)
 	{
@@ -34,16 +34,16 @@ void	ft_puthex(char conv, f_list *p, unsigned long long int arg)
 void	ft_putpoint(void *arg)
 {
 
-	unsigned long long int temp;
-	unsigned long long int temptemp;
+	uintmax_t temp;
+	uintmax_t temptemp;
 	//temp = &arg;
 	//printf("%p\n", temp);
-	unsigned long long int i;
+	uintmax_t i;
 	char *base;
 	char *str;
 	//void *temp;
 
-	temp = (unsigned long long)arg;
+	temp = (uintmax_t)arg;
 	temptemp = temp;
 
 	i = 0;
