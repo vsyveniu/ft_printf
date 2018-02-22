@@ -13,15 +13,15 @@ void	ft_printbinary(int i, int val)
 	(val == 6) ? ft_putbinary((size_t)i) : 0;
 }
 
-void	ft_printcocto(void *i, int val)
+void	ft_printcocto(f_list *p, void *i, int val)
 {
-	(val == 0) ? ft_putocto((unsigned int)i) : 0;
-	(val == 1) ? ft_putocto((unsigned short)i) : 0;
-	(val == 2) ? ft_putocto((char)i) : 0;
-	(val == 3) ? ft_putocto((unsigned long long int)i) : 0;
-	(val == 4) ? ft_putocto((unsigned long long int)i) : 0;
-	(val == 5) ? ft_putocto((unsigned int)i) : 0;
-	(val == 6) ? ft_putocto((size_t)i) : 0;
+	(val == 0) ? ft_putocto(p, (unsigned int)i) : 0;
+	(val == 1) ? ft_putocto(p, (unsigned short)i) : 0;
+	(val == 2) ? ft_putocto(p, (char)i) : 0;
+	(val == 3) ? ft_putocto(p, (unsigned long long int)i) : 0;
+	(val == 4) ? ft_putocto(p, (unsigned long long int)i) : 0;
+	(val == 5) ? ft_putocto(p, (unsigned int)i) : 0;
+	(val == 6) ? ft_putocto(p, (size_t)i) : 0;
 }
 
 void	ft_printhex(char c,f_list *p, void *i, int val)

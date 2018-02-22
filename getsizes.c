@@ -112,7 +112,7 @@ int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size)
 
 	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'p')
 		return (size = ft_gethexsize(p,  temp, systembase, size));
-	if (temp == 0)
+	if (temp == 0 && p->pr > 0)
 	{
 		size = 1;
 	}
@@ -301,13 +301,12 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	int retsize;
 
 	retsize = size;
-	(p->conversion == '%') ? size += 1 : 0;
 	/*printf("\n----------->>>>>>>>>>size   %d\n",  size);
 	printf("\n----------->>>>>>>>>>ispos  %d\n", p->ispos);
 	printf("\n----------->>>>>>>>>>p->mod %d\n", p->mod);
 	printf("\n----------->>>>>>>>>>p->conversion %c\n", p->conversion);
-	printf("\n----------->>>>>>>>>>p->crutchmark %d\n", p->crutchmark);*/
-
+	printf("\n----------->>>>>>>>>>p->crutchmark %d\n", p->crutchmark);
+	printf("\n----------->>>>>>>>>>p->precision %d\n", p->pr);*/
 	(p->w && !p->pr && p->w >= size) ? retsize = p->w: 0; //10
 	(p->w && !p->pr && p->w >= size && p->f_plus) ? retsize = p->w - 1: 0; //10
 	(p->w && !p->pr && p->w >= size && p->ispos == 2) ? retsize = p->w: 0; //10
@@ -324,7 +323,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->w && p->pr && p->w > p->pr  && p->pr < size && p->w >= size && p->ispos == 2) ? retsize = p->w : 0; //10.1
 	(!p->w && p->pr && p->pr < size && p->ispos == 1) ? retsize = size : 0;
 	(!p->w && p->pr && p->pr < size && p->ispos == 2) ? retsize = size + 1: 0;
-	(p->f_space && p->ispos == 1 && !p->f_plus && p->w < size) ? retsize += 1 : 0;
+	(p->f_space && p->ispos == 1 && !p->f_plus && p->w < size && p->conversion != '%') ? retsize += 1 : 0;
 	(p->f_plus && p->ispos == 1 && p->w < size) ? retsize += 1 : 0;
 	(p->f_plus && p->ispos == 1 && p->f_zero) ? retsize += 1 : 0;
 
@@ -340,6 +339,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->f_oct && !p->w && !p->pr && (p->conversion == 'x' || p->conversion == 'X') && p->ispos != 0) ? retsize += 2 : 0;
 	(p->w && p->pr &&  p->w >= size && p->w > p->pr && p->ispos == 0) ? retsize = p->w : 0;
 	(p->conversion == 'p') ? retsize += 2 : 0;
+	//(p->conversion == '%') ? retsize += 1 : 0;
 	//(p->ispos == 2 && p->mod == 3) ? retsize += 1 : 0;      //////////////////////////this is the crutch for what????
 	//retsize = ft_printcrutches(p, arg, size);	
 

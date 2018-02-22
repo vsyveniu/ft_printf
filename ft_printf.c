@@ -153,6 +153,11 @@ int		ft_parse(char *f, int *i, va_list args)
 //	}*/
 	//printf("\nbefore all->  %c\n", f[*i]);
 	//write(1, "fuck", 4);
+	//printf("-------->>>>>> i - 1 %c\n", f[*i - 1]);
+	//printf("-------->>>>>> i    %c\n", f[*i]);
+	//printf("-------->>>>>> i + 1 %c\n", f[*i + 1]);
+	//if(f[*i] == '%' && f[*i + 1] != '%')
+		//printf("picha\n");
 	(*i)++;
 	while (f[*i] != '\0')
 	{
@@ -176,18 +181,20 @@ int		ft_parse(char *f, int *i, va_list args)
 		if (ft_isconv(f[*i]) == 1)
 		{
 			p->conversion = get_conversion(f, i);
+			(*i)++;
 			break ;
 		}
-		else if (ft_isconv(f[*i]) == 0 && ft_isflag(f[*i]) == 0 && ft_isdigit(f[*i]) == 0)
+		/*else if (ft_isconv(f[*i]) == 0 && ft_isflag(f[*i]) == 0 && ft_isdigit(f[*i]) == 0)
 		{
 			if(p->f_minus)
 			{
 				write(1, &f[*i], 1);
 			}
+			
 			else
 				(*i)--;
 			break ;
-		}
+		}*/
 	(*i)++;	
 	}
 	ret = printallshit(p, args);
@@ -286,7 +293,7 @@ int		ft_parse(char *f, int *i, va_list args)
 
 
 
-	return(ret - 1);
+	return(ret);
 }
 
 int		ft_ismod(char c)
@@ -310,6 +317,21 @@ int		ft_isconv(char c)
 		|| c == 'c' || c == 'C' || c == 'b'
 		|| c == 'r' || c == 'k' || c == 'f'
 		|| c == '%' || c == 'p'){
+		return(1);
+	}
+	else
+		return(0);
+}
+
+int		ft_isconv2(char c)
+{
+	if (c == 's' || c == 'S' || c == 'd' 
+		|| c == 'd' || c == 'D' || c == 'i'
+		|| c == 'o' || c == 'O' || c == 'u'
+		|| c == 'U' || c == 'x' || c == 'X'
+		|| c == 'c' || c == 'C' || c == 'b'
+		|| c == 'r' || c == 'k' || c == 'f'
+		|| c == 'p'){
 		return(1);
 	}
 	else
@@ -386,13 +408,16 @@ int		ft_handleshit(const char *format, va_list args)
 		{	
 			ft_putnnnstr(f, start, i);
 			ret += ft_parse(f, &i, args);
-			start = i + 1;
+			start = i;
+			//printf("in handshit -->> %c\n", f[i]);
 		}
 		else if (f[i] != '\0')
 		{
+			//printf("----------------->> %c\n", f[i]);
 			ret++;
 			i++;
-		}	
+		}
+	//printf("-----> i %c\n", f[i]);	
 	}
 	ft_putnnnstr(f, start, len);
 	return (ret);
@@ -434,13 +459,12 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-
+/*
 int		main()
 {
 	int ret1;
 	int ret;
 
-	/*
 	
 
 
@@ -583,18 +607,19 @@ int		main()
 	printf("\n");
 	printf("custom -> %d\n", ret);
 	printf("origin -> %d\n", ret1);
-*/
 
-	ret = ft_printf("{%   % )");
+
+	ret = ft_printf("@moulitest: %.o", 0);
 	printf("\n");
-	ret1 = printf("{%   % )");
+	  ret1 = printf("@moulitest: %.o", 0);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
 
-	printf("\norigin -> %d\n", ret1);
+	printf("\ncustom -> %d\n", ret);
 	printf("\norigin -> %d\n", ret1);
 	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
 	//ret1 =   printf("|%x|", 42);
 
  return (0);	
 }	
+*/

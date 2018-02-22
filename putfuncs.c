@@ -67,7 +67,7 @@ void	ft_putpoint(void *arg)
 }
 
 
-void	ft_putocto(unsigned long long int arg)
+void	ft_putocto(f_list *p, unsigned long long int arg)
 {
 	unsigned long long int i;
 	char *base;
@@ -82,7 +82,7 @@ void	ft_putocto(unsigned long long int arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (arg == 0)
+	if (arg == 0 && p->pr > 0)
 		ft_putchar('0');
 	while (arg)
 	{

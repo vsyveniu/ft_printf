@@ -39,7 +39,7 @@ void	ft_handlepos(f_list *p, int size)
 			(p->pr && !p->w && p->pr >= size) ? ft_putnchar('0', p->pr - size) : 0; // .10
 			(p->w && p->pr && p->w > p->pr && p->pr > size && !p->f_minus) ? ft_putdoublecratch(' ', '0', p->w - p->pr, p->pr - size) : 0; // 10.8
 			(p->w && p->pr && p->w > p->pr && p->pr > size && p->f_minus) ? ft_putnchar('0', p->pr - size) : 0; // 10.8
-			//(p->w && p->pr && p->w > p->pr && p->pr < size) ? ft_putnchar(' ', p->w - size) : 0; // 10.1 size 2 //// need for something?
+			(p->w && p->pr && p->w > p->pr && p->pr < size) ? ft_putnchar(' ', p->w - size) : 0; // 10.1 size 2 //// need for something? it will crash something else
 			(p->w && p->pr && p->w > p->pr && p->pr < size && (p->conversion == 'o' || p->conversion == 'O')) ? ft_putnchar(' ', p->w - size - 1) : 0; // 10.1 size 2 //// need for something?
 			(p->w && p->pr && p->pr > p->w && !p->f_oct) ? ft_putnchar('0', p->pr - size) : 0; // 10.15 // 10.15
 			(p->w && p->pr && p->w == p->pr && !p->f_oct) ? ft_putnchar('0', p->pr - size) : 0; //15.15
@@ -91,7 +91,7 @@ void	ft_handlepos(f_list *p, int size)
 		}
 		else if(!p->w && !p->pr && p->f_plus && (p->ispos == 1 || p->ispos == 0))
 			ft_putchar('+');
-		else if (p->ispos == 0 && (p->mod == 4 || p->mod == 5) && !p->crutchmark)
+		else if (p->ispos == 0 && (p->mod == 4 || p->mod == 5) && p->conversion != 'x' && p->conversion != 'X' && !p->crutchmark)
 			ft_putchar('-');
 		//(p->f_plus) ? size += 1 : 0;
 		//printf("-=----------------------------.>>>>>>>>>>>>>>>>>>. picha\n");

@@ -19,7 +19,7 @@ void	ft_handledigits(f_list *params, void *arg, int val)
 	if (params->conversion == 'x' || params->conversion == 'X')
 		ft_printhex(params->conversion, params, arg, val);
 	if (params->conversion == 'o' || params->conversion == 'O')
-		ft_printcocto(arg, val);
+		ft_printcocto(params, arg, val);
 	if (params->conversion == 'b')
 		ft_printbinary((int)arg, val);
 	if (params->conversion == 'p')
