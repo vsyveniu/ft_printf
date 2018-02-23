@@ -326,6 +326,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	/*printf("\n----------->>>>>>>>>>size   %d\n",  size);
 	printf("\n----------->>>>>>>>>>ispos  %d\n", p->ispos);
 	printf("\n----------->>>>>>>>>>p->mod %d\n", p->mod);
+	printf("\n----------->>>>>>>>>>p->f_space {%c}\n", p->f_space);
 	printf("\n----------->>>>>>>>>>p->conversion %c\n", p->conversion);
 	printf("\n----------->>>>>>>>>>p->crutchmark %d\n", p->crutchmark);
 	printf("\n----------->>>>>>>>>>p->precision %d\n", p->pr);
@@ -347,7 +348,7 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(!p->w && p->pr && p->pr < size && p->ispos == 1) ? retsize = size : 0;
 	(!p->w && p->pr && p->pr < size && p->ispos == 2) ? retsize = size + 1: 0;
 	(p->f_space && p->ispos == 1 && !p->f_plus && p->w < size && p->conversion != '%') ? retsize += 1 : 0;
-	(p->f_plus && p->ispos == 1 && p->w < size) ? retsize += 1 : 0;
+	(p->f_plus && p->ispos == 1 && p->w <= size && !p->f_zero) ? retsize += 1 : 0;
 	(p->f_plus && p->ispos == 1 && p->f_zero) ? retsize += 1 : 0;
 
 

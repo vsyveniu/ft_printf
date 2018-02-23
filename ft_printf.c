@@ -618,9 +618,9 @@ int		main()
 
 	printf("\n");
 
-	ret = ft_printf("{%03c}", 0);
+	ret = ft_printf("{% 03d}", 123456);
 	printf("\n");
-	ret1 = printf("{%03c}", 0);
+	ret1 = printf("{% 03d}", 123456);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
 

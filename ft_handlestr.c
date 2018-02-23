@@ -66,8 +66,9 @@ int		ft_printstr(f_list *p, char *str, int size)
 {
 	if (!str)
 		ft_putstr("(null)");
-	(p->w && !p->f_minus && !p->pr) ? ft_putscratch(' ', str, p->w - size) : 0;
-	(p->w && p->f_minus && !p->pr) ? ft_putscratch2(' ', str, p->w - size) : 0;
+	(p->w && p->f_zero) ? ft_putscratch('0', str, p->w - size) : 0;
+	(p->w && !p->f_minus && !p->pr && !p->f_zero) ? ft_putscratch(' ', str, p->w - size) : 0;
+	(p->w && p->f_minus && !p->pr && !p->f_zero) ? ft_putscratch2(' ', str, p->w - size) : 0;
 	(p->w && p->w <= p->pr && p->pr < size) ? ft_putnstr(str, p->pr) : 0;
 	(p->pr < size && !p->w) ? ft_putnstr(str, p->pr) : 0;
 	(!p->w && !p->pr) ? ft_putstr(str) : 0;
@@ -76,6 +77,7 @@ int		ft_printstr(f_list *p, char *str, int size)
 	(p->w && p->pr && p->w > p->pr && size == 0 && !p->f_minus) ? ft_putnchar(' ', p->w) : 0;
 	(p->w && p->pr && p->w > p->pr && p	->f_minus && size > 0) ? ft_putscratchv4(str, ' ', p->pr, p->w - p->pr) : 0;
 	(p->w && p->pr && p->w > p->pr && p->f_minus && size == 0) ? ft_putscratchv5(' ', p->w - p->pr + 1) : 0;
+
 	return (size);
 }
 
