@@ -110,6 +110,7 @@ int		ft_parse(char *f, int *i, va_list args)
 		return (0);
 	p->w = 0;
 	p->pr = 0;
+	p->prcrutch = 0;
 	p->mod = 0;
 	p->crutchmark = 0;
 	p->conversion = 0;
@@ -171,12 +172,16 @@ int		ft_parse(char *f, int *i, va_list args)
 			while (ft_isdigit(f[*i]) == 1)
 				(*i)++;	
 		}
-		if (f[*i] == '.' && ft_isdigit(f[*i + 1]) == 1)
+		if (f[*i] == '.')
 		{
-			(*i)++;
-			p->pr = get_precision(f, i);
-			while (ft_isdigit(f[*i]) == 1)
+			p->prcrutch = 1;
+			if (f[*i] == '.' && ft_isdigit(f[*i + 1]) == 1)
+			{
 				(*i)++;
+				p->pr = get_precision(f, i);
+				while (ft_isdigit(f[*i]) == 1)
+					(*i)++;
+			}
 		}
 		if (ft_isconv(f[*i]) == 1)
 		{
@@ -459,15 +464,15 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-/*
+
 int		main()
 {
-	int ret1;
-	int ret;
-
-	
+	int ret1 = 0;
+	int ret = 0;
 
 
+
+/*
 
 
 	printf("\n");
@@ -609,17 +614,20 @@ int		main()
 	printf("origin -> %d\n", ret1);
 
 
-	ret = ft_printf("@moulitest: %.o", 0);
+*/
+
 	printf("\n");
-	  ret1 = printf("@moulitest: %.o", 0);
+
+	ret = ft_printf("{%03c}", 0);
+	printf("\n");
+	ret1 = printf("{%03c}", 0);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
 
 	printf("\ncustom -> %d\n", ret);
 	printf("\norigin -> %d\n", ret1);
-	//ret1 =   printf("a%ob%oc%od", 0, 55555, 100000);
-	//ret1 =   printf("|%x|", 42);
+
+	printf("\n");
 
  return (0);	
 }	
-*/

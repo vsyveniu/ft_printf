@@ -12,11 +12,13 @@
 
 #include "includes/ft_printf.h"
 
-void	ft_putnbr(intmax_t n)
+void	ft_putnbr(f_list *p, intmax_t n)
 {
 	intmax_t	i;
 
 	i = (intmax_t)n;
+	if (n == 0 && p->prcrutch)
+		return ;
 	if (n < 0)
 	{
 		i = (intmax_t)(-n);
@@ -24,8 +26,8 @@ void	ft_putnbr(intmax_t n)
 	}
 	if (i > 9)
 	{
-		ft_putnbr(i / 10);
-		ft_putnbr(i % 10);
+		ft_putnbr(p, i / 10);
+		ft_putnbr(p, i % 10);
 	}
 	else
 	{

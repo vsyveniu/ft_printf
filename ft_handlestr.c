@@ -3,8 +3,9 @@
 
 void	ft_printchar(f_list *p, unsigned char c, int size)
 {
-	(p->w && !p->f_minus) ? ft_putcratchv2(' ', c, p->w - size) : 0;
+	(p->w && !p->f_minus && !p->f_zero) ? ft_putcratchv2(' ', c, p->w - size) : 0;
 	(p->w && p->f_minus) ? ft_putcratch(c, ' ', p->w - 1) : 0;
+	(p->w && p->f_zero) ? ft_putcratch(c, '0', p->w - size) : 0;
 	(!p->w) ? ft_putchar(c) : 0;
 }
 

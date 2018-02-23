@@ -32,6 +32,7 @@ typedef	struct  				p_list
 	char						conversion;
 	int							ispos;
 	int 						crutchmark;
+	int 						prcrutch;
 }								f_list;
 
 
@@ -58,7 +59,7 @@ int		ft_printstr(f_list *params, char *str, int size);
 void		ft_handlestr(f_list *p, void *arg, int size);
 
 void		ft_handledigits(f_list *params, void *arg, int val);
-void		ft_putnbr(intmax_t n);
+void		ft_putnbr(f_list *p, intmax_t n);
 void	ft_putunnbr(uintmax_t n);
 void		ft_putnchar(char c, int size);
 void	ft_printhash(char c);
@@ -70,7 +71,7 @@ void	ft_putbinary(int arg);
 void	ft_printbinary(int i, int val);
 void	ft_printcocto(f_list *p, void *i, int val);
 void	ft_printhex(char c,f_list *p, void *i, int val);
-void		ft_printdecimal(void *i, int val);
+void		ft_printdecimal(f_list *p, void *i, int val);
 void		ft_printudecimal(f_list *p, void *i, int val);
 void	ft_putcratch(char c1, char c2, int size);
 void	ft_putcratchv2(char c1, char c2, int size);
@@ -117,7 +118,7 @@ int		ft_parse(char *format, int *i, va_list args);
 void 	ft_postparse(char *format, char *crutch, char *crutchpr, f_list *p);
 void	ft_putnstr(char *str, int size);
 int		printallshit(f_list *p, va_list args);
-void	ft_printlongdecimal(void *i, int val);
+void	ft_printlongdecimal(f_list *p, void *i, int val);
 void	ft_printnotvalid(void *i, int* index);
 
 

@@ -17,7 +17,7 @@ void	ft_puthex(char conv, f_list *p, uintmax_t arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if ((arg == 0 && p->f_oct) || (arg == 0 && (p->mod == 0 || p->mod == 1 || p->mod == 2)))
+	if (((arg == 0 && p->f_oct) || (arg == 0 && (p->mod == 0 || p->mod == 1 || p->mod == 2))) && !p->prcrutch)
 		ft_putchar('0');
 	while (arg)
 	{
@@ -73,6 +73,7 @@ void	ft_putocto(f_list *p, unsigned long long int arg)
 	char *base;
 	char *str;
 	unsigned long long int temp;
+	(void)p;
 	
 	base = "012345678";
 
@@ -82,7 +83,7 @@ void	ft_putocto(f_list *p, unsigned long long int arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (arg == 0 && p->pr > 0)
+	if ((arg == 0 && !p->prcrutch) || (arg == 0 && p->f_oct))
 		ft_putchar('0');
 	while (arg)
 	{

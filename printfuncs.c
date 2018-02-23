@@ -38,41 +38,44 @@ void	ft_printhex(char c,f_list *p, void *i, int val)
 
 void	ft_printpointer(void *i)
 {
-	ft_putchar('0');
-	ft_putchar('x');
 	ft_putpoint(i);
 }
 
-void	ft_printdecimal(void *i, int val)
+void	ft_printdecimal(f_list *p, void *i, int val)
 {
 	int temp;
-	//printf("------------>>>>>>>>>%d\n", val);
+
 	temp = (int)i;
-	if ((int)i < 0)/////////////////this isa very weak crutch and it will fuck me many times int the future
+	if ((int)i < 0)
 		temp *= -1;
-	//printf("------------->>>>>>>>>>>> %d <<<<<<<<<<<<<<<------------", (int)i);
-	(val == 0) ? ft_putnbr(temp) : 0;
-	(val == 1) ? ft_putnbr((short int )i) : 0;
+	(val == 0) ? ft_putnbr(p, temp) : 0;
+	(val == 1) ? ft_putnbr(p, (short int )i) : 0;
 	if (val == 2)
 	{
 		if (temp == -128)
 			write(1, "-128", 4);
 		else
-		   	ft_putnbr((char)i);
+		  	ft_putnbr(p, (char)i);
 	}
-	(val == 3) ? ft_putnbr((long)i) : 0;
-	(val == 4) ? ft_putunnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
-	(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
-	(val == 6) ? ft_putnbr((ssize_t)i) : 0;
+	(val == 3) ? ft_putnbr(p, (long)i) : 0;
+	if (val == 4)
+	{ 
+		if ((uintmax_t)i > 9223372036854775807)
+			write (1, "-9223372036854775808", 20);
+		else
+			ft_putnbr(p, (long long)i);
+	}
+	(val == 5) ? ft_putunnbr((intmax_t)i) : 0;
+	(val == 6) ? ft_putnbr(p, (ssize_t)i) : 0;
 }
 
-void	ft_printlongdecimal(void *i, int val)
+void	ft_printlongdecimal(f_list *p, void *i, int val)
 {
-	(val == 0) ? ft_putnbr((long)i) : 0;
-	(val == 3) ? ft_putnbr((long)i) : 0;
-	(val == 4) ? ft_putnbr((long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
-	(val == 5) ? ft_putnbr((unsigned long long int )i) : 0;
-	(val == 6) ? ft_putnbr((size_t)i) : 0;
+	(val == 0) ? ft_putnbr(p, (long)i) : 0;
+	(val == 3) ? ft_putnbr(p, (long)i) : 0;
+	(val == 4) ? ft_putnbr(p, (long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
+	(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
+	(val == 6) ? ft_putnbr(p, (ssize_t)i) : 0;
 }
 
 
@@ -88,7 +91,7 @@ void	ft_printudecimal(f_list *p, void *i, int val)
 		(val == 3) ? ft_putunnbr((unsigned long long)i) : 0;
 		(val == 4) ? ft_putunnbr((unsigned long long)i) : 0;
 		(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
-		(val == 6) ? ft_putnbr((size_t)i) : 0;
+		(val == 6) ? ft_putnbr(p, (size_t)i) : 0;
 	}
 	else if (p->conversion == 'U')
 	{
@@ -98,7 +101,7 @@ void	ft_printudecimal(f_list *p, void *i, int val)
 		(val == 3) ? ft_putunnbr((unsigned long long)i) : 0;
 		(val == 4) ? ft_putunnbr((unsigned long long)i) : 0;
 		(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
-		(val == 6) ? ft_putnbr((size_t)i) : 0;
+		(val == 6) ? ft_putnbr(p, (size_t)i) : 0;
 	}
 }
 
@@ -111,4 +114,18 @@ void	ft_printnotvalid(void *i, int *index)
 
 	printf("%c\n", c[*index]);
 }
-
+/*
+val = 0;
+	if ( p->mod && ft_strcmp(p->mod, "h") == 0)
+		return(val = 1);
+	if (p->mod && ft_strcmp(p->mod, "hh") == 0)
+		return(val = 2);
+	if (p->mod && ft_strcmp(p->mod, "l") == 0)
+		return(val = 3);
+	if (p->mod && ft_strcmp(p->mod, "ll") == 0)
+		return(val = 4);
+	if (p->mod && ft_strcmp(p->mod, "j") == 0)
+		return(val = 5);
+	if (p->mod && ft_strcmp(p->mod, "z") == 0)
+		return(val = 6);
+	return(val);*/

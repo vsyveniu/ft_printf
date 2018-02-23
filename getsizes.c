@@ -5,13 +5,21 @@ int		ft_getsignsize(f_list *p, void *arg, intmax_t systembase, int size)
 {
 	intmax_t temp;
 
-	// printf("--------------->>>>>>>>>>> kurwa\n");
 	temp = (intmax_t)arg;
-	if (temp == 1 || temp == 0)
+	if (temp == 1 || (temp == 0 && !p->prcrutch))
 		size = 1;
 	else if (temp == -1)
 		size = 2;
 	else if (temp == -2147483649 && p->mod == 3)
+		size = 11;
+	//else if (temp == 2147483648 && p->mod == 3)
+	//{
+	//	size = 1;
+	//	p->crutchmark = 1;
+	//}
+	else if (temp == -2147483648 && p->mod == 3)
+		size = 11;
+	else if (temp == -2147483648)
 		size = 11;
 	else if (temp == 32768 && p->mod == 1)
 		size = 6;
@@ -22,11 +30,22 @@ int		ft_getsignsize(f_list *p, void *arg, intmax_t systembase, int size)
 		size = 10;
 		p->crutchmark = 1;
 	}
-	else if (temp == 9223372036854775807 && p->mod == 5)
+	else if ((uintmax_t)arg == 9223372036854775807 && p->mod == 5)
 	{
 		size = 19;
 		p->crutchmark = 1;
 	}
+	else if ((long)arg == -9223372036854775805 && p->mod == 4)
+	{
+		size = 20;
+	}
+	else if ((uintmax_t)arg > 9223372036854775807 && p->mod == 4)
+	{
+		size = 20;
+		p->crutchmark = 1;
+	}
+	else if ((uintmax_t)arg > 9223372036854775807 && p->mod == 5)
+		size = 20;
 	else if (temp == 129 && p->mod == 2)
 	{
 		size = 4;
@@ -49,13 +68,14 @@ int		ft_getintsize(void *arg, int systembase, int size, f_list *p)
 {
 	int temp;
 	temp = (int)arg;
+
 	//(p->mod == 2 &&  temp <= -129) ? size -= 1 : 0;
 	if (temp == 1 || temp == 0)
 		size = 1;
 	else if (temp == -2147483648)
 	{
 		p->crutchmark = 1;
-		size = 10;
+		size = 11;
 	}
 	else if (temp == -128 && p->mod == 2)
 	{
@@ -98,8 +118,10 @@ int 	ft_gethexsize(f_list *p, uintmax_t temp, uintmax_t systembase, int size)
 			size = 1;
 		return (size);
 	}
-	if (temp == 0)
+	if (temp == 0 && !p->prcrutch)
 		size = 1;
+	if (temp == 0 && p->f_oct && p->prcrutch && (p->conversion == 'o' || p->conversion == 'O'))
+		size += 1;
 	else
 		size = ft_unsbase(temp, systembase, size);
 	return (size);
@@ -110,12 +132,12 @@ int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size)
 	uintmax_t temp;
 	temp = (uintmax_t)arg;
 
-	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'p')
+	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'p' || p->conversion == 'o' || p->conversion == 'O')
 		return (size = ft_gethexsize(p,  temp, systembase, size));
 	if (temp == 0 && p->pr > 0)
-	{
 		size = 1;
-	}
+	if (temp == 0 && !p->w && !p->pr)
+		size = 1;
 	else
 	{
 		if (temp == 4294967296 && p->mod == 0 && p->conversion == 'u')
@@ -306,13 +328,14 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	printf("\n----------->>>>>>>>>>p->mod %d\n", p->mod);
 	printf("\n----------->>>>>>>>>>p->conversion %c\n", p->conversion);
 	printf("\n----------->>>>>>>>>>p->crutchmark %d\n", p->crutchmark);
-	printf("\n----------->>>>>>>>>>p->precision %d\n", p->pr);*/
+	printf("\n----------->>>>>>>>>>p->precision %d\n", p->pr);
+	printf("\n----------->>>>>>>>>>p->prcrutch %d\n", p->prcrutch);*/
 	(p->w && !p->pr && p->w >= size) ? retsize = p->w: 0; //10
 	(p->w && !p->pr && p->w >= size && p->f_plus) ? retsize = p->w - 1: 0; //10
-	(p->w && !p->pr && p->w >= size && p->ispos == 2) ? retsize = p->w: 0; //10
-	(p->w && !p->pr && p->w >= size && p->ispos == 2 && !p->f_zero) ? retsize = p->w: 0; //10 ////don't know a relatives
+	(p->w && !p->pr && p->w >= size && p->ispos == 2 ) ? retsize = p->w: 0; //10
+	//(p->w && !p->pr && p->w >= size && p->ispos == 2 && !p->f_zero) ? retsize = p->w: 0; //10 ////don't know a relatives it is dead!
 	(p->w && !p->pr && p->w == size ) ? retsize = p->w: 0; //10
-	(!p->w && p->pr && p->pr >= size) ? retsize = p->pr : 0; //.10
+	(!p->w && p->pr && p->pr >= size && p->conversion != '%') ? retsize = p->pr: 0; //.10
 	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 1) ? retsize = p->w : 0; //15.10
 	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 2) ? retsize = p->w : 0; //15.10
 	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->ispos == 1) ? retsize = p->pr : 0; //10.15
@@ -329,7 +352,8 @@ int		ft_printsize(f_list *p, void *arg, int size)
 
 
 
-	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && !p->f_zero && !p->pr && p->mod != 2 && p->mod != 3 && p->mod != 4 && p->mod != 5 && p->mod != 6) ? retsize += 1 : 0;
+	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && !p->w && !p->f_zero && !p->pr && p->mod != 2 && p->mod != 3 &&  p->mod != 4 && p->mod != 5 && p->mod != 6 && !p->crutchmark) ? retsize += 1 : 0;
+	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && !p->w && !p->f_zero && p->pr && p->mod != 2 && p->mod != 3 &&  p->mod != 4 && p->mod != 5 && p->mod != 6 && !p->crutchmark) ? retsize += 1 : 0;
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->f_zero && !p->w) ? retsize += 1 : 0;
 	(p->ispos == 0 && (p->conversion == 'd' || p->conversion == 'i') && p->f_plus) ? retsize += 1 : 0;
 	//(p->ispos == 1 && p->mod == 1 && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0; ///??
@@ -338,7 +362,12 @@ int		ft_printsize(f_list *p, void *arg, int size)
 
 	(p->f_oct && !p->w && !p->pr && (p->conversion == 'x' || p->conversion == 'X') && p->ispos != 0) ? retsize += 2 : 0;
 	(p->w && p->pr &&  p->w >= size && p->w > p->pr && p->ispos == 0) ? retsize = p->w : 0;
-	(p->conversion == 'p') ? retsize += 2 : 0;
+	(p->conversion == 'p' && !p->pr && p->w <= size) ? retsize += 2 : 0;
+	(p->conversion == 'p' && p->pr && p->w && p->pr > p->w && p->pr >= size) ? retsize += 2 : 0;
+	(p->conversion == 'p' && p->pr && p->w && p->pr == p->w && p->pr >= size) ? retsize += 2 : 0;
+	(p->conversion == 'p' && !p->w && p->pr >= size) ? retsize += 2 : 0; //// may fuck all neighbors
+	(p->conversion == 'p' && p->w == size + 1) ? retsize += 1 : 0; /// there is a fucking bug, i've used a dumb crutch to fix it
+	((p->conversion == 'o' || p->conversion == 'O') && p->f_oct && !p->w && !p->pr && p->ispos != 0) ? retsize += 1 : 0;
 	//(p->conversion == '%') ? retsize += 1 : 0;
 	//(p->ispos == 2 && p->mod == 3) ? retsize += 1 : 0;      //////////////////////////this is the crutch for what????
 	//retsize = ft_printcrutches(p, arg, size);	
