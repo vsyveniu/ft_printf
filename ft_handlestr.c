@@ -93,6 +93,9 @@ int		ft_printstr(f_list *p, char *str, int size)
 
 	(p->w && !p->pr && p->w >= size && p->f_minus) ? ft_putscratch2(' ', str, p->w - size) : 0;
 	(p->w && p->pr && p->w > p->pr  && p->pr <= size && p->f_minus) ? ft_putscratchv4(str, ' ', p->pr, p->w - p->pr) : 0;
+
+	(p->w && p->pr && p->w > p->pr  && p->pr > size && p->f_minus) ? ft_putscratch2( ' ', str , p->w - size) : 0;
+	
 	(p->w && p->pr && p->w == p->pr  && p->w >= size && p->f_minus) ? ft_putscratch2(' ', str, p->w - size) : 0;
 	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->f_minus) ? ft_putscratch2(' ', str, p->w - size) : 0;
 	(!p->w && p->pr && p->pr >= size && p->f_minus) ? ft_putstr(str) : 0;

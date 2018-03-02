@@ -136,7 +136,7 @@ int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size)
 		return (size = ft_gethexsize(p,  temp, systembase, size));
 	if (temp == 0 && p->pr > 0)
 		size = 1;
-	if (temp == 0 && !p->w && !p->pr)
+	if (temp == 0 && !p->w && !p->pr && !p->prcrutch)
 		size = 1;
 	else
 	{
@@ -340,13 +340,15 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 1) ? retsize = p->w : 0; //15.10
 	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 2) ? retsize = p->w : 0; //15.10
 	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->ispos == 1) ? retsize = p->pr : 0; //10.15
+
 	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->ispos == 2) ? retsize = p->pr + 1 : 0; //10.15
+
 	(p->w && p->pr && p->pr == p->w  && p->pr >= size && p->w >= size && p->ispos == 1) ? retsize = p->pr : 0; //10.10
 	(p->w && p->pr && p->pr == p->w  && p->pr >= size && p->w >= size && p->ispos == 2) ? retsize = p->pr + 1: 0; //10.10
 	(p->w && p->pr && p->w > p->pr  && p->pr < size && p->w >= size && p->ispos == 1) ? retsize = p->w : 0; //10.1
 	(p->w && p->pr && p->w > p->pr  && p->pr < size && p->w >= size && p->ispos == 2) ? retsize = p->w : 0; //10.1
 	(!p->w && p->pr && p->pr < size && p->ispos == 1) ? retsize = size : 0;
-	(!p->w && p->pr && p->pr < size && p->ispos == 2) ? retsize = size + 1: 0;
+	(!p->w && p->pr && p->pr < size && p->ispos == 2 && p->conversion != 'd' && p->conversion != 'i' && p->conversion != 'D') ? retsize = size + 1: 0;
 	(p->f_space && p->ispos == 1 && !p->f_plus && p->w < size && p->conversion != '%') ? retsize += 1 : 0;
 	(p->f_plus && p->ispos == 1 && p->w <= size && !p->f_zero) ? retsize += 1 : 0;
 	(p->f_plus && p->ispos == 1 && p->f_zero) ? retsize += 1 : 0;
@@ -356,6 +358,8 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && !p->w && !p->f_zero && !p->pr && p->mod != 2 && p->mod != 3 &&  p->mod != 4 && p->mod != 5 && p->mod != 6 && !p->crutchmark) ? retsize += 1 : 0;
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && !p->w && !p->f_zero && p->pr && p->mod != 2 && p->mod != 3 &&  p->mod != 4 && p->mod != 5 && p->mod != 6 && !p->crutchmark) ? retsize += 1 : 0;
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->f_zero && !p->w) ? retsize += 1 : 0;
+	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->w && p->pr && p->w > p->pr) ? retsize += 1 : 0; ///this and one below can be
+	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->w && p->pr && p->w < p->pr) ? retsize += 1 : 0;
 	(p->ispos == 0 && (p->conversion == 'd' || p->conversion == 'i') && p->f_plus) ? retsize += 1 : 0;
 	//(p->ispos == 1 && p->mod == 1 && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0; ///??
 	//(p->ispos == 1 && p->mod == 2 && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0;
@@ -478,6 +482,9 @@ int		ft_printstrsize(f_list *p, void *arg, int size)
 	(p->w && !p->pr && p->prcrutch) ? retsize = p->w : 0;
 	(p->w && !p->pr && p->w >= size) ? retsize = p->w : 0;
 	(p->w && !p->pr && p->w < size) ? retsize = size : 0;
+	(!p->w && p->pr && p->pr > size) ? retsize = size : 0;
+	(!p->w && p->pr && p->pr == size) ? retsize = p->pr : 0;
+	(!p->w && p->pr && p->pr < size) ? retsize = p->pr : 0;
 	(!p->w && !p->pr) ? retsize = size : 0;
 	//printf("-----------------?????????????????? %d\n", retsize);
 	return (retsize);

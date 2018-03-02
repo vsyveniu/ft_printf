@@ -85,6 +85,8 @@ void	ft_printudecimal(f_list *p, void *i, int val)
 {	
 	if (p->conversion == 'u')
 	{
+		if ((int)i == 0 && p->prcrutch && p->pr == 0)
+			return ;
 		(val == 0) ? ft_putunnbr((unsigned int)i) : 0;
 		(val == 1) ? ft_putunnbr((unsigned short int)i) : 0;
 		(val == 2) ? ft_putunnbr((unsigned char)i) : 0;
@@ -93,7 +95,7 @@ void	ft_printudecimal(f_list *p, void *i, int val)
 		(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
 		(val == 6) ? ft_putnbr(p, (size_t)i) : 0;
 	}
-	else if (p->conversion == 'U')
+	else if (p->conversion == 'U' && !p->prcrutch)
 	{
 		(val == 0) ? ft_putunnbr((unsigned long int)i) : 0;
 		(val == 1) ? ft_putunnbr((unsigned long int)i) : 0;

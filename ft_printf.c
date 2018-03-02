@@ -779,9 +779,9 @@ int		main()
 	printf("\n");
 
 
-	ret = ft_printf("%-5.2s is a string", "this");
+	ret = ft_printf("%.u, %.0u", 0, 0);
 	printf("\n");
-	ret1 = printf("%-5.2s is a string", "this");
+	ret1 = printf("%.u, %.0u", 0, 0);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
 
