@@ -92,7 +92,7 @@ void	ft_handlepos(f_list *p, int size)
 		}
 		else if(!p->w && !p->pr && p->f_plus && (p->ispos == 1 || p->ispos == 0))
 			ft_putchar('+');
-		else if (p->ispos == 0 && (p->mod == 4 || p->mod == 5) && p->conversion != 'x' && p->conversion != 'X' && !p->crutchmark && p->conversion != 'u' && p->conversion != 'U')
+		else if (p->ispos == 0 && p->mod == 5 && (p->conversion == 'd' || p->conversion == 'i'))
 			ft_putchar('-');
 		//(p->f_plus) ? size += 1 : 0;
 		//printf("-=----------------------------.>>>>>>>>>>>>>>>>>>. picha\n");

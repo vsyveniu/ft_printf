@@ -454,15 +454,31 @@ int		ft_printsize(f_list *p, void *arg, int size)
 int		ft_printstrsize(f_list *p, void *arg, int size)
 {
 	//printf("---------->>>>>>picha\n");
+	int retsize;
+
+	retsize = 0;
+	/*printf("\n----------->>>>>>>>>>size   %d\n",  size);
+	printf("\n----------->>>>>>>>>>p->f_space {%c}\n", p->f_space);
+	printf("\n----------->>>>>>>>>>p->conversion %c\n", p->conversion);
+	printf("\n----------->>>>>>>>>>p->precision %d\n", p->pr);
+	printf("\n----------->>>>>>>>>>p->prcrutch %d\n", p->prcrutch);*/
 	//(p->w < p->pr) ? size = p->w : 0;
-	if (!arg && p->conversion != 'c')
-		size = 6;
-	(p->w > p->pr) ? size = p->w : 0;
+	if (!arg && (p->conversion != 'c' || p->conversion != 'C'))
+		retsize = 6;
+	( p->w && p-> pr && p->w > p->pr) ? retsize = p->w : 0;
 //	(!p->w && p->pr && p->pr > size) ? size = p->pr : 0;
 	//(!p->w && p->pr && p->pr < size) ? size = size - p->pr : 0;
 	//(p->w && p->w <= p->pr && p->pr < size) ? size = p->pr : 0;
-	(!p->w && p->pr && p->pr < size) ? size = size - p->pr : 0;
+	(!p->w && p->pr && p->pr < size) ? retsize = p->pr : 0;
 	//(!p->w && p->pr && !p->f_minus && p->pr > size) ? size = p->pr - size: 0;
-	(!p->w && p->pr && p->f_minus && p->pr < size) ? size = size - p->pr: 0;
-	return (size);
+	//(p->w && p->pr && p->pr >= p->w && p->pr >= size) ? size = p->pr : 0;
+	(p->w && p->pr && p->w == p->pr && p->pr > size) ? retsize = p->w : 0;
+	(p->w && p->pr && p->pr > p->w && p->pr >= size) ? retsize = size : 0;
+	(p->w && p->pr && p->pr > p->w && p->pr < size) ? retsize = p->pr : 0;
+	(p->w && !p->pr && p->prcrutch) ? retsize = p->w : 0;
+	(p->w && !p->pr && p->w >= size) ? retsize = p->w : 0;
+	(p->w && !p->pr && p->w < size) ? retsize = size : 0;
+	(!p->w && !p->pr) ? retsize = size : 0;
+	//printf("-----------------?????????????????? %d\n", retsize);
+	return (retsize);
 }

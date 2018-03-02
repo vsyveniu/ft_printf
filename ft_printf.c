@@ -464,7 +464,7 @@ int 	ft_printf(const char *format, ... )
 	va_end(args);	
 	return (returnvalue);
 }
-
+/*
 int		main()
 {
 	int ret1 = 0;
@@ -472,7 +472,6 @@ int		main()
 
 
 
-/*
 
 
 	printf("\n");
@@ -615,12 +614,12 @@ int		main()
 
 
 */
-
+/*
 	printf("\n");
 
-	ret = ft_printf("{% 03d}", 123456);
+	ret = ft_printf("{%5s is a string}", "g");
 	printf("\n");
-	ret1 = printf("{% 03d}", 123456);
+	ret1 = printf("{%5s is a string}", "g");
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
 
@@ -629,5 +628,167 @@ int		main()
 
 	printf("\n");
 
+
+	printf("\n");
+
+	ret = ft_printf("{%5.3s is a string}", "g");
+	printf("\n");
+	ret1 = printf("{%5.3s is a string}", "g");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+	printf("\n");
+
+	ret = ft_printf("{%5.5s is a string}", "g");
+	printf("\n");
+	ret1 = printf("{%5.5s is a string}", "g");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+	printf("\n");
+
+	ret = ft_printf("{%5.7s is a string}", "g");
+	printf("\n");
+	ret1 = printf("{%5.7s is a string}", "g");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+	printf("----------------------------------------------");
+	printf("\n");
+
+	ret = ft_printf("{%.2s is a string}", "gggg");
+	printf("\n");
+	ret1 = printf("{%.2s is a string}", "gggg");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+	printf("\n");
+
+	ret = ft_printf("{%.7s is a string}", "g");
+	printf("\n");
+	ret1 = printf("{%.7s is a string}", "g");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+
+
+	printf("\n");
+	printf("----------------------------------------------");
+	printf("\n");
+
+	ret = ft_printf("{%2s is a string}", "gggg");
+	printf("\n");
+	ret1 = printf("{%2s is a string}", "gggg");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("----------------------------------------------||||||||||||||||----------------");
+	printf("\n");
+	printf("\n");
+
+	printf("\n");
+	printf("\n");
+
+	ret = ft_printf("{%-5s is a string}", "g");
+	printf("\n");
+	ret1 = printf("{%-5s is a string}", "g");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("\n");
+
+	ret = ft_printf("{%-5.3s is a string}", "g");
+	printf("\n");
+	ret1 = printf("{%-5.3s is a string}", "g");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+	printf("\n");
+	printf("\n");
+
+	ret = ft_printf("{%-5.5s is a string}", "g");
+	printf("\n");
+	ret1 = printf("{%-5.5s is a string}", "g");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("\n");
+
+	ret = ft_printf("{%-5.7s is a string}", "g");
+	printf("\n");
+	ret1 = printf("{%-5.5s is a string}", "g");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+
+	printf("\n");
+	printf("\n");
+
+	ret = ft_printf("{%-.4s is a string}", "gggg");
+	printf("\n");
+	ret1 = printf("{%-.4s is a string}", "gggg");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+	printf("\n");
+
+
+	ret = ft_printf("%-5.2s is a string", "this");
+	printf("\n");
+	ret1 = printf("%-5.2s is a string", "this");
+	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
+	printf("\n");
+
+	printf("\ncustom -> %d\n", ret);
+	printf("\norigin -> %d\n", ret1);
+
+
  return (0);	
 }	
+*/
