@@ -40,7 +40,7 @@ void	ft_handlepos(f_list *p, int size)
 			(p->w && p->pr && p->w > p->pr && p->pr > size && !p->f_minus) ? ft_putdoublecratch(' ', '0', p->w - p->pr, p->pr - size) : 0; // 10.8
 			(p->w && p->pr && p->w > p->pr && p->pr > size && p->f_minus) ? ft_putnchar('0', p->pr - size) : 0; // 10.8
 			(p->w && p->pr && p->w > p->pr && p->pr < size) ? ft_putnchar(' ', p->w - size) : 0; // 10.1 size 2 //// need for something? it will crash something else
-			(p->w && p->pr && p->w > p->pr && p->pr < size && (p->conversion == 'o' || p->conversion == 'O')) ? ft_putnchar(' ', p->w - size - 1) : 0; // 10.1 size 2 //// need for something?
+			//(p->w && p->pr && p->w > p->pr && p->pr < size && (p->conversion == 'o' || p->conversion == 'O')) ? ft_putnchar(' ', p->w - size - 1) : 0; // 10.1 size 2 //// need for something?
 			(p->w && p->pr && p->pr > p->w && !p->f_oct) ? ft_putnchar('0', p->pr - size) : 0; // 10.15 // 10.15
 			(p->w && p->pr && p->w == p->pr && !p->f_oct) ? ft_putnchar('0', p->pr - size) : 0; //15.15
 		}

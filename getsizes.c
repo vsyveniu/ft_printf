@@ -338,10 +338,14 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->w && !p->pr && p->w == size ) ? retsize = p->w: 0; //10
 	(!p->w && p->pr && p->pr >= size && p->conversion != '%') ? retsize = p->pr: 0; //.10
 	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 1) ? retsize = p->w : 0; //15.10
+
 	(p->w && p->pr && p->w > p->pr  && p->w >= size && p->ispos == 2) ? retsize = p->w : 0; //15.10
+	
 	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->ispos == 1) ? retsize = p->pr : 0; //10.15
 
-	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->ispos == 2) ? retsize = p->pr + 1 : 0; //10.15
+	(p->w && p->pr && p->pr > p->w  && p->pr >= size && p->ispos == 2) ? retsize = p->pr: 0; //10.15
+	(p->w && p->pr && p->pr > p->w  && p->pr < size && p->ispos == 2) ? retsize = size + 1: 0; //10.15
+	(p->w && p->pr && p->pr < p->w  && p->pr < size && p->ispos == 2) ? retsize = size + 1: 0; //10.15
 
 	(p->w && p->pr && p->pr == p->w  && p->pr >= size && p->w >= size && p->ispos == 1) ? retsize = p->pr : 0; //10.10
 	(p->w && p->pr && p->pr == p->w  && p->pr >= size && p->w >= size && p->ispos == 2) ? retsize = p->pr + 1: 0; //10.10
@@ -358,8 +362,8 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && !p->w && !p->f_zero && !p->pr && p->mod != 2 && p->mod != 3 &&  p->mod != 4 && p->mod != 5 && p->mod != 6 && !p->crutchmark) ? retsize += 1 : 0;
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && !p->w && !p->f_zero && p->pr && p->mod != 2 && p->mod != 3 &&  p->mod != 4 && p->mod != 5 && p->mod != 6 && !p->crutchmark) ? retsize += 1 : 0;
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->f_zero && !p->w) ? retsize += 1 : 0;
-	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->w && p->pr && p->w > p->pr) ? retsize += 1 : 0; ///this and one below can be
-	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->w && p->pr && p->w < p->pr) ? retsize += 1 : 0;
+	//(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->w && p->pr && p->w > p->pr && p->pr > size) ? retsize += 1 : 0; ///this and one below can be p->w > p->pr
+	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i') && p->w && p->pr && p->w < p->pr && p->pr > size) ? retsize += 1 : 0; //!!!!!!!!!!!!!!!!!!
 	(p->ispos == 0 && (p->conversion == 'd' || p->conversion == 'i') && p->f_plus) ? retsize += 1 : 0;
 	//(p->ispos == 1 && p->mod == 1 && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0; ///??
 	//(p->ispos == 1 && p->mod == 2 && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0;
