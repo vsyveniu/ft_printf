@@ -66,7 +66,7 @@ void	ft_printhash(char c);
 void	ft_putcratchv2(char c1, char c2, int size);
 void	ft_putcratch(char c1, char c2, int size);
 void	ft_puthex(char c, f_list *p, uintmax_t arg);
-void	ft_putocto(f_list *p, unsigned long long int arg);
+void	ft_putocto(f_list *p, uintmax_t arg);
 void	ft_putbinary(int arg);
 void	ft_printbinary(int i, int val);
 void	ft_printcocto(f_list *p, void *i, int val);
@@ -120,6 +120,10 @@ void	ft_putnstr(char *str, int size);
 int		printallshit(f_list *p, va_list args);
 void	ft_printlongdecimal(f_list *p, void *i, int val);
 void	ft_printnotvalid(void *i, int* index);
+
+int 	ft_hhbase(signed char arg, int base,  int size, f_list *p);
+void	ft_puthhocto(f_list *p, unsigned char arg);
+
 
 
 #endif

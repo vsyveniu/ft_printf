@@ -44,7 +44,7 @@ void	ft_handlepos(f_list *p, int size)
 			(p->w && p->pr && p->pr > p->w && !p->f_oct) ? ft_putnchar('0', p->pr - size) : 0; // 10.15 // 10.15
 			(p->w && p->pr && p->w == p->pr && !p->f_oct) ? ft_putnchar('0', p->pr - size) : 0; //15.15
 		}
-		else if ((p->w || p->pr) && p->f_plus && !p->f_zero)  /// width/precision and plus
+		else if ((p->w || p->pr) && p->f_plus && !p->f_zero )  /// width/precision and plus
 		{
 			(p->w && !p->pr && p->w >= size && p->f_plus) ? ft_putcratchv2(' ', '+', p->w - size - 1) : 0;  //+10
 			(p->pr && !p->w && p->pr >= size && p->f_plus) ? ft_putcratch('+', '0', p->pr - size) : 0;      //+.10
@@ -86,11 +86,11 @@ void	ft_handlepos(f_list *p, int size)
 			(p->w && p->pr && p->w == p->pr ) ? ft_putcratch(' ','0',p->pr - size) : 0;  //+010.10
 			(!p->w && p->pr && p->pr < size) ? ft_putchar (' '): 0;  //.3
 		}
-		else if (!p->w && !p->pr && p->f_space && !p->f_plus && p->ispos != 2)  /// width/precision and zero and plus
+		else if (!p->w && !p->pr && p->f_space && !p->f_plus && p->ispos != 2 && (p->conversion == 'd' || p->conversion == 'i'))  /// width/precision and zero and plus
 		{
 			ft_putchar(' ');
 		}
-		else if(!p->w && !p->pr && p->f_plus && (p->ispos == 1 || p->ispos == 0))
+		else if(!p->w && !p->pr && p->f_plus && (p->ispos == 1 || p->ispos == 0) && (p->conversion == 'd' || p->conversion == 'i'))
 			ft_putchar('+');
 		else if (p->ispos == 0 && p->mod == 5 && (p->conversion == 'd' || p->conversion == 'i'))
 			ft_putchar('-');
@@ -278,7 +278,7 @@ void	ft_handleneg(f_list *p, int size)
 			(p->w && p->pr && p->pr > p->w ) ? ft_putcratch(' ', '0', p->pr - size) : 0;  //+08.10
 			(p->w && p->pr && p->w == p->pr ) ? ft_putcratch(' ','0',p->pr - size) : 0;  //+010.10
 		}*/
-		else if (!p->w && !p->pr && !p->crutchmark && p->mod != 6)  /// width/precision and zero and plus
+		else if (!p->w && !p->pr && !p->crutchmark && p->mod != 6 && p->mod != 2)  /// width/precision and zero and plus
 		{
 			ft_putchar('-');
 		}

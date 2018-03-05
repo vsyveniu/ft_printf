@@ -67,15 +67,16 @@ void	ft_putpoint(void *arg)
 }
 
 
-void	ft_putocto(f_list *p, unsigned long long int arg)
+void	ft_putocto(f_list *p, uintmax_t arg)
 {
-	unsigned long long int i;
+	uintmax_t i;
 	char *base;
 	char *str;
-	unsigned long long int temp;
+	uintmax_t temp;
 	(void)p;
 	
 	base = "012345678";
+
 
 	i = 0;
 	temp = arg;
@@ -94,6 +95,37 @@ void	ft_putocto(f_list *p, unsigned long long int arg)
 		write(1, &str[i], 1);
 	free(str);
 }
+
+void	ft_puthhocto(f_list *p, unsigned char arg)
+{
+	int i;
+	char *base;
+	char *str;
+	unsigned char temp;
+	(void)p;
+	
+	base = "012345678";
+
+	i = 0;
+	temp = arg;
+		//printf("------------>>>>>>> %jo\n", temp);
+	while ((temp /= 8) > 0)
+		i++;
+	str = (char *)malloc(sizeof(char) * i + 1);
+	i = 0;
+	if ((arg == 0 && !p->prcrutch) || (arg == 0 && p->f_oct))
+		ft_putchar('0');
+	while (arg)
+	{
+		str[i++] = base[arg % 8];
+		arg /= 8;
+	}
+	while(i-- > 0)
+		write(1, &str[i], 1);
+	free(str);
+}
+
+
 
 void	ft_putbinary(int arg)
 {

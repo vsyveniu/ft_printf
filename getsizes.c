@@ -6,7 +6,9 @@ int		ft_getsignsize(f_list *p, void *arg, intmax_t systembase, int size)
 	intmax_t temp;
 
 	temp = (intmax_t)arg;
-	if (temp == 1 || (temp == 0 && !p->prcrutch))
+	if (p->mod == 2 && p->conversion != 'D')
+		return (size = ft_hhbase((signed char)arg, systembase, size, p));
+	else if (temp == 1 || (temp == 0 && !p->prcrutch))
 		size = 1;
 	else if (temp == -1)
 		size = 2;
@@ -54,22 +56,25 @@ int		ft_getsignsize(f_list *p, void *arg, intmax_t systembase, int size)
 	else if (temp < 0)
 	{
 		temp *= -1;
+
 		size = ft_base(temp, systembase, size);
 	}
 	else
 	{
+
 		size = ft_base(temp, systembase, size);
 	}
+
 	return (size);
 }
 
 
 int		ft_getintsize(void *arg, int systembase, int size, f_list *p)
 {
+
 	int temp;
 	temp = (int)arg;
 
-	//(p->mod == 2 &&  temp <= -129) ? size -= 1 : 0;
 	if (temp == 1 || temp == 0)
 		size = 1;
 	else if (temp == -2147483648)
@@ -77,25 +82,59 @@ int		ft_getintsize(void *arg, int systembase, int size, f_list *p)
 		p->crutchmark = 1;
 		size = 11;
 	}
-	else if (temp == -128 && p->mod == 2)
-	{
-		size = 4;
-		p->crutchmark = 1;
-	}
+	//else if (temp == -128 && p->mod == 2)
+//	{
+//		size = 4;
+//		p->crutchmark = 1;
+//	}
 	else if (temp == -129 && p->mod == 2)
 	{
 		size = 3;
 		p->crutchmark = 1;
 	}
+	else if (p->mod == 2)
+		return(size = ft_hhbase((signed char)arg, systembase, size, p));
 	else if (temp < 0)
 	{
 		temp *= -1;
+
 		size = ft_intbase(temp, systembase, size);
 	}
 	else
 		size = ft_intbase(temp, systembase, size);
 	return (size);
 }
+
+
+int 	ft_hhbase(signed char arg, int base,  int size, f_list *p)
+{
+	unsigned char temp;
+
+	temp = (unsigned char)arg;
+
+	if (arg < 0 && (p->conversion == 'd' || p->conversion == 'i'))
+	{
+	 	arg *= -1;
+	 	size += 1;
+	 	while (arg > 0)
+		{
+			arg /= base;
+			size += 1;
+		}
+		if (arg == -128)
+			size = 4;
+	return (size);
+	}
+	if (arg == 0)
+		size += 1;
+	while (temp > 0)
+	{
+		temp /= base;
+		size += 1;
+	}
+	return (size);
+}
+
 
 int	ft_intbase(int arg, int base, int size)
 {
@@ -131,7 +170,8 @@ int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size)
 {
 	uintmax_t temp;
 	temp = (uintmax_t)arg;
-
+	if (p->mod == 2 && p->conversion != 'O' && p->conversion != 'U')
+		return (size = ft_hhbase((signed char)arg, systembase, size, p));
 	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'p' || p->conversion == 'o' || p->conversion == 'O')
 		return (size = ft_gethexsize(p,  temp, systembase, size));
 	if (temp == 0 && p->pr > 0)
@@ -353,8 +393,8 @@ int		ft_printsize(f_list *p, void *arg, int size)
 	(p->w && p->pr && p->w > p->pr  && p->pr < size && p->w >= size && p->ispos == 2) ? retsize = p->w : 0; //10.1
 	(!p->w && p->pr && p->pr < size && p->ispos == 1) ? retsize = size : 0;
 	(!p->w && p->pr && p->pr < size && p->ispos == 2 && p->conversion != 'd' && p->conversion != 'i' && p->conversion != 'D') ? retsize = size + 1: 0;
-	(p->f_space && p->ispos == 1 && !p->f_plus && p->w < size && p->conversion != '%') ? retsize += 1 : 0;
-	(p->f_plus && p->ispos == 1 && p->w <= size && !p->f_zero) ? retsize += 1 : 0;
+	(p->f_space && p->ispos == 1 && !p->f_plus && p->w < size && p->conversion != '%' && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0;
+	(p->f_plus && p->ispos == 1 && p->w <= size && !p->f_zero && (p->conversion == 'd' || p->conversion == 'i')) ? retsize += 1 : 0;
 	(p->f_plus && p->ispos == 1 && p->f_zero) ? retsize += 1 : 0;
 
 
@@ -490,6 +530,10 @@ int		ft_printstrsize(f_list *p, void *arg, int size)
 	(!p->w && p->pr && p->pr == size) ? retsize = p->pr : 0;
 	(!p->w && p->pr && p->pr < size) ? retsize = p->pr : 0;
 	(!p->w && !p->pr) ? retsize = size : 0;
+	(p->w && p->f_zero && p->w > p->pr && p->w > size) ? retsize = p->w : 0;
+	(p->w && p->f_zero && p->w < p->pr && p->pr > size) ? retsize = p->w : 0;
+	(p->w && p->f_zero && p->w < p->pr && p->w < size) ? retsize = size : 0;
+	(p->w && p->f_zero && p->w == p->pr && p->w == size) ? retsize = size : 0;
 	//printf("-----------------?????????????????? %d\n", retsize);
 	return (retsize);
 }

@@ -15,20 +15,33 @@ void	ft_printbinary(int i, int val)
 
 void	ft_printcocto(f_list *p, void *i, int val)
 {
-	(val == 0) ? ft_putocto(p, (unsigned int)i) : 0;
-	(val == 1) ? ft_putocto(p, (unsigned short)i) : 0;
-	(val == 2) ? ft_putocto(p, (char)i) : 0;
-	(val == 3) ? ft_putocto(p, (unsigned long long int)i) : 0;
-	(val == 4) ? ft_putocto(p, (unsigned long long int)i) : 0;
-	(val == 5) ? ft_putocto(p, (unsigned int)i) : 0;
-	(val == 6) ? ft_putocto(p, (size_t)i) : 0;
+	if (p->conversion == 'o')
+	{
+		(val == 0) ? ft_putocto(p, (unsigned int)i) : 0;
+		(val == 1) ? ft_putocto(p, (unsigned short)i) : 0;
+		(val == 2) ? ft_puthhocto(p, (unsigned char)i) : 0;
+		(val == 3) ? ft_putocto(p, (unsigned long long int)i) : 0;
+		(val == 4) ? ft_putocto(p, (unsigned long long int)i) : 0;
+		(val == 5) ? ft_putocto(p, (unsigned int)i) : 0;
+		(val == 6) ? ft_putocto(p, (size_t)i) : 0;
+	}
+	else if (p->conversion == 'O')
+	{
+		(val == 0) ? ft_putocto(p, (unsigned int)i) : 0;
+		(val == 1) ? ft_putocto(p, (unsigned short)i) : 0;
+		(val == 2) ? ft_putocto(p, (unsigned int)i) : 0;
+		(val == 3) ? ft_putocto(p, (unsigned long long int)i) : 0;
+		(val == 4) ? ft_putocto(p, (unsigned long long int)i) : 0;
+		(val == 5) ? ft_putocto(p, (unsigned int)i) : 0;
+		(val == 6) ? ft_putocto(p, (size_t)i) : 0;
+	}
 }
 
 void	ft_printhex(char c,f_list *p, void *i, int val)
 {
 	(val == 0) ? ft_puthex(c, p, (unsigned int)i) : 0;
 	(val == 1) ? ft_puthex(c, p, (unsigned short)i) : 0;
-	(val == 2) ? ft_puthex(c, p, (char)i) : 0;
+	(val == 2) ? ft_puthex(c, p, (unsigned char)i) : 0;
 	(val == 3) ? ft_puthex(c, p, (unsigned long long int)i) : 0;
 	(val == 4) ? ft_puthex(c, p, (unsigned long int)i) : 0;
 	(val == 5) ? ft_puthex(c, p, (uintmax_t)i) : 0;
@@ -72,6 +85,8 @@ void	ft_printdecimal(f_list *p, void *i, int val)
 void	ft_printlongdecimal(f_list *p, void *i, int val)
 {
 	(val == 0) ? ft_putnbr(p, (long)i) : 0;
+	(val == 1) ? ft_putnbr(p, (long)i) : 0;
+	(val == 2) ? ft_putnbr(p, (long)i) : 0;
 	(val == 3) ? ft_putnbr(p, (long)i) : 0;
 	(val == 4) ? ft_putnbr(p, (long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
 	(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;

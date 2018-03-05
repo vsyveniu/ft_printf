@@ -779,9 +779,9 @@ int		main()
 	printf("\n");
 
 
-	ret = ft_printf("%15.4o", 424242);
+	ret = ft_printf("%hhD, %hhD", 0, 65535);
 	printf("\n");
-	ret1 = printf("%15.4o", 424242);
+	ret1 = printf("%hhD, %hhD", 0, 65535);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
 
