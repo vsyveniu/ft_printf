@@ -283,7 +283,7 @@ void	ft_handleneg(f_list *p, int size)
 			(p->w && p->pr && p->pr > p->w ) ? ft_putcratch(' ', '0', p->pr - size) : 0;  //+08.10
 			(p->w && p->pr && p->w == p->pr ) ? ft_putcratch(' ','0',p->pr - size) : 0;  //+010.10
 		}*/
-		else if (!p->w && !p->pr && !p->crutchmark && p->mod != 6 && p->mod != 2 && p->mod != 1)  /// width/precision and zero and plus
+		else if (!p->w && !p->pr && !p->crutchmark && p->mod != 6 && p->mod != 2 && p->mod != 1 && p->conversion != 'D')  /// width/precision and zero and plus
 		{
 			ft_putchar('-');
 		}

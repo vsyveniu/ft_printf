@@ -75,7 +75,8 @@ int		ft_printstr(f_list *p, char *str, int size)
 		ft_putstr("(null)");
 
 	(!str && p->prcrutch && p->w && p->f_zero) ? ft_putnchar('0', p->w) : 0;
-	(p->w && !p->pr && p->w >= size && !p->f_minus && !p->f_zero) ? ft_putscratch(' ', str, p->w - size) : 0;
+	(p->w && !p->pr && p->w >= size && !p->f_minus && !p->f_zero && !p->prcrutch) ? ft_putscratch(' ', str, p->w - size) : 0;
+	(p->w && !p->pr && p->w >= size && !p->f_minus && !p->f_zero && p->prcrutch) ? ft_putnchar(' ',p->w) : 0;
 	(p->w && !p->pr && p->w < size && !p->f_minus && !p->prcrutch &&!p->f_zero) ? ft_putstr(str) : 0;
 	(p->w && !p->pr && p->w < size && !p->f_minus && p->prcrutch &&!p->f_zero) ? ft_putnchar(' ', p->w) : 0;
 

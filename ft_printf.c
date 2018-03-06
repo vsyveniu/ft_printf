@@ -189,17 +189,6 @@ int		ft_parse(char *f, int *i, va_list args)
 			(*i)++;
 			break ;
 		}
-		/*else if (ft_isconv(f[*i]) == 0 && ft_isflag(f[*i]) == 0 && ft_isdigit(f[*i]) == 0)
-		{
-			if(p->f_minus)
-			{
-				write(1, &f[*i], 1);
-			}
-			
-			else
-				(*i)--;
-			break ;
-		}*/
 	(*i)++;	
 	}
 	ret = printallshit(p, args);
@@ -414,15 +403,12 @@ int		ft_handleshit(const char *format, va_list args)
 			ft_putnnnstr(f, start, i);
 			ret += ft_parse(f, &i, args);
 			start = i;
-			//printf("in handshit -->> %c\n", f[i]);
 		}
 		else if (f[i] != '\0')
 		{
-			//printf("----------------->> %c\n", f[i]);
 			ret++;
 			i++;
 		}
-	//printf("-----> i %c\n", f[i]);	
 	}
 	ft_putnnnstr(f, start, len);
 	return (ret);
@@ -779,9 +765,9 @@ int		main()
 	printf("\n");
 
 
-	ret = ft_printf("{%hi}", -32767);
+	ret = ft_printf("{%-15Z}", 123);
 	printf("\n");
-	ret1 = printf("{%hi}", -32767);
+	ret1 = printf("{%-15Z}", 123);
 	//ret = ft_printf("a%ob%oc%od", 0, 55555, 100000);
 	printf("\n");
 

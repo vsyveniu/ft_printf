@@ -17,7 +17,7 @@ void	ft_puthex(char conv, f_list *p, uintmax_t arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (((arg == 0 && p->f_oct) || (arg == 0 && (p->mod == 0 || p->mod == 1 || p->mod == 2 || p->mod == 3 || p->mod == 5 || p->mod == 6))) && !p->prcrutch)
+	if (((arg == 0 && p->f_oct) || (arg == 0 && (p->mod == 0 || p->mod == 1 || p->mod == 2 || p->mod == 3 || p->mod == 4 || p->mod == 5 || p->mod == 6))) && !p->prcrutch)
 		ft_putchar('0');
 	while (arg)
 	{

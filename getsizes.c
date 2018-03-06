@@ -46,7 +46,7 @@ int		ft_getsignsize(f_list *p, void *arg, intmax_t systembase, int size)
 		size = 20;
 		p->crutchmark = 1;
 	}
-	else if ((uintmax_t)arg > 9223372036854775807 && p->mod == 5)
+	else if ((uintmax_t)arg > 9223372036854775807 && (p->mod == 5 || p->mod == 6))
 		size = 20;
 	else if (temp == 129 && p->mod == 2)
 	{
@@ -135,6 +135,22 @@ int 	ft_hhbase(signed char arg, int base,  int size, f_list *p)
 	return (size);
 }
 
+int 	ft_hbase(unsigned short arg, int base,  int size, f_list *p)
+{
+	unsigned short temp;
+	(void)p;
+	temp = arg;
+
+	if (arg == 0)
+		size += 1;
+	while (temp > 0)
+	{
+		temp /= base;
+		size += 1;
+	}
+	return (size);
+}
+
 
 int	ft_intbase(int arg, int base, int size)
 {
@@ -170,8 +186,11 @@ int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int size)
 {
 	uintmax_t temp;
 	temp = (uintmax_t)arg;
-	if (p->mod == 2 && p->conversion != 'O' && p->conversion != 'U')
+
+	if (p->mod == 2  && p->conversion != 'O' && p->conversion != 'U')
 		return (size = ft_hhbase((signed char)arg, systembase, size, p));
+	if (p->mod == 1 && p->conversion != 'U')
+		return (size = ft_hbase((unsigned short)arg, systembase, size, p));
 	if (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'p' || p->conversion == 'o' || p->conversion == 'O')
 		return (size = ft_gethexsize(p,  temp, systembase, size));
 	if (temp == 0 && p->pr > 0)
@@ -225,7 +244,6 @@ int 	ft_getsizehexoctbi(f_list *p, void  *arg)
 {
 	int 			size;
 	long long 		systembase;
-
 
 	size = 0;
 	(p->conversion == 'x' || p->conversion == 'X') ? systembase = 16 : 0;
@@ -526,7 +544,8 @@ int		ft_printstrsize(f_list *p, void *arg, int size)
 	//(!p->w && p->pr && !p->f_minus && p->pr > size) ? size = p->pr - size: 0;
 	//(p->w && p->pr && p->pr >= p->w && p->pr >= size) ? size = p->pr : 0;
 	(p->w && p->pr && p->w == p->pr && p->pr > size) ? retsize = p->w : 0;
-	(p->w && p->pr && p->pr > p->w && p->pr >= size) ? retsize = size : 0;
+	(p->w && p->pr && p->pr > p->w && p->pr >= size) ? retsize = p->w : 0;
+	(p->w && p->pr && p->pr > p->w && p->w < size &&p->pr >= size) ? retsize = size: 0;
 	(p->w && p->pr && p->pr > p->w && p->pr < size) ? retsize = p->pr : 0;
 	(p->w && !p->pr && p->prcrutch) ? retsize = p->w : 0;
 	(p->w && !p->pr && p->w >= size) ? retsize = p->w : 0;
