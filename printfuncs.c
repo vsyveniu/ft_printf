@@ -22,7 +22,7 @@ void	ft_printcocto(f_list *p, void *i, int val)
 		(val == 2) ? ft_puthhocto(p, (unsigned char)i) : 0;
 		(val == 3) ? ft_putocto(p, (unsigned long long int)i) : 0;
 		(val == 4) ? ft_putocto(p, (unsigned long long int)i) : 0;
-		(val == 5) ? ft_putocto(p, (unsigned int)i) : 0;
+		(val == 5) ? ft_putocto(p, (uintmax_t)i) : 0;
 		(val == 6) ? ft_putocto(p, (size_t)i) : 0;
 	}
 	else if (p->conversion == 'O')
@@ -49,9 +49,9 @@ void	ft_printhex(char c,f_list *p, void *i, int val)
 }
 
 
-void	ft_printpointer(void *i)
+void	ft_printpointer(void *i, f_list *p)
 {
-	ft_putpoint(i);
+	ft_putpoint(i, p);
 }
 
 void	ft_printdecimal(f_list *p, void *i, int val)
@@ -108,7 +108,7 @@ void	ft_printudecimal(f_list *p, void *i, int val)
 		(val == 3) ? ft_putunnbr((unsigned long long)i) : 0;
 		(val == 4) ? ft_putunnbr((unsigned long long)i) : 0;
 		(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
-		(val == 6) ? ft_putnbr(p, (size_t)i) : 0;
+		(val == 6) ? ft_putunnbr((size_t)i) : 0;
 	}
 	else if (p->conversion == 'U' && !p->prcrutch)
 	{

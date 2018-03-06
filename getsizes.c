@@ -410,11 +410,14 @@ int		ft_printsize(f_list *p, void *arg, int size)
 
 
 	(p->f_oct && !p->w && !p->pr && (p->conversion == 'x' || p->conversion == 'X') && p->ispos != 0) ? retsize += 2 : 0;
+	(p->f_oct && !p->w && p->pr && (p->conversion == 'x' || p->conversion == 'X') && p->ispos != 0) ? retsize += 2 : 0;
 	(p->w && p->pr &&  p->w >= size && p->w > p->pr && p->ispos == 0) ? retsize = p->w : 0;
-	(p->conversion == 'p' && !p->pr && p->w <= size) ? retsize += 2 : 0;
+	(p->conversion == 'p' && !p->pr && p->w && p->w <= size) ? retsize += 2 : 0;
 	(p->conversion == 'p' && p->pr && p->w && p->pr > p->w && p->pr >= size) ? retsize += 2 : 0;
 	(p->conversion == 'p' && p->pr && p->w && p->pr == p->w && p->pr >= size) ? retsize += 2 : 0;
+	(p->conversion == 'p' && p->pr && p->w && p->pr == p->w && p->pr < size) ? retsize += 2 : 0;
 	(p->conversion == 'p' && !p->w && p->pr >= size) ? retsize += 2 : 0; //// may fuck all neighbors
+	(p->conversion == 'p' && !p->w && !p->pr && !p->prcrutch) ? retsize += 2 : 0; //// may fuck all neighbors
 	(p->conversion == 'p' && p->w == size + 1) ? retsize += 1 : 0; /// there is a fucking bug, i've used a dumb crutch to fix it
 	((p->conversion == 'o' || p->conversion == 'O') && p->f_oct && !p->w && !p->pr && p->ispos != 0) ? retsize += 1 : 0;
 	//(p->conversion == '%') ? retsize += 1 : 0;
@@ -513,6 +516,8 @@ int		ft_printstrsize(f_list *p, void *arg, int size)
 	//(p->w < p->pr) ? size = p->w : 0;
 	if (!arg && (p->conversion != 'c' || p->conversion != 'C'))
 		retsize = 6;
+	if (!arg && p->prcrutch && p->w && (p->conversion != 's' || p->conversion != 'S'))
+		retsize = p->w;
 	( p->w && p-> pr && p->w > p->pr) ? retsize = p->w : 0;
 //	(!p->w && p->pr && p->pr > size) ? size = p->pr : 0;
 	//(!p->w && p->pr && p->pr < size) ? size = size - p->pr : 0;
@@ -525,7 +530,7 @@ int		ft_printstrsize(f_list *p, void *arg, int size)
 	(p->w && p->pr && p->pr > p->w && p->pr < size) ? retsize = p->pr : 0;
 	(p->w && !p->pr && p->prcrutch) ? retsize = p->w : 0;
 	(p->w && !p->pr && p->w >= size) ? retsize = p->w : 0;
-	(p->w && !p->pr && p->w < size) ? retsize = size : 0;
+	(p->w && !p->pr && p->w < size && !p->prcrutch) ? retsize = size : 0;
 	(!p->w && p->pr && p->pr > size) ? retsize = size : 0;
 	(!p->w && p->pr && p->pr == size) ? retsize = p->pr : 0;
 	(!p->w && p->pr && p->pr < size) ? retsize = p->pr : 0;

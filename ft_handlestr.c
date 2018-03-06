@@ -71,9 +71,10 @@ void	ft_putscrutchvzero(char *str, char c, int size1, int size2)
 
 int		ft_printstr(f_list *p, char *str, int size)
 {
-	if (!str)
+	if (!str && !p->prcrutch)
 		ft_putstr("(null)");
-	
+
+	(!str && p->prcrutch && p->w && p->f_zero) ? ft_putnchar('0', p->w) : 0;
 	(p->w && !p->pr && p->w >= size && !p->f_minus && !p->f_zero) ? ft_putscratch(' ', str, p->w - size) : 0;
 	(p->w && !p->pr && p->w < size && !p->f_minus && !p->prcrutch &&!p->f_zero) ? ft_putstr(str) : 0;
 	(p->w && !p->pr && p->w < size && !p->f_minus && p->prcrutch &&!p->f_zero) ? ft_putnchar(' ', p->w) : 0;
@@ -144,9 +145,9 @@ int		ft_printstr(f_list *p, char *str, int size)
 
 void		ft_handlestr(f_list *p, void *arg, int size)
 {
-	if (!arg)
-		if(p->conversion == 's' || p->conversion == 'S')
-			ft_putstr("null");
+	//if (!arg)
+	//	if(p->conversion == 's' || p->conversion == 'S')
+	//		ft_putstr("null");
 	if (p->conversion == 'c' || p->conversion == 'C')
 	{
 		ft_printchar(p, (*(unsigned char*)arg), size);

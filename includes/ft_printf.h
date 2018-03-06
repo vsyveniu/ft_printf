@@ -80,10 +80,10 @@ void	ft_putdoublecratch(char c1, char c2, int size, int size2);
 void	ft_printhash(char c);
 int		ft_checkmodifiers(f_list *p);
 int		ft_checkflag(f_list *p, void *arg, int size);
-int	ft_handleleft(f_list *p,  int size);
-int	ft_handleright(f_list *p,  int size);
+int	ft_handleleft(f_list *p, void *arg, int size);
+int	ft_handleright(f_list *p, void *arg,  int size);
 void	ft_handleneg(f_list *p, int size);
-void	ft_handlepos(f_list *p, int size);
+void	ft_handlepos(f_list *p, void *arg, int size);
 int		ft_getargsize(f_list *p, void *arg);
 int		ft_checkmodifiers(f_list *p);
 int		ft_getargsize(f_list *p, void *arg);
@@ -107,8 +107,8 @@ void 	ft_crutchforhash(f_list *p, char c, int size);
 void 	ft_crutchforhashv3(f_list *p,char c,  int size, int size2);
 size_t		ft_strlen(const char *str);
 void	ft_putchar(char c);
-void	ft_printpointer(void *i);
-void	ft_putpoint(void *arg);
+void	ft_printpointer(void *i, f_list *p);
+void	ft_putpoint(void *arg, f_list *p);
 int		ft_ismod(char c);
 int		ft_isconv(char c);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -123,6 +123,7 @@ void	ft_printnotvalid(void *i, int* index);
 
 int 	ft_hhbase(signed char arg, int base,  int size, f_list *p);
 void	ft_puthhocto(f_list *p, unsigned char arg);
+void 	ft_crutchforhashv4(f_list *p, char c, int size);
 
 
 

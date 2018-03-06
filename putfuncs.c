@@ -17,7 +17,7 @@ void	ft_puthex(char conv, f_list *p, uintmax_t arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (((arg == 0 && p->f_oct) || (arg == 0 && (p->mod == 0 || p->mod == 1 || p->mod == 2 || p->mod == 3))) && !p->prcrutch)
+	if (((arg == 0 && p->f_oct) || (arg == 0 && (p->mod == 0 || p->mod == 1 || p->mod == 2 || p->mod == 3 || p->mod == 5 || p->mod == 6))) && !p->prcrutch)
 		ft_putchar('0');
 	while (arg)
 	{
@@ -31,17 +31,14 @@ void	ft_puthex(char conv, f_list *p, uintmax_t arg)
 }
 
 
-void	ft_putpoint(void *arg)
+void	ft_putpoint(void *arg, f_list *p)
 {
 
 	uintmax_t temp;
 	uintmax_t temptemp;
-	//temp = &arg;
-	//printf("%p\n", temp);
 	uintmax_t i;
 	char *base;
 	char *str;
-	//void *temp;
 
 	temp = (uintmax_t)arg;
 	temptemp = temp;
@@ -52,13 +49,12 @@ void	ft_putpoint(void *arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (temp == 0)
+	if (temp == 0 && !p->prcrutch)
 		ft_putchar('0');
 	while (temp)
 	{
 		str[i++] = base[temp % 16];
 		temp /= 16;
-	//printf("\n---->>>>>  %llu\n", temp);
 	}
 	str[i] = '\0';
 	while(i-- > 0)

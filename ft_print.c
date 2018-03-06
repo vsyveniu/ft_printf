@@ -3,7 +3,8 @@
 
 void	ft_handleBITCH(f_list *p, int size)
 {
-	(p->w && !p->f_minus) ? ft_putnchar(' ', p->w - size) : 0;
+	(p->w && !p->f_minus && !p->f_zero) ? ft_putnchar(' ', p->w - size) : 0;
+	(p->w && p->f_zero && !p->f_minus) ? ft_putnchar('0', p->w - size) : 0;
 }
 
 void	ft_handlerightsideinleft(f_list * p, int size)
@@ -22,7 +23,7 @@ void	ft_handlerightsideinleft(f_list * p, int size)
 */
 
 
-void	ft_handlepos(f_list *p, int size)
+void	ft_handlepos(f_list *p, void *arg, int size)
 {
 	
 		//if (p->f_minus)
@@ -92,7 +93,7 @@ void	ft_handlepos(f_list *p, int size)
 		}
 		else if(!p->w && !p->pr && p->f_plus && (p->ispos == 1 || p->ispos == 0) && (p->conversion == 'd' || p->conversion == 'i'))
 			ft_putchar('+');
-		else if (p->ispos == 0 && p->mod == 5 && (p->conversion == 'd' || p->conversion == 'i'))
+		else if ((uintmax_t)arg > 0 && p->ispos == 0 && p->mod == 5 && (p->conversion == 'd' || p->conversion == 'i'))
 			ft_putchar('-');
 		//(p->f_plus) ? size += 1 : 0;
 		//printf("-=----------------------------.>>>>>>>>>>>>>>>>>>. picha\n");
@@ -124,10 +125,11 @@ void	ft_handlepos(f_list *p, int size)
 }
 
 
-int	ft_handleleft(f_list *p, int size)
+int	ft_handleleft(f_list *p, void *arg, int size)
 {
 	//printf("----------------->>>>>>>>> picha\n");
 	//printf("---------->>>>>>> %d\n", size);
+	(void)arg;
 	(p->conversion == 'p') ? size += 2 : 0;
 	(p->ispos == 2 && (p->conversion == 'd' || p->conversion == 'i')) ? size += 1 : 0;
 	(p->f_oct && (p->conversion == 'x' || p->conversion == 'X')) ? size += 2 : 0;
@@ -186,9 +188,12 @@ void	ft_handlehash(f_list *p, int size)
 		(p->w && !p->pr && p->w >= size && !p->f_minus && p->conversion != 'x' && p->conversion != 'X') ? ft_crutchforhashv2(p, ' ', p->w - size - 1) : 0; //10
 		(p->w && !p->pr && p->w >= size && !p->f_minus && (p->conversion == 'x' || p->conversion == 'X') && !p->f_zero) ? ft_crutchforhashv2(p, ' ', p->w - size - 2) : 0; //10
 		(p->w && !p->pr && p->w >= size && p->f_minus) ? ft_printhash(p->conversion) : 0; //10
-		(!p->w && p->pr && p->pr >= size && !p->f_minus && p->ispos != 0) ? ft_crutchforhashv2(p, '0', p->pr - size) : 0; //.10
+
+		(!p->w && p->pr && p->pr >= size && !p->f_minus && p->ispos != 0) ? ft_crutchforhashv4(p, '0', p->pr - size) : 0; //.10
+
 		(!p->w && p->pr && p->pr >= size && !p->f_minus && p->ispos == 0) ? ft_putnchar('0', p->pr - 1) : 0; //.10
 		(!p->w && p->pr && p->pr >= size && p->f_minus) ? ft_crutchforhash(p, '0', p->pr - size) : 0; //.10
+		
 		(p->w && p->pr && p->w > p->pr && p->w >= size && (p->conversion == 'x' || p->conversion == 'X')) ? ft_crutchforhashv3(p, '0',p->w - p->pr - 2, p->pr - size) : 0; //15.10
 		(p->w && p->pr && p->w > p->pr && p->w >= size && (p->conversion == 'o' || p->conversion == 'O') && !p->f_minus) ? ft_crutchforhashv3(p, '0',p->w - p->pr, p->pr - size) : 0; //15.10
 		(p->w && p->pr && p->w > p->pr && p->w >= size && (p->conversion == 'o' || p->conversion == 'O') && p->f_minus) ? ft_printhash(p->conversion) : 0;//15.10
@@ -278,7 +283,7 @@ void	ft_handleneg(f_list *p, int size)
 			(p->w && p->pr && p->pr > p->w ) ? ft_putcratch(' ', '0', p->pr - size) : 0;  //+08.10
 			(p->w && p->pr && p->w == p->pr ) ? ft_putcratch(' ','0',p->pr - size) : 0;  //+010.10
 		}*/
-		else if (!p->w && !p->pr && !p->crutchmark && p->mod != 6 && p->mod != 2)  /// width/precision and zero and plus
+		else if (!p->w && !p->pr && !p->crutchmark && p->mod != 6 && p->mod != 2 && p->mod != 1)  /// width/precision and zero and plus
 		{
 			ft_putchar('-');
 		}
@@ -324,7 +329,7 @@ void	ft_handlep(f_list *p, int size)
 {
 	(!p->w && !p->pr) ? write(1, "0x", 2) : 0;
 	(p->w && p->f_zero && !p->f_minus) ? ft_crutchforhash(p, '0', p->w - size - 2) : 0;
-	(p->w && p->pr && p->w > p->pr && p->w >= size && !p->f_minus) ? ft_crutchforhashv3(p, '0', p->w - p->pr - 2, p->pr - size) : 0;
+	(p->w && p->pr && p->w > p->pr && p->w >= size && !p->f_minus) ? ft_crutchforhashv3(p, '0', p->w - size - 2, p->pr - size) : 0;
 	(p->w && p->pr && p->w > p->pr && p->w >= size && p->f_minus) ? ft_crutchforhash(p, '0', p->pr - size) : 0;
 	(p->w && p->pr && p->w < p->pr && p->pr >= size ) ? ft_crutchforhash(p, '0', p->pr - size) : 0;
 	(!p->w && p->pr && p->pr >= size) ? ft_crutchforhash(p, '0', p->pr - size) : 0;
@@ -334,7 +339,7 @@ void	ft_handlep(f_list *p, int size)
 }
 
 
-int	ft_handleright(f_list *p, int size)
+int	ft_handleright(f_list *p, void *arg, int size)
 {
 	if (p->f_oct && (p->conversion == 'x' || p->conversion == 'X' || p->conversion == 'o' || p->conversion == 'O'))
 	{
@@ -350,7 +355,7 @@ int	ft_handleright(f_list *p, int size)
 		ft_handleneg(p, size);
 	}
 	else
-		ft_handlepos(p, size);
+		ft_handlepos(p, arg, size);
 	return (size); ///this is void!!!!!!!!!!
 }
 
@@ -363,13 +368,13 @@ int		ft_checkflag(f_list *p, void *arg, int size)
 {
 	if (p->f_minus)
 	{
-		ft_handleright(p, size);
+		ft_handleright(p, arg, size);
 		ft_handledigits(p, arg, p->mod);
-		ft_handleleft(p, size);
+		ft_handleleft(p, arg, size);
 	}
 	else
 	{
-		ft_handleright(p, size);
+		ft_handleright(p, arg, size);
 		ft_handledigits(p, arg, p->mod);
 	}
 	return(size);
