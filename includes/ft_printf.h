@@ -61,7 +61,14 @@ int 	ft_hbase(unsigned short arg, int base,  int s, f_list *p);
 int		ft_intbase(int arg, int base, int s);
 int 	ft_expand(f_list *p, void *arg, intmax_t temp, int s);
 int 	ft_expand2(f_list *p, intmax_t temp,  void *arg,  int s);
-
+int		ft_unsbase(uintmax_t arg, uintmax_t base, int s);
+int	    ft_base(intmax_t arg, intmax_t base, int s);
+int		getunsignsize(f_list *p, void *arg, uintmax_t systembase, int s);
+int		ft_getsignsize(f_list *p, void *arg, intmax_t systembase, int s);
+int 	ft_gethexsize(f_list *p, uintmax_t temp, uintmax_t systembase, int s);
+void	ft_putpoint(void *arg, f_list *p);
+void	ft_putbinary(int arg);
+void	ft_printhash(char c);
 
 
 
@@ -98,8 +105,7 @@ void	ft_putcratchv2(char c1, char c2, int size);
 void	ft_putcratch(char c1, char c2, int size);
 void	ft_puthex(char c, f_list *p, uintmax_t arg);
 void	ft_putocto(f_list *p, uintmax_t arg);
-void	ft_putbinary(int arg);
-void	ft_printbinary(int i, int val);
+
 void	ft_printcocto(f_list *p, void *i, int val);
 void	ft_printhex(char c,f_list *p, void *i, int val);
 void		ft_printdecimal(f_list *p, void *i, int val);
@@ -138,8 +144,6 @@ void 	ft_hash(f_list *p, char c, int size);
 void 	ft_hashv3(f_list *p,char c,  int size, int size2);
 size_t		ft_strlen(const char *str);
 void	ft_putchar(char c);
-void	ft_printpointer(void *i, f_list *p);
-void	ft_putpoint(void *arg, f_list *p);
 int		ft_parse(const char *format, int *i, va_list args);
 void 	ft_postparse(char *format, char *crutch, char *crutchpr, f_list *p);
 void	ft_putnstr(char *str, int size);

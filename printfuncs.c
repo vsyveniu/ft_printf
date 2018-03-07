@@ -2,17 +2,6 @@
 #include "includes/ft_printf.h"
 
 
-void	ft_printbinary(int i, int val)
-{
-	(val == 0) ? ft_putbinary(i) : 0;
-	(val == 1) ? ft_putbinary((short)i) : 0;
-	(val == 2) ? ft_putbinary((char)i) : 0;
-	(val == 3) ? ft_putbinary((unsigned long)i) : 0;
-	(val == 4) ? ft_putbinary((long)i) : 0;
-	//(val == 5) ? ft_puthex(c, (uintmax_t)i) : 0;
-	(val == 6) ? ft_putbinary((size_t)i) : 0;
-}
-
 void	ft_printcocto(f_list *p, void *i, int val)
 {
 	if (p->c == 'o')
@@ -49,11 +38,6 @@ void	ft_printhex(char c,f_list *p, void *i, int val)
 }
 
 
-void	ft_printpointer(void *i, f_list *p)
-{
-	ft_putpoint(i, p);
-}
-
 void	ft_printdecimal(f_list *p, void *i, int val)
 {
 	int temp;
@@ -88,7 +72,7 @@ void	ft_printlongdecimal(f_list *p, void *i, int val)
 	(val == 1) ? ft_putnbr(p, (long)i) : 0;
 	(val == 2) ? ft_putnbr(p, (long)i) : 0;
 	(val == 3) ? ft_putnbr(p, (long)i) : 0;
-	(val == 4) ? ft_putnbr(p, (long long)i) : 0; //need putunsignednbr!!!!!!!!!!!!!!!!!!!
+	(val == 4) ? ft_putnbr(p, (long long)i) : 0;
 	(val == 5) ? ft_putunnbr((uintmax_t)i) : 0;
 	(val == 6) ? ft_putnbr(p, (ssize_t)i) : 0;
 }
@@ -121,28 +105,3 @@ void	ft_printudecimal(f_list *p, void *i, int val)
 		(val == 6) ? ft_putnbr(p, (size_t)i) : 0;
 	}
 }
-
-void	ft_printnotvalid(void *i, int *index)
-{
-	char *c;
-
-	c = (char*)i;
-
-
-	printf("%c\n", c[*index]);
-}
-/*
-val = 0;
-	if ( p->mod && ft_strcmp(p->mod, "h") == 0)
-		return(val = 1);
-	if (p->mod && ft_strcmp(p->mod, "hh") == 0)
-		return(val = 2);
-	if (p->mod && ft_strcmp(p->mod, "l") == 0)
-		return(val = 3);
-	if (p->mod && ft_strcmp(p->mod, "ll") == 0)
-		return(val = 4);
-	if (p->mod && ft_strcmp(p->mod, "j") == 0)
-		return(val = 5);
-	if (p->mod && ft_strcmp(p->mod, "z") == 0)
-		return(val = 6);
-	return(val);*/
