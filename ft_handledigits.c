@@ -6,26 +6,26 @@ void	ft_printpercent()
 {	write(1, "%", 1);
 }
 
-void	ft_handledigits(f_list *params, void *arg, int val)
+void	ft_handledigits(f_list *p, void *arg, int val)
 {
-	if ((params->conversion == 'd' || params->conversion == 'i'))
-		ft_printdecimal(params, arg, val);
-	if (params-> conversion == 'D')
-		ft_printlongdecimal(params, arg, val);
-	if (params->conversion == 'u' || params->conversion == 'U')
-		ft_printudecimal(params, arg, val);
-	if (params->conversion == '%')
+	if ((p->c == 'd' || p->c == 'i'))
+		ft_printdecimal(p, arg, val);
+	if (p->c == 'D')
+		ft_printlongdecimal(p, arg, val);
+	if (p->c == 'u' || p->c == 'U')
+		ft_printudecimal(p, arg, val);
+	if (p->c == '%')
 		ft_printpercent();
-	if (params->conversion == 'x' || params->conversion == 'X')
-		ft_printhex(params->conversion, params, arg, val);
-	if (params->conversion == 'o' || params->conversion == 'O')
-		ft_printcocto(params, arg, val);
-	if (params->conversion == 'b')
+	if (p->c == 'x' || p->c == 'X')
+		ft_printhex(p->c, p, arg, val);
+	if (p->c == 'o' || p->c == 'O')
+		ft_printcocto(p, arg, val);
+	if (p->c == 'b')
 		ft_printbinary((int)arg, val);
-	if (params->conversion == 'p')
-		ft_printpointer(arg, params);
-//	if (params->conversion == 'k')
+	if (p->c == 'p')
+		ft_printpointer(arg, p);
+//	if (p->c == 'k')
 //		ft_printdate((int)arg);
-//	if (params->conversion == 'r')
+//	if (p->c == 'r')
 //		ft_printnonprintable((int)arg);
 }

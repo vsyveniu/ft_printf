@@ -1,7 +1,7 @@
 
 #include "includes/ft_printf.h"
 
-static int		ft_handlethisbitcheshhandll(char *format, int *i)
+static int		ft_handlethisbitcheshhandll(const char *format, int *i)
 {
 	int	temp;
 
@@ -26,14 +26,13 @@ static int		ft_handlethisbitcheshhandll(char *format, int *i)
 		}
 		temp = 3;
 	}
-	//printf("----------------|||||||||| %d\n", temp);
 	return(temp);
 }
 
 
-int			get_mod(char *format, int *i) // is it bettter to fill struct with int?
+int			get_mod(const char *format, int *i)
 {
-	int temp;  //is it may be int?
+	int temp;
 
 	temp = 0;
 	if (format[*i] == 'h' || format[*i] == 'l')
@@ -58,7 +57,7 @@ int			get_mod(char *format, int *i) // is it bettter to fill struct with int?
 	return (temp);
 }
 
-char			get_conversion(char *format, int *i)
+char			get_conversion(const char *format, int *i)
 {
 	char temp;
 

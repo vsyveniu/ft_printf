@@ -4,10 +4,10 @@
 
 void	ft_puthex(char conv, f_list *p, uintmax_t arg)
 {
-	uintmax_t i;
-	char *base;
-	char *str;
-	uintmax_t temp;
+	uintmax_t	i;
+	char		*base;
+	char		*str;
+	uintmax_t	temp;
 
 	i = 0;
 	temp = arg;
@@ -17,7 +17,8 @@ void	ft_puthex(char conv, f_list *p, uintmax_t arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (((arg == 0 && p->f_oct) || (arg == 0 && (p->mod == 0 || p->mod == 1 || p->mod == 2 || p->mod == 3 || p->mod == 4 || p->mod == 5 || p->mod == 6))) && !p->prcrutch)
+	if (((arg == 0 && p->f_oct) || (arg == 0 && (p->m == 0 || p->m == 1 || p->m
+	 == 2 || p->m == 3 || p->m == 4 || p->m == 5 || p->m == 6))) && !p->prc)
 		ft_putchar('0');
 	while (arg)
 	{
@@ -49,7 +50,7 @@ void	ft_putpoint(void *arg, f_list *p)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if (temp == 0 && !p->prcrutch)
+	if (temp == 0 && !p->prc)
 		ft_putchar('0');
 	while (temp)
 	{
@@ -80,7 +81,7 @@ void	ft_putocto(f_list *p, uintmax_t arg)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if ((arg == 0 && !p->prcrutch) || (arg == 0 && p->f_oct))
+	if ((arg == 0 && !p->prc) || (arg == 0 && p->f_oct))
 		ft_putchar('0');
 	while (arg)
 	{
@@ -104,12 +105,11 @@ void	ft_puthhocto(f_list *p, unsigned char arg)
 
 	i = 0;
 	temp = arg;
-		//printf("------------>>>>>>> %jo\n", temp);
 	while ((temp /= 8) > 0)
 		i++;
 	str = (char *)malloc(sizeof(char) * i + 1);
 	i = 0;
-	if ((arg == 0 && !p->prcrutch) || (arg == 0 && p->f_oct))
+	if ((arg == 0 && !p->prc) || (arg == 0 && p->f_oct))
 		ft_putchar('0');
 	while (arg)
 	{

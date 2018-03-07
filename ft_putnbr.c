@@ -17,7 +17,7 @@ void	ft_putnbr(f_list *p, intmax_t n)
 	intmax_t	i;
 
 	i = (intmax_t)n;
-	if (n == 0 && p->prcrutch)
+	if (n == 0 && p->prc)
 		return ;
 	if (n < 0)
 	{

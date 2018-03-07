@@ -12,32 +12,31 @@ int			ft_checkisnorepeat(char cinlist, char c)
 {
 	if (cinlist == c)
 	{
-		//ft_errorrepeatflag();
 		return (0);
 	}
 	return (1);
 }
 
-f_list		*ft_getflag(char c, f_list *params)
+f_list		*ft_getflag(char c, f_list *p)
 {
-	if (c == '#' && (ft_checkisnorepeat(params->f_oct, '#'))) 
-		params->f_oct = '#';
-	if (c == '+' && (ft_checkisnorepeat(params->f_plus, '+'))) 
-		params->f_plus = '+';
-	if (c == '-' && (ft_checkisnorepeat(params->f_minus, '-'))) 
-		params->f_minus = '-';
-	if (c == ' ' && (ft_checkisnorepeat(params->f_space, ' '))) 
-		params->f_space = ' ';
-	if (c == '0' && (ft_checkisnorepeat(params->f_space, '0')))
-		params->f_zero = '0';
-	return (params);
+	if (c == '#' && (ft_checkisnorepeat(p->f_oct, '#'))) 
+		p->f_oct = '#';
+	if (c == '+' && (ft_checkisnorepeat(p->f_plus, '+'))) 
+		p->f_plus = '+';
+	if (c == '-' && (ft_checkisnorepeat(p->f_l, '-'))) 
+		p->f_l = '-';
+	if (c == ' ' && (ft_checkisnorepeat(p->f_space, ' '))) 
+		p->f_space = ' ';
+	if (c == '0' && (ft_checkisnorepeat(p->f_space, '0')))
+		p->f_zero = '0';
+	return (p);
 }
 
 
-int			ft_getwidth(char *format, int *i)
+int			ft_getwidth(const char *format, int *i)
 {
 	int	temp;
-	//printf("-------------------------> %c\n", format[*i]);
+
 	temp = 0;
 	while (format[*i] >= '0' && format[*i] <= '9')
 	{
@@ -52,7 +51,6 @@ int			get_precision(const char *format, int *i)
 	int	temp;
 
 	temp = 0;
-	//(*i) += 1;
 	while (format[*i] >= '0' && format[*i] <= '9')
 	{
 		temp = (temp * 10) + (format[*i] - 48);
